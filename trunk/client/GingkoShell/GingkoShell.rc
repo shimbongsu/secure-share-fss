@@ -1,0 +1,456 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LISTITEMS           BITMAP                  "res\\ListItems.bmp"
+IDB_DISP_NO             BITMAP                  "res\\bitmap1.bmp"
+IDB_DISP_PASS           BITMAP                  "res\\bitmap2.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_DIVIDER             CURSOR                  "res\\divider.cur"
+IDC_HYPERLINK           CURSOR                  "res\\hand.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_POPUP MENU 
+BEGIN
+    POPUP "POPUP"
+    BEGIN
+        MENUITEM "&Gingko Sharing",             ID_POPUP_GINGKOSHARING
+        MENUITEM "Gingko &Map",                 ID_POPUP_GINGKOMAP
+        MENUITEM "&Decrypt File",               ID_POPUP_DECRYPTFILE
+        MENUITEM SEPARATOR
+        MENUITEM "&Options",                    ID_POPUP_OPTIONS
+        MENUITEM SEPARATOR
+        MENUITEM "&Login",                      ID_POPUP_LOGIN
+        MENUITEM "Logou&t",                     ID_POPUP_LOGOUT
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit",                       ID_POPUP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName", "JPoet Security System Co.Ltd"
+            VALUE "FileDescription", "Gingko Security System Shell Application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "GingkoShell"
+            VALUE "LegalCopyright", "Copyright (C) 2009 JPoet Security System Co.Ltd, All rights reserved."
+            VALUE "OriginalFilename", "GingkoFish.exe"
+            VALUE "ProductName", "Gingko Security System"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_GINGKOSHELL         ICON                    "GingkoShell.ico"
+IDI_SMALL               ICON                    "small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_GINGKOSHELL MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_GINGKOSHELL ACCELERATORS 
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About GingkoShell"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            128,IDC_ICON_ABOUT,14,14,20,20
+    LTEXT           "GingkoShell, Version 1.0",IDC_ABOUT_VERSION,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2009",IDC_COPYCOPY,42,26,114,8
+    DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
+END
+
+IDD_MAINDLG DIALOGEX 0, 0, 394, 298
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Gingko Share"
+FONT 9, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,272,277,50,14
+    PUSHBUTTON      "Close",IDCANCEL,337,277,50,14
+    CONTROL         "",IDC_TOP_BAR,"Static",SS_BLACKRECT | WS_TABSTOP,7,7,380,50
+    GROUPBOX        "",IDC_FILE_INFO_GROUP,7,60,376,55
+    EDITTEXT        IDC_EDIT_FILENAME,67,76,255,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_BROWSER,327,75,47,14
+    LTEXT           "Filename:",IDC_FILE_NAME,15,77,52,13
+    CONTROL         "Encrypt file only. (You should give a password by manually. )",IDC_CHK_ENCRYPT_ONLY,
+                    "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_TABSTOP,66,99,256,9
+    CONTROL         "",IDC_TAB_PANEL,"SysTabControl32",WS_TABSTOP,7,127,380,141
+    PUSHBUTTON      "&Options",IDC_BTN_OPTIONS,7,277,50,14
+    CONTROL         "",IDC_PRG_FILEPROCESS,"msctls_progress32",NOT WS_VISIBLE | WS_BORDER,67,76,254,13
+    PUSHBUTTON      "Delete",IDC_BTN_DELETE,327,95,47,14
+END
+
+IDD_DETAIL DIALOGEX 0, 0, 305, 129
+STYLE DS_SYSMODAL | DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Title:",IDC_TITLE,15,17,48,14
+    EDITTEXT        IDC_EDIT_TITLE,75,17,217,15,ES_AUTOHSCROLL
+    LTEXT           "Author:",IDC_AUTHOR,15,36,48,14
+    EDITTEXT        IDC_EDIT_AUTHOR,75,36,217,15,ES_AUTOHSCROLL
+    LTEXT           "Keywords:",IDC_KEYWORDS,15,55,48,14
+    EDITTEXT        IDC_EDIT_KEYWORDS,75,55,217,15,ES_AUTOHSCROLL
+    LTEXT           "Description:",IDC_DESCRIPTION,15,74,48,14
+    EDITTEXT        IDC_EDIT_DESCRIPTION,75,74,217,38,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
+END
+
+IDD_SECURITY DIALOGEX 0, 0, 251, 116
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Shared Options:",IDC_SHARED_OPTIONS,14,17,53,12
+    LTEXT           "Security Options",IDC_SECURITY_OPTIONS,14,34,62,12
+    CONTROL         "",IDC_CMB_SECURITY_OPTIONS,"ComboBoxEx32",CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP,93,31,143,121
+    CONTROL         "",IDC_CMB_SHARED_OPTIONS,"ComboBoxEx32",CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP,94,15,142,131
+    GROUPBOX        "Limitations",IDC_GROUP_LIMITS,11,49,229,50
+    CONTROL         "World wide",IDC_RD_WW,"Button",BS_AUTORADIOBUTTON,96,58,51,10
+    CONTROL         "Organization",IDC_RD_ORG,"Button",BS_AUTORADIOBUTTON,96,71,57,10
+    CONTROL         "Unit Only",IDC_RD_UNIT,"Button",BS_AUTORADIOBUTTON,96,83,45,10
+END
+
+IDD_SHARE DIALOGEX 0, 0, 316, 110
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_USER_LIST,"SysListView32",LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,3,28,307,61
+    LTEXT           "User's Email:",IDC_USER_EMAIL,9,10,52,12
+    PUSHBUTTON      "Check/Add",IDC_BTN_CHECK_ADD,254,8,58,16
+    PUSHBUTTON      "Remove",IDC_BTN_REMOVE_USER,253,91,58,16
+    PUSHBUTTON      "Sharing Map",IDC_BTN_SHARE_ROUTE,3,91,58,16
+    CONTROL         "",IDC_EDIT_EMAIL,"ComboBoxEx32",CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP,67,9,186,105
+    PUSHBUTTON      "Request Permission",IDC_BTN_REQUEST,122,91,76,16
+END
+
+IDD_OPTIONS_DIALOG DIALOGEX 0, 0, 375, 279
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,319,256,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,5,256,50,16
+    GROUPBOX        "Server",IDC_SERVER_LIST_GROUP,5,5,364,57
+    GROUPBOX        "Proxy",IDC_PROXY_OPTIONS,5,67,364,103
+    GROUPBOX        "Miscellaneous",IDC_MISCELLANCEOUS,5,179,364,70
+    LTEXT           "Master Server",IDC_LBL_MASTER_SERVER,20,24,57,11
+    EDITTEXT        IDC_MASTER_SERVER,107,22,254,15,ES_AUTOHSCROLL
+    LTEXT           "Unit/Organization Server",IDC_LBL_UNITSERVER,19,41,86,11
+    EDITTEXT        IDC_EDIT_UNIT_SERVER,107,39,254,15,ES_AUTOHSCROLL
+    LTEXT           "HTTP Proxy Server",IDC_LBL_PROXYSERVER,19,98,79,11
+    EDITTEXT        IDC_EDIT_PROXYSERVER,107,96,254,15,ES_AUTOHSCROLL
+    LTEXT           "Proxy Port",IDC_LBL_PROXYPORT,19,114,57,11
+    EDITTEXT        IDC_EDIT_PROXYPORT,107,112,254,15,ES_AUTOHSCROLL
+    LTEXT           "User name",IDC_LBL_PROXY_USERNAME,19,132,57,11
+    EDITTEXT        IDC_EDIT_PROXY_USERNAME,107,129,254,15,ES_AUTOHSCROLL
+    LTEXT           "Password",IDC_LBL_PROXY_PASSWORD,19,148,57,11
+    EDITTEXT        IDC_EDIT_PROXY_PASSWORD,107,146,254,15,ES_AUTOHSCROLL
+    CONTROL         "Same as IE",IDC_SAME_AS_IE,"Button",BS_AUTORADIOBUTTON,190,78,54,11
+    CONTROL         "Custom",IDC_RD_CUSTOM,"Button",BS_AUTORADIOBUTTON,249,78,50,11
+    CONTROL         "Direct connection",IDC_NO_PROXY,"Button",BS_AUTORADIOBUTTON,110,78,71,10
+    LTEXT           "Timeout",IDC_LBL_TIMEOUT,20,191,57,11
+    EDITTEXT        IDC_EDIT_CALL_TIMEOUT,107,188,254,15,ES_AUTOHSCROLL
+    LTEXT           "Language",IDC_LANGUAGE_INTERFACE,19,208,57,11
+    COMBOBOX        IDC_CBO_LANGUAGE,107,206,254,14,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_PASSWORD_DIALOG DIALOGEX 0, 0, 275, 154
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_TOPMOST | WS_EX_CONTROLPARENT
+CAPTION "Input your password"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,224,126,50,17
+    PUSHBUTTON      "Cancel",IDCANCEL,0,126,50,17
+    CONTROL         "",IDC_PASSWORD_TOPBAR,"Static",SS_BLACKRECT,0,0,275,58
+    EDITTEXT        IDC_EDIT_PASSWORD,103,73,145,15,ES_PASSWORD | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PASSWORD_RET,103,96,145,15,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "Password",IDC_LBL_PASSWORD,11,76,69,9
+    LTEXT           "Retype password",IDC_LBL_PASSWORDRET,11,98,69,9
+END
+
+IDD_LOGIN_DIALOG DIALOGEX 0, 0, 281, 151
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Login"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Login",IDOK,222,132,50,14
+    LTEXT           "User Id",IDC_LBL_USERID,11,74,48,11,0,WS_EX_TRANSPARENT
+    LTEXT           "Password",IDC_LBL_PASSWORD,11,95,48,13,0,WS_EX_TRANSPARENT
+    EDITTEXT        IDC_EDIT_USERID,71,72,144,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PASSWORD,71,93,145,14,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "New Account",IDC_NEW_REGISTER,218,74,62,11
+    LTEXT           "Forget?",IDC_LINK_GETPASSWORD,218,94,62,11
+    PUSHBUTTON      "&Options",IDC_BTN_OPTIONS,5,132,47,14
+    CONTROL         "",IDC_LOGIN_TOPBAR,"Static",SS_BLACKRECT,0,0,280,60
+END
+
+IDD_REQ_PERM_DIALOG DIALOGEX 0, 0, 417, 271
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Request Permission"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,357,248,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,12,248,50,14
+    GROUPBOX        "",IDC_PERMS_REQ_GROUP,9,79,391,34
+    CONTROL         "",IDC_RQP_TOP_BAR,"Static",SS_BLACKRECT,0,0,415,65
+    CONTROL         "Holder",IDC_CHK_HOLDER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,34,90,48,15
+    CONTROL         "Owner",IDC_CHK_OWNER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,92,90,48,15
+    CONTROL         "Readable",IDC_CHK_READABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,150,90,48,15
+    CONTROL         "Writable",IDC_CHK_WRITABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,208,90,48,15
+    CONTROL         "Printable",IDC_CHK_PRINTABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,266,90,48,15
+    CONTROL         "Deletable",IDC_CHK_DELETABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,324,90,48,15
+    EDITTEXT        IDC_EDIT_MESSAGE,12,132,393,109,ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL
+    LTEXT           "Send your reason to owner or holder for getting the permission.",IDC_LBL_MESSAGE,11,118,235,13
+    LTEXT           "Request Permissions",IDC_LBL_REQPERMS,13,68,174,13
+END
+
+IDD_ASSOCIATE_DIALOG DIALOGEX 0, 0, 317, 183
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Sharing Mapping"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,258,161,50,16
+    CONTROL         "",IDC_MAIN_CONTAINER,"Static",SS_BLACKRECT,0,0,315,154
+    PUSHBUTTON      "Print",IDC_PRINT,9,161,50,16
+    PUSHBUTTON      "Save",IDC_SAVEAS,65,161,50,16
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_MAINDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 387
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 291
+    END
+
+    IDD_DETAIL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 298
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 122
+    END
+
+    IDD_SECURITY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 244
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 109
+    END
+
+    IDD_OPTIONS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 369
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 272
+    END
+
+    IDD_PASSWORD_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 274
+        BOTTOMMARGIN, 153
+    END
+
+    IDD_LOGIN_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 280
+        BOTTOMMARGIN, 146
+    END
+
+    IDD_REQ_PERM_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 416
+        BOTTOMMARGIN, 270
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "GingkoShell"
+    IDC_GINGKOSHELL         "GINGKOSHELL"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

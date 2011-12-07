@@ -1,0 +1,36 @@
+HKCR
+{
+    NoRemove *
+    {
+        NoRemove ShellEx
+        {
+            NoRemove ContextMenuHandlers
+            {
+                GingkoSecurityShellExtension = s '{7DFB6A6B-8CB7-4B1B-9CA9-6C9F11E923C9}'
+            }
+        }
+    }
+	GkoShellExt.GingkoContextMenuExt.1 = s 'CGingkoContextMenuExt Class'
+	{
+		CLSID = s '{7DFB6A6B-8CB7-4B1B-9CA9-6C9F11E923C9}'
+	}
+	GkoShellExt.GingkoContextMenuExt = s 'CGingkoContextMenuExt Class'
+	{
+		CLSID = s '{7DFB6A6B-8CB7-4B1B-9CA9-6C9F11E923C9}'
+		CurVer = s 'GkoShellExt.GingkoContextMenuExt.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {7DFB6A6B-8CB7-4B1B-9CA9-6C9F11E923C9} = s 'CGingkoContextMenuExt Class'
+		{
+			ProgID = s 'GkoShellExt.GingkoContextMenuExt.1'
+			VersionIndependentProgID = s 'GkoShellExt.GingkoContextMenuExt'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{1A0BE39A-A0A0-4D53-B64E-DCC4CDFFC244}'
+		}
+	}
+}

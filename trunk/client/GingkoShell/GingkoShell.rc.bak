@@ -1,0 +1,272 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LISTITEMS           BITMAP                  "res\\ListItems.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_DIVIDER             CURSOR                  "res\\divider.cur"
+IDC_HYPERLINK           CURSOR                  "res\\hand.cur"
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_GINGKOSHELL         ICON                    "GingkoShell.ico"
+IDI_SMALL               ICON                    "small.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_GINGKOSHELL MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "E&xit",                       IDM_EXIT
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",                  IDM_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_GINGKOSHELL ACCELERATORS 
+BEGIN
+    "?",            IDM_ABOUT,              ASCII,  ALT
+    "/",            IDM_ABOUT,              ASCII,  ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About GingkoShell"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            128,IDC_STATIC,14,14,21,20
+    LTEXT           "GingkoShell, Version 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2009",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
+END
+
+IDD_MAINDLG DIALOGEX 0, 0, 431, 338
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Gingko Share"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,290,317,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,355,317,50,14
+    CONTROL         "",IDC_TOP_BAR,"Static",SS_BLACKFRAME | WS_TABSTOP,7,7,417,45
+    GROUPBOX        "File",IDC_FILE_INFO_GROUP,7,60,417,55,WS_TABSTOP
+    EDITTEXT        IDC_EDIT_FILENAME,69,76,289,17,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_BROWSER,365,76,58,18
+    LTEXT           "Filename:",IDC_FILE_NAME,15,77,52,13,WS_TABSTOP
+    CONTROL         "Encrypt file only. (You should give a password by manually. And  please remember this password.)",IDC_CHK_ENCRYPT_ONLY,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,68,98,330,10
+    CONTROL         "",IDC_TAB_PANEL,"SysTabControl32",WS_TABSTOP,7,127,417,178
+    PUSHBUTTON      "&Options",IDC_BTN_OPTIONS,192,317,50,14
+END
+
+IDD_DETAIL DIALOGEX 0, 0, 305, 129
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "",IDC_GROUP_DETAIL,7,7,291,115
+    LTEXT           "Title:",IDC_TITLE,15,17,48,14
+    EDITTEXT        IDC_EDIT_TITLE,75,17,217,15,ES_AUTOHSCROLL | NOT WS_TABSTOP
+    LTEXT           "Author:",IDC_AUTHOR,15,36,48,14
+    EDITTEXT        IDC_EDIT_AUTHOR,75,36,217,15,ES_AUTOHSCROLL | NOT WS_TABSTOP
+    LTEXT           "Keywords:",IDC_KEYWORDS,15,55,48,14
+    EDITTEXT        IDC_EDIT_KEYWORDS,75,55,217,15,ES_AUTOHSCROLL | NOT WS_TABSTOP
+    LTEXT           "Description:",IDC_DESCRIPTION,15,74,48,14
+    EDITTEXT        IDC_EDIT_DESCRIPTION,75,74,217,38,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL | NOT WS_TABSTOP
+END
+
+IDD_SECURITY DIALOGEX 0, 0, 251, 116
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    GROUPBOX        "",IDC_SECURITY_GROUP,7,7,237,102
+    LTEXT           "Shared Options:",IDC_SHARED_OPTIONS,14,17,53,12
+    LTEXT           "Security Options",IDC_SECURITY_OPTIONS,14,34,62,12
+    CONTROL         "",IDC_CMB_SECURITY_OPTIONS,"ComboBoxEx32",CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP,93,31,143,121
+    CONTROL         "",IDC_CMB_SHARED_OPTIONS,"ComboBoxEx32",CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP,94,15,142,131
+    GROUPBOX        "Limitations",IDC_GROUP_LIMITS,11,49,229,50
+    CONTROL         "World wide",IDC_RD_WW,"Button",BS_AUTORADIOBUTTON,96,58,51,10
+    CONTROL         "Organization",IDC_RD_ORG,"Button",BS_AUTORADIOBUTTON,96,71,57,10
+    CONTROL         "Unit Only",IDC_RD_UNIT,"Button",BS_AUTORADIOBUTTON,96,83,45,10
+END
+
+IDD_SHARE DIALOGEX 0, 0, 316, 110
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_USER_LIST,"SysListView32",LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,3,28,307,61
+    LTEXT           "User's Email:",IDC_USER_EMAIL,9,10,52,12
+    EDITTEXT        IDC_EDIT_EMAIL,65,7,187,16,ES_AUTOHSCROLL
+    PUSHBUTTON      "Check/Add",IDC_BTN_CHECK_ADD,254,6,58,16
+    PUSHBUTTON      "Remove",IDC_BTN_REMOVE_USER,253,91,58,16
+    GROUPBOX        "",IDC_SHARE_GROUP,0,0,314,109
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_MAINDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 424
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 331
+    END
+
+    IDD_DETAIL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 298
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 122
+    END
+
+    IDD_SECURITY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 244
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 109
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_APP_TITLE           "GingkoShell"
+    IDC_GINGKOSHELL         "GINGKOSHELL"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

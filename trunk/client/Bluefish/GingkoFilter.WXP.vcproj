@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="Bluefish"
+	ProjectGUID="{FD3D9280-6390-43F9-8CF0-48DC9B738727}"
+	RootNamespace="GingkoFilter.WXP"
+	TargetFrameworkVersion="131072"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+		<Platform
+			Name="x64"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="WXP free|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP free ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0500"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP free|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP free ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0500"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP checked|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP checked ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP checked|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP checked ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP free (PREfast)|Win32"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0500"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP free (PREfast)|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0500"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP checked (PREfast)|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501;NT4_DRIVER=1"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP checked (PREfast)|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501;NT4_DRIVER=1"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K free|Win32"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K free ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K free|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K free ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K checked|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K checked|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K free (PREfast)|Win32"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K free (PREfast)|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K checked (PREfast)|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K checked (PREfast)|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\GingkoFilter.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;def;asm;mc"
+			>
+			<File
+				RelativePath=".\gingko_apc.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_debug.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_fastio.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_filter.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_hook.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_impl.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_interact.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_ioqueue.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_lib_fun.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_readwrite.c"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_redfish.c"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx"
+			>
+			<File
+				RelativePath=".\gingko_apc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_crypto.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_debug.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_defs.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_fastio.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_filter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_hook.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_interact.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_ioqueue.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_lib.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_readwrite.h"
+				>
+			</File>
+			<File
+				RelativePath=".\gingko_redfish.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Special Files"
+			Filter="*"
+			>
+			<File
+				RelativePath=".\ddkbldenv.cmd"
+				>
+			</File>
+			<File
+				RelativePath=".\ddkpostbld.cmd"
+				>
+			</File>
+			<File
+				RelativePath=".\ddkprebld.cmd"
+				>
+			</File>
+			<File
+				RelativePath=".\gingkofilter.inf"
+				>
+			</File>
+			<File
+				RelativePath=".\GingkoFilter.vsprops"
+				>
+			</File>
+			<File
+				RelativePath=".\gingkofilter_w2k.inf"
+				>
+			</File>
+			<File
+				RelativePath=".\gingkoInstall.cmd"
+				>
+			</File>
+			<File
+				RelativePath=".\gingkoUninstall.cmd"
+				>
+			</File>
+			<File
+				RelativePath=".\makefile"
+				>
+			</File>
+			<File
+				RelativePath=".\Makefile.inc"
+				>
+			</File>
+			<File
+				RelativePath=".\sources"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;mc;ico;cur;bmp;dlg;rc2"
+			>
+			<File
+				RelativePath=".\gingko_filter_res.rc"
+				>
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

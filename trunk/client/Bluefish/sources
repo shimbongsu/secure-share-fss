@@ -1,0 +1,58 @@
+# $Id$
+TARGETNAME=Bluefish
+TARGETPATH=obj
+TARGETTYPE=DRIVER
+DRIVERTYPE=FS
+C_DEFINES=$(C_DEFINES) -DNT4_DRIVER
+#C_DEFINES=$(C_DEFINES) 
+NO_SAFESEH=0
+##NT4_DRIVER=0
+
+
+!if "$(DDK_TARGET_OS)"=="Win2K"
+#
+# The driver is built in the Win2K build environment
+#
+#C_DEFINES=$(C_DEFINES) -DNDIS40_MINIPORT=1
+#C_DEFINES=$(C_DEFINES) -DNDIS40=1
+!else 
+#
+# The driver is built in the XP or .NET build environment
+# So let us build NDIS 5.1 version.
+#
+#C_DEFINES=$(C_DEFINES) -DNDIS51_MINIPORT=1
+#C_DEFINES=$(C_DEFINES) -DNDIS51=1
+!endif
+
+USER_C_FLAGS=$(USER_C_FLAGS) -D_UNICODE
+LINKER_FLAGS=$(LINKER_FLAGS) /SUBSYSTEM:NATIVE /DRIVER:WDM -map
+
+
+# Create browse info
+#BROWSER_INFO=0
+#BROWSERFILE=gingko
+
+C_DEFINES=$(C_DEFINES)
+
+INCLUDES = ../Common;../Crypto
+
+TARGETLIBS=../Common/obj$(BUILD_ALT_DIR)/*/Common.lib	\
+		    ../Crypto/obj$(BUILD_ALT_DIR)/*/Crypto.lib
+	
+# Additional defines for the C/C++ preprocessor
+
+
+
+	
+SOURCES=gingko_filter.c            \
+        gingko_lib_fun.c           \
+        gingko_debug.c			   \
+        gingko_fastio.c			   \
+        gingko_readwrite.c		   \
+        gingko_impl.c			   \
+        gingko_apc.c			   \
+        gingko_hook.c			   \
+        gingko_interact.c		   \
+        gingko_ioqueue.c		   \
+        gingko_redfish.c		   \
+        gingko_filter_res.rc

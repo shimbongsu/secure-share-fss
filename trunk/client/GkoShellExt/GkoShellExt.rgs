@@ -1,0 +1,22 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'GkoShellExt'
+		'GkoShellExt.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D1046D0B-8B45-461D-A3C8-253F93958D3F} = s 'CompReg Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{1A0BE39A-A0A0-4D53-B64E-DCC4CDFFC244}'
+		}
+	}
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GingkoShell>
+  <Options>
+    <GingkoServer>
+      <MasterServer>http://localhost:8080/rsm/gkws/</MasterServer>
+      <UnitServer>http://www.7turn.cn/gingko/gkws/</UnitServer>
+    </GingkoServer>
+    <Proxy>
+      <Connection>Direct</Connection>
+      <Server>192.168.2.233</Server>
+      <Port>8080</Port>
+      <Username>long.zou</Username>
+      <Password>12345678</Password>
+    </Proxy>
+    <Miscellaneous>
+      <Timeout>2</Timeout>
+      <Language>zh_CN</Language>
+    </Miscellaneous>
+  </Options>
+</GingkoShell>

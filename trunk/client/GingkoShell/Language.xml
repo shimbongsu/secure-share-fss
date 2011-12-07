@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="GB18030"?>
+<Language name="zh_CN">
+	<Form id="140" name="IDD_LOGIN_DIALOG" caption="登录">
+		<lable id="1034">用户ID</lable>
+		<lable id="1035">密码</lable>
+		<lable id="1039">注册新帐号</lable>
+		<lable id="1040">忘记密码？</lable>
+		<lable id="1029">设置</lable>
+		<lable id="1">登录</lable>
+	</Form>
+	<Form id="139" name="IDD_PASSWORD_DIALOG" caption="输入密码">
+		<lable id="1035">您的密码</lable>
+		<lable id="1038">再输一次</lable>
+		<lable id="1">确定</lable>
+		<lable id="2">取消</lable>
+	</Form>	
+	<Form id="137" name="IDD_SHARE" caption="共享设置">
+		<lable id="1014">用户ID/Email</lable>
+		<lable id="1009">验证/添加</lable>
+		<lable id="1011">移除</lable>
+	</Form>		
+	<Form id="136" name="IDD_SECURITY" caption="安全隐私">
+		<lable id="1017">共享选项</lable>
+		<lable id="1018">权限选项</lable>
+		<lable id="1028">限制性</lable>
+		<lable id="1025">无限制</lable>
+		<lable id="1026">只在组织内部</lable>
+		<lable id="1027">只在单元内部</lable>
+	</Form>
+	<Form id="135" name="IDD_DETAIL" caption="详细信息">
+		<lable id="1011">标题</lable>
+		<lable id="1013">作者</lable>
+		<lable id="1015">关键字</lable>
+		<lable id="1017">详细描述</lable>
+	</Form>
+	<Form id="129" name="IDD_MAINDLG" caption="Gingko文件共享">
+		<lable id="1005">共享的文件</lable>
+		<lable id="1006">文件名</lable>
+		<lable id="1002">只加密文件（手工输入密码）</lable>
+		<lable id="1001">浏览</lable>
+		<lable id="1029">设置</lable>
+		<lable id="1">确定</lable>
+		<lable id="2">关闭</lable>
+	</Form>
+	<Form id="138" name="IDD_OPTIONS_DIALOG" caption="系统设置">
+		<lable id="1064">服务器设置</lable>
+		<lable id="1056">根节点服务器</lable>
+		<lable id="1057">内部服务器</lable>
+		<lable id="1042">代理选项</lable>
+		<lable id="1027">直接连接</lable>
+		<lable id="1050">与IE相同</lable>
+		<lable id="1051">自定义</lable>
+		<lable id="1058">代理服务器</lable>
+		<lable id="1059">端口</lable>
+		<lable id="1060">用户名</lable>
+		<lable id="1061">密码</lable>
+		<lable id="1043">杂项</lable>
+		<lable id="1054">连接超时时间</lable>
+		<lable id="1063">界面语言</lable>
+		<lable id="1">确定</lable>
+		<lable id="2">关闭</lable>		
+	</Form>	
+	<Global>
+		<lable id="1">详细信息</lable>
+		<lable id="2">安全隐私</lable>
+		<lable id="3">共享设置</lable>
+		<lable id="4">只读公开</lable>
+		<lable id="5">全部公开</lable>
+		<lable id="6">私有的</lable>
+		<lable id="7">需要请求权限</lable>
+		<lable id="8">只限所有者</lable>
+		<lable id="9">所有者授权</lable>
+		<lable id="10">责任人授权</lable>
+		<lable id="11">责任人可以设置责任人</lable>
+		<lable id="12">系统管理员授权</lable>
+		<lable id="13">系统管理员可以设置责任人</lable>
+		<lable id="14">用户ID/Email</lable>
+		<lable id="15">用户名</lable>
+		<lable id="16">所有者</lable>
+		<lable id="17">责任人</lable>
+		<lable id="18">可读</lable>
+		<lable id="19">可写</lable>
+		<lable id="20">可打印</lable>
+		<lable id="21">可删除</lable>
+	</Global>
+</Language>
