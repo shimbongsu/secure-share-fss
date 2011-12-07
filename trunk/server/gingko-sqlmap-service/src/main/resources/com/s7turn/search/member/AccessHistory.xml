@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="AccessHistory">
+    <resultMap id="result" class="com.s7turn.search.engine.member.AccessHistory" >
+       <result property="id" column="history_id" columnIndex="1" />
+       <result property="userId" column="who_id" columnIndex="2" />
+       <result property="accessCategory" column="where_type" columnIndex="3" />
+       <result property="accessToId" column="where_id" columnIndex="4" />
+       <result property="when" column="when_access" columnIndex="5" />
+       <result property="remoteAddress" column="access_address" columnIndex="6" />
+       <result property="description" column="access_desc" columnIndex="7" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE access_history_history_id_seq;
+        CREATE TABLE access_history(history_id bigint default nextval('access_history_history_id_seq'),
+         who_id bigint, where_type int, where_id bigint, when_access timestamp, access_address varchar(100),
+         access_desc varchar(400),
+         primary key( history_id ) );
+    </update>
+    <select id="findAll" resultMap="result">
+        SELECT history_id, who_id, where_type, where_id, when_access, access_address, access_desc
+        FROM access_history
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT history_id, who_id, where_type, where_id, when_access, access_address, access_desc
+        FROM access_history
+        WHERE history_id=#id#
+    </select>    
+    <select id="findByAccessBy" resultMap="result">
+        SELECT history_id, who_id, where_type, where_id, when_access, access_address, access_desc
+        FROM access_history
+        WHERE where_type=#accessCategory# AND where_id=#accessToId#
+    </select>
+    <select id="findByAccessTo" resultMap="result">
+        SELECT history_id, who_id, where_type, where_id, when_access, access_address, access_desc
+        FROM access_history
+        WHERE where_type=#accessCategory# AND who_id=#userId#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT history_id, who_id, where_type, where_id, when_access, access_address, access_desc
+        FROM access_history
+        WHERE history_id=#id#
+    </select>
+    <select id="findByThisDayAccess" resultMap="result">
+        SELECT history_id, who_id, where_type, where_id, when_access, access_address, access_desc
+        FROM access_history
+        WHERE who_id=#userId# AND where_type=#accessCategory# AND where_id=#accessToId# AND ((date(when_access)-date(#when#))=0)
+    </select>
+    <delete id="deleteAccessHistory" >
+        DELETE FROM access_history
+        WHERE history_id=#id#
+    </delete>
+    <insert id="insertAccessHistory" >
+        INSERT INTO access_history( who_id, where_type, where_id, when_access, access_address, access_desc)
+        VALUES( #userId#, #accessCategory#, #accessToId#, now(), #remoteAddress#, #description# )
+    </insert>
+    <update id="updateAccessHistory" >
+        UPDATE access_history SET when_access=now(), access_address=#remoteAddress#, access_desc=#description#
+        WHERE history_id=#id#
+    </update>
+</sqlMap>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="PeckerThreadInfo">
+    <resultMap id="result" class="com.s7turn.pecker.threads.PeckerThreadInfo" >
+       <result  property="id" column="pti_id" columnIndex="1" />
+       <result  property="url" column="pti_url" columnIndex="2" />
+       <result  property="method" column="pti_method" columnIndex="3" />
+       <result  property="contentType" column="pti_contenttype" columnIndex="4" />
+       <result  property="encoding" column="pti_encoding" columnIndex="5" />
+       <result  property="taskText" column="pti_task" columnIndex="6" />
+       <result  property="stepText" column="pti_step" columnIndex="7" />
+       <result  property="acceptanceText" column="pti_accept" columnIndex="8" />
+    </resultMap>    
+    <select id="findByUrl" parameterClass="java.lang.String" resultClass="java.lang.String">
+            select pti_url
+            from pecker_pti
+            where pti_url=#url#
+            limit 1
+    </select>
+    <select id="findUnfetchUrls" resultClass="java.lang.String">
+            select pti_url
+            from pecker_pti where pti_status=0;
+    </select>
+    <select id="getFirstOne" resultMap="result">
+            select pti_id, pti_url, pti_method, pti_contenttype, pti_encoding, pti_task, pti_step, pti_accept
+            from pecker_pti 
+            where pti_status = 0
+            order by pti_id asc 
+            limit 1
+    </select>
+    <delete id="completedPeckerThreadInfo" >
+        update pecker_pti 
+        set pti_status = 2
+        where pti_id = #id#
+    </delete>
+    <delete id="deletePeckerThreadInfo" >
+        update pecker_pti 
+        set pti_status = 1
+        where pti_url = #url#
+    </delete>
+    <insert id="insertPeckerThreadInfo">
+        insert into pecker_pti( pti_id, pti_url, pti_method, pti_contenttype, pti_encoding, 
+                    pti_task, pti_step, pti_accept, pti_status, pti_lastupdated )
+        values( nextval('seq_pecker_pti_id'), #url#, #method#, #contentType#, #encoding#, 
+                    #taskText#, #stepText#, #acceptanceText#, 0, now())
+    </insert>
+</sqlMap>

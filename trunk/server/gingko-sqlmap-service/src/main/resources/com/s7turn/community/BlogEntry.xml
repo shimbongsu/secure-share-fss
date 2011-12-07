@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BlogEntry">
+    <resultMap id="result" class="com.s7turn.search.community.BlogEntry" >
+       <result property="id" column="bentry_id" columnIndex="1" />
+       <result property="blogId" column="bentry_blogid" columnIndex="2" />
+       <result property="subject" column="bentry_subject" columnIndex="3" />
+       <result property="content" column="bentry_content" columnIndex="4" />
+       <result property="userId" column="bentry_userid" columnIndex="5" />
+       <result property="shortDescription" column="bentry_shortdesc" columnIndex="6" />
+       <result property="status" column="bentry_status" columnIndex="7" />
+       <result property="tags" column="community_tags" columnIndex="8" />
+       <result property="lastUpdatedTime" column="bentry_lastupdated" columnIndex="9" />
+       <result property="createTime" column="bentry_createtime" columnIndex="10" />
+    </resultMap>
+    <update id="createTable">
+       CREATE SEQUENCE community_blogentry_bentry_id_seq;
+       CREATE TABLE community_blogentry(bentry_id bigint default nextval('community_blogentry_bentry_id_seq'),
+                    bentry_blogid bigint, bentry_subject varchar(30), bentry_content text, 
+                    bentry_userid bigint, bentry_shortdesc varchar(400), bentry_status int2,
+                    community_tags varchar(200), bentry_lastupdated timestamp, 
+                    bentry_createtime timestamp, primary key( bentry_id )
+       );
+    </update> 
+    <select id="findAll" resultMap="result">
+        SELECT bentry_id, bentry_blogid, bentry_subject, bentry_content, bentry_userid, bentry_shortdesc, bentry_status, community_tags, bentry_lastupdated, bentry_createtime
+        FROM community_blogentry
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT bentry_id, bentry_blogid, bentry_subject, bentry_content, bentry_userid, bentry_shortdesc, bentry_status, community_tags, bentry_lastupdated, bentry_createtime
+        FROM community_blogentry
+        WHERE bentry_id=#id#
+    </select>    
+    <select id="findByBlog" resultMap="result">
+        SELECT bentry_id, bentry_blogid, bentry_subject, bentry_content, bentry_userid, bentry_shortdesc, bentry_status, community_tags, bentry_lastupdated, bentry_createtime
+        FROM community_blogentry
+        WHERE bentry_blogid=#id#
+    </select>
+    <select id="findByUser" resultMap="result">
+        SELECT bentry_id, bentry_blogid, bentry_subject, bentry_content, bentry_userid, bentry_shortdesc, bentry_status, community_tags, bentry_lastupdated, bentry_createtime
+        FROM community_blogentry
+        WHERE bentry_userid=#id#
+    </select>
+    <select id="findByBlogAndUser" resultMap="result">
+        SELECT bentry_id, bentry_blogid, bentry_subject, bentry_content, bentry_userid, bentry_shortdesc, bentry_status, community_tags, bentry_lastupdated, bentry_createtime
+        FROM community_blogentry
+        WHERE bentry_blogid=#blogId# AND bentry_userid=#userId#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT bentry_id, bentry_blogid, bentry_subject, bentry_content, bentry_userid, bentry_shortdesc, bentry_status, community_tags, bentry_lastupdated, bentry_createtime
+        FROM community_blogentry
+        WHERE bentry_subject=#code#
+    </select>
+    <delete id="deleteBlogEntry" >
+        DELETE FROM community_blogentry  
+        WHERE bentry_id=#id#
+    </delete>
+    <insert id="insertBlogEntry" >
+        INSERT INTO community_blogentry(bentry_blogid, bentry_subject, bentry_content, bentry_userid, bentry_shortdesc, bentry_status, community_tags, bentry_lastupdated, bentry_createtime)
+        VALUES( #blogId#, #subject#, #content#, #userId#, #shortDescription#, #status#, #tags#, now(), now())
+    </insert>
+    <update id="updateBlogEntry" >
+        UPDATE community_blogentry SET bentry_blogid=#blogId#, bentry_subject=#subject#, 
+                bentry_content=#content#, bentry_userid=#userId#, community_tags=#tags#,
+                bentry_shortdesc=#shortDescription#, bentry_status = #status#, 
+                bentry_lastupdated=now()
+        WHERE bentry_id=#id#
+    </update>
+</sqlMap>

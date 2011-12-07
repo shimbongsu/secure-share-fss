@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Website" >
+    <resultMap id="result" class="com.s7turn.search.engine.Website" >
+       <result property="id" column="ws_uuid" columnIndex="1" />
+       <result property="name" column="ws_name" columnIndex="2" />
+       <result property="url" column="ws_url" columnIndex="3" />
+       <result property="description" column="ws_desc" columnIndex="4" />
+       <result property="logo" column="ws_logo" columnIndex="5" />
+       <result property="lastUpdatedTime" column="ws_lastupdated" columnIndex="6" />
+       <result property="lastFetchTime" column="ws_fetchtime" columnIndex="7" />
+    </resultMap>
+    <select id="findByAll" resultMap="result">
+        select ws_uuid, ws_name, ws_url, ws_desc, ws_logo, ws_lastupdated, ws_fetchtime
+        from bi_website
+    </select>
+    <select id="findByCode" resultMap="result">
+        select ws_uuid, ws_name, ws_url, ws_desc, ws_logo, ws_lastupdated, ws_fetchtime
+        from bi_website
+        where ws_name=#name#
+    </select>
+    <delete id="deleteWebsite" >
+        delete from bi_website 
+        where ws_uuid = #id#
+    </delete>
+    <insert id="insertWebsite" >
+        insert into bi_website( ws_uuid, ws_name, ws_url, ws_desc, ws_logo, ws_lastupdated, ws_fetchtime )
+        values( #id#, #name#,#url#, #description#, #logo#, now(), #lastFetchTime# )
+    </insert>
+    <update id="updateWebsite" >
+        update bi_website set ws_name=#name#, ws_url = #url#, ws_desc=#description#, 
+              ws_logo = #logo#, ws_lastupdated=now(), ws_lastfetchtime=#lastFetchTime#
+        where ws_uuid=#id#
+    </update>
+</sqlMap>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Message">
+    <resultMap id="result" class="com.s7turn.search.community.Message" >
+       <result property="id" column="msg_id" columnIndex="1" />
+       <result property="subject" column="msg_subject" columnIndex="2" />
+       <result property="content" column="msg_content" columnIndex="3" />
+       <result property="fromUser" column="msg_fromuser" columnIndex="4" />
+       <result property="toUser" column="msg_touser" columnIndex="5" />
+       <result property="readTime" column="msg_readtime" columnIndex="6" />
+       <result property="sendTime" column="msg_sendtime" columnIndex="7" />
+       <result property="status" column="msg_status" columnIndex="8" />
+       <result property="type" column="msg_type" columnIndex="9" />
+       <result property="previousId" column="msg_relateid" columnIndex="10" />
+       <result property="messageId" column="message_id" columnIndex="11" />
+       <result property="lastUpdatedTime" column="msg_lastupdated" columnIndex="12" />
+       <result property="boxName" column="msg_boxname" columnIndex="13" />
+       <result property="sendToList" column="msg_sendtolist" columnIndex="14" />
+    </resultMap>
+    <resultMap id="resultBox" class="com.s7turn.search.community.MessageBox" >
+       <result property="id" column="box_id" columnIndex="1" />
+       <result property="boxName" column="box_name" columnIndex="2" />
+       <result property="userId" column="box_userid" columnIndex="3" />
+    </resultMap>
+    <update id="createTable">
+			CREATE SEQUENCE community_messages_msg_id_seq;
+			CREATE TABLE community_messages( msg_id bigint default nextval('community_messages_msg_id_seq'),
+			msg_subject varchar(300), msg_content text, 
+			msg_fromuser bigint, msg_relateid bigint, msg_draft int, msg_type int,
+            msg_sendtolist text,
+			msg_lastupdated timestamp, primary key( msg_id ) )
+			
+			CREATE SEQUENCE community_messagebox_msgbox_id_seq;
+			CREATE TABLE community_messagebox(msgbox_id bigint default nextval('community_messagebox_msgbox_id_seq'), 
+			msg_id bigint, msg_touser bigint, msg_readtime timestamp null, 
+			msg_sendtime timestamp null, msg_status int, msg_boxname varchar(20) default 'inbox', primary key(msgbox_id) );
+
+            CREATE SEQUENCE message_boxes_box_id_seq;
+            CREATE TABLE message_boxes( box_id bigint default nextval('message_boxes_box_id_seq'),
+            box_name varchar(200) not null,
+            box_userid bigint not null,
+            primary key(box_id));
+    </update> 
+    <select id="findAll" resultMap="result">
+			SELECT a.msgbox_id as msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, b.msg_touser,
+			b.msg_readtime, b.msg_sendtime, b.msg_status, a.msg_type, a.msg_relateid, a.msg_id as message_id,
+			a.msg_lastupdated,b.msg_boxname, a.msg_sendtolist
+			FROM community_messages a INNER JOIN community_messagebox b ON a.msg_id=b.msg_id
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+			SELECT a.msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, 0 as msg_touser,
+			now() as msg_readtime, now() as msg_sendtime, a.msg_draft as msg_status, 
+			a.msg_type, a.msg_relateid, a.msg_id as message_id, a.msg_lastupdated, 'inbox' as msg_boxname,
+            a.msg_sendtolist
+			FROM community_messages a
+			WHERE a.msg_id=#id#
+    </select>
+    <select id="findByDraftMessages" resultMap="result">
+			SELECT a.msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, 0 as msg_touser,
+			now() as msg_readtime, now() as msg_sendtime, a.msg_draft as msg_status, 
+			a.msg_type, a.msg_relateid, a.msg_id as message_id, a.msg_lastupdated, 'draft' as msg_boxname,
+            a.msg_sendtolist
+			FROM community_messages a
+			WHERE a.msg_fromuser=#fromUser# AND a.msg_draft=1
+		</select>    
+    <select id="findByAllMessages" resultMap="result">
+			SELECT a.msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, 0 as msg_touser,
+			now() as msg_readtime, now() as msg_sendtime, a.msg_draft as msg_status, 
+                        a.msg_type, a.msg_relateid, a.msg_id as message_id, a.msg_lastupdated,
+                        'all' as msg_boxname, a.msg_sendtolist
+			FROM community_messages a
+			WHERE a.msg_fromuser=#fromUser#
+		</select>
+    <select id="findBySendMessages" resultMap="result">
+			SELECT a.msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, 0 as msg_touser,
+			now() as msg_readtime, now() as msg_sendtime, a.msg_draft as msg_status, 
+			a.msg_type, a.msg_relateid, a.msg_id as message_id, a.msg_lastupdated, 
+            'send' as msg_boxname, a.msg_sendtolist
+			FROM community_messages a
+			WHERE a.msg_fromuser=#fromUser# AND a.msg_draft=0
+		</select>
+    <select id="findByRecivedMessages" resultMap="result">
+			SELECT b.msgbox_id as msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, b.msg_touser,
+			b.msg_readtime, b.msg_sendtime, b.msg_status, a.msg_type, a.msg_relateid, 
+			a.msg_id as message_id, a.msg_lastupdated, b.msg_boxname, a.msg_sendtolist
+			FROM community_messages a INNER JOIN community_messagebox b ON a.msg_id=b.msg_id
+			WHERE b.msg_touser=#toUser#
+    </select>
+    <select id="findByRecivedMessagesWithType" resultMap="result">
+			SELECT b.msgbox_id as msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, b.msg_touser,
+			b.msg_readtime, b.msg_sendtime, b.msg_status, a.msg_type, a.msg_relateid, 
+			a.msg_id as message_id, a.msg_lastupdated, b.msg_boxname, a.msg_sendtolist
+			FROM community_messages a INNER JOIN community_messagebox b ON a.msg_id=b.msg_id
+			WHERE b.msg_touser=#toUser# AND a.msg_type=#type#
+    </select>
+    <select id="findByMessageBoxId" resultMap="result">
+			SELECT b.msgbox_id as msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, b.msg_touser,
+			b.msg_readtime, b.msg_sendtime, b.msg_status, a.msg_type, a.msg_relateid, 
+			a.msg_id as message_id, a.msg_lastupdated, b.msg_boxname, a.msg_sendtolist
+			FROM community_messages a INNER JOIN community_messagebox b ON a.msg_id=b.msg_id
+			WHERE b.msgbox_id=#id#
+    </select>
+    <select id="findByBox" resultMap="result">
+			SELECT b.msgbox_id as msg_id, a.msg_subject, a.msg_content, a.msg_fromuser, b.msg_touser,
+			b.msg_readtime, b.msg_sendtime, b.msg_status, a.msg_type, a.msg_relateid,
+			a.msg_id as message_id, a.msg_lastupdated, b.msg_boxname, a.msg_sendtolist
+			FROM community_messages a INNER JOIN community_messagebox b ON a.msg_id=b.msg_id
+			WHERE b.msg_boxname=lower(#boxName#) AND b.msg_touser=#userId#
+    </select>
+    <delete id="deleteMessage" >
+        DELETE FROM community_messages
+        WHERE msg_id=#id#;
+        
+        DELETE FROM community_messagebox
+        WHERE msg_id=#id#;
+    </delete>
+    <insert id="insertMessage" >
+        INSERT INTO community_messages(msg_subject, msg_content, msg_fromuser, 
+        				msg_relateid, msg_draft, msg_type,msg_lastupdated, msg_sendtolist)
+        VALUES( #subject#, #content#, #fromUser#, #previousId#, 
+        				#status#, #type#, now(), #sendToList# );
+        <selectKey keyProperty="id" resultClass="java.lang.Long" type="post">
+            select currval('community_messages_msg_id_seq') as id
+        </selectKey>
+    </insert>
+    <update id="updateMessage" >
+        UPDATE community_messages SET msg_subject=#subject#, msg_content=#content#, msg_fromuser=#fromUser#, 
+                msg_relateid=#fileUrl#, msg_draft=#status#, msg_type=#type#, msg_sendtolist=#sendToList#
+                msg_lastupdated=now()
+        WHERE msg_id=#id#
+    </update>
+    <insert id="sendMessage" >
+    		INSERT INTO community_messagebox(msg_id, msg_touser, msg_sendtime, msg_status, msg_boxname )
+    		VALUES( #messageId#, #toUser#, now(), 0, lower( #boxName# ) )
+    </insert>
+    <update id="sendMessageUpdateDraft" >
+           UPDATE community_messages SET msg_draft=0
+    	   WHERE msg_id=#messageId#
+    </update>
+    <update id="updateMessageReadState" >
+        UPDATE community_messagebox SET msg_status=#status#
+        WHERE msgbox_id=#id#
+    </update>
+    <insert id="createBox">
+        INSERT INTO message_boxes(box_name, box_userid)
+        VALUES( #boxName#, #userId#)
+        <selectKey keyProperty="id" resultClass="java.lang.Long" type="post">
+            select currval('message_boxes_box_id_seq') as id
+        </selectKey>
+    </insert>
+    <update id="deleteBox">
+        DELETE FROM message_boxes WHERE box_name=#oldBoxName# AND box_userid=#userId#;
+    </update>
+    <update id="updateMessageInBox">
+        UPDATE community_messagebox SET msg_boxname=lower(#boxName#)
+        WHERE msg_boxname=lower(#oldBoxName#) AND msg_touser=#userId#;
+    </update>
+    <update id="deleteMessageInBox">
+        DELETE FROM community_messagebox
+        WHERE msg_boxname=lower(#oldBoxName#) AND msg_touser=#userId#;
+    </update>
+    <update id="moveMessageToBox">
+        UPDATE community_messagebox SET msg_boxname=lower(#boxName#)
+        WHERE msg_touser=#userId# AND msg_id=#id#;
+    </update>
+    <select id="selectBoxes" resultMap="resultBox">
+        SELECT box_id, box_name, box_userid
+        FROM message_boxes
+        WHERE box_userid=#userId#
+    </select>
+    <select id="selectBox" resultMap="resultBox">
+        SELECT box_id, box_name, box_userid
+        FROM message_boxes
+        WHERE box_userid=#userId# AND box_name=#boxName#
+    </select>
+</sqlMap>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SubCategory" >
+    <resultMap id="result" class="com.s7turn.search.engine.SubCategory" >
+       <result property="id" column="sub_id" columnIndex="1" />
+       <result property="name" column="sub_name" columnIndex="2" />
+       <result property="code" column="sub_code" columnIndex="3" />
+       <result property="lastUpdatedTime" column="sub_updatedtime" columnIndex="4" />
+       <result property="description" column="sub_desc" columnIndex="5" />
+       <result property="category" column="sub_category" columnIndex="6" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.CategoryTypeHandler"/>
+    </resultMap>
+    <select id="findAll" resultMap="result">
+        select sub_id, sub_name, sub_code, sub_updatedtime, sub_desc, sub_category,
+        cat_code, cat_name
+        from bi_subcategory LEFT JOIN bi_category ON bi_subcategory.sub_category=bi_category.cat_id
+    </select>
+    
+    <select id="findByPrimaryKey" resultMap="result">
+        select sub_id, sub_name, sub_code, sub_updatedtime, sub_desc, sub_category,
+        cat_code, cat_name
+        from bi_subcategory LEFT JOIN bi_category ON bi_subcategory.sub_category=bi_category.cat_id
+        where sub_id=#id#
+    </select>
+    <select id="findByCategory" resultMap="result">
+        select sub_id, sub_name, sub_code, sub_updatedtime, sub_desc, sub_category,
+        cat_code, cat_name
+        from bi_subcategory LEFT JOIN bi_category ON bi_subcategory.sub_category=bi_category.cat_id
+        where sub_category=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+        select sub_id, sub_name, sub_code, sub_updatedtime, sub_desc, sub_category,
+        cat_code, cat_name
+        from bi_subcategory LEFT JOIN bi_category ON bi_subcategory.sub_category=bi_category.cat_id
+        where sub_code=#code#
+    </select>
+    <delete id="deleteSubCategory" >
+        delete from bi_subcategory 
+        where sub_id = #id#
+    </delete>
+    <insert id="insertSubCategory" >
+        insert into bi_subcategory( sub_name, sub_code, sub_desc, sub_updatedtime, sub_category )
+        values( #name#, #code#, #description#, now(), #category.code# )
+    </insert>
+    <update id="updateSubCategory" >
+        update bi_subcategory set sub_name=#name#, sub_code=#code#, sub_desc=#description#, 
+              sub_updatedtime=now(), sub_category=#category.code#
+        where sub_id=#id#
+    </update>
+</sqlMap>

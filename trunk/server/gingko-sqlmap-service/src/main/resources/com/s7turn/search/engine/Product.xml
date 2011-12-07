@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Product" >
+    <resultMap id="result" class="com.s7turn.search.engine.Product" >
+       <result property="name" column="prod_name" columnIndex="1" />
+       <result property="code" column="prod_code" columnIndex="2" />
+       <result property="description" column="prod_desc" columnIndex="3" />
+       <result property="sku" column="prod_sku" columnIndex="4" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.SkuTypeHandler"/>
+       <result property="variant" column="prod_variant" columnIndex="5" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.VariantTypeHandler"/>
+       <result property="brand" column="prod_brand" columnIndex="6" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.BrandTypeHandler"/>
+       <result property="subCategory" column="prod_subcategory" columnIndex="7" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.SubCategoryTypeHandler" />
+       <result property="category" column="prod_category" columnIndex="8" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.CategoryTypeHandler" />
+       <result property="gbu" column="prod_gbu" columnIndex="9" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.GBUTypeHandler"/>
+       <result property="lastUpdatedTime" column="prod_lastupdated" columnIndex="10" />
+       <result property="id" column="prod_id" columnIndex="11" />
+    </resultMap>
+    <select id="findByAll" resultMap="result">
+        select prod_name, prod_code, prod_desc, prod_sku, prod_variant,prod_brand,
+        prod_subcategory, prod_category, prod_gbu, prod_lastupdated, prod_id, 
+        gbu_code, gbu_name, cat_code, cat_name, sub_code, sub_name, 
+        brd_name, brd_brief, brd_url, brd_producer, brd_producerurl
+        from bi_product LEFT JOIN bi_biggbu ON bi_product.prod_gbu=bi_biggbu.gbu_id
+        LEFT JOIN bi_category ON bi_product.prod_category=bi_category.cat_id
+        LEFT JOIN bi_subcategory ON bi_product.prod_subcategory=bi_subcategory.sub_id
+        LEFT JOIN bi_brand ON bi_product.prod_brand=bi_brand.brand_id
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        select prod_name, prod_code, prod_desc, prod_sku, prod_variant,prod_brand,
+        prod_subcategory, prod_category, prod_gbu, prod_lastupdated, prod_id, 
+        gbu_code, gbu_name, cat_code, cat_name, sub_code, sub_name, 
+        brd_name, brd_brief, brd_url, brd_producer, brd_producerurl
+        from bi_product LEFT JOIN bi_biggbu ON bi_product.prod_gbu=bi_biggbu.gbu_id
+        LEFT JOIN bi_category ON bi_product.prod_category=bi_category.cat_id
+        LEFT JOIN bi_subcategory ON bi_product.prod_subcategory=bi_subcategory.sub_id
+        LEFT JOIN bi_brand ON bi_product.prod_brand=bi_brand.brand_id
+        where prod_id=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+        select prod_name, prod_code, prod_desc, prod_sku, prod_variant,prod_brand,
+        prod_subcategory, prod_category, prod_gbu, prod_lastupdated, prod_id, 
+        gbu_code, gbu_name, cat_code, cat_name, sub_code, sub_name, 
+        brd_name, brd_brief, brd_url, brd_producer, brd_producerurl
+        from bi_product LEFT JOIN bi_biggbu ON bi_product.prod_gbu=bi_biggbu.gbu_id
+        LEFT JOIN bi_category ON bi_product.prod_category=bi_category.cat_id
+        LEFT JOIN bi_subcategory ON bi_product.prod_subcategory=bi_subcategory.sub_id
+        LEFT JOIN bi_brand ON bi_product.prod_brand=bi_brand.brand_id
+        where prod_code=#code#
+    </select>
+    <select id="searchProducts" resultMap="result">
+        select prod_name, prod_code, prod_desc, prod_sku, prod_variant,prod_brand,
+        prod_subcategory, prod_category, prod_gbu, prod_lastupdated, prod_id, 
+        gbu_code, gbu_name, cat_code, cat_name, sub_code, sub_name, 
+        brd_name, brd_brief, brd_url, brd_producer, brd_producerurl
+        from bi_product LEFT JOIN bi_biggbu ON bi_product.prod_gbu=bi_biggbu.gbu_id
+        LEFT JOIN bi_category ON bi_product.prod_category=bi_category.cat_id
+        LEFT JOIN bi_subcategory ON bi_product.prod_subcategory=bi_subcategory.sub_id
+        LEFT JOIN bi_brand ON bi_product.prod_brand=bi_brand.brand_id
+        where prod_gbu=#gbu.id# 
+        <dynamic>
+            <isNotNull prepend="AND" property="category">
+                prod_category=#category.id# 
+            </isNotNull>
+            <isNotNull prepend="AND" property="subCategory">
+                prod_subcategory=#subCategory.id#
+            </isNotNull>
+            <isNotNull prepend="AND" property="brand">
+                bi_brand.brd_name LIKE (#brand.name#)
+            </isNotNull>
+        </dynamic>
+    </select>
+    <delete id="deleteProduct" >
+        delete from bi_product 
+        where prod_code = #code#
+    </delete>
+    <insert id="insertProduct" >
+        insert into bi_product( prod_name, prod_code, prod_desc, prod_sku, prod_variant, prod_brand,
+        prod_subcategory, prod_category, prod_gbu, prod_lastupdated, prod_id )
+        values( #name#, #code#, #description#, #sku.code#, #variant.code#, #brand.id#, 
+        #subCategory.code#,#category.code#, #gbu.code#, now(), nextval('bi_product_prod_id_seq'))
+    </insert>
+    <update id="updateProduct" >
+        UPDATE bi_product SET prod_id=#name#, prod_code=#code#, prod_desc=#description#, 
+        prod_sku=#sku.code#, prod_variant=#variant.code#, prod_brand=#brand.id#,
+        prod_subcategory=#subCategory.code#, prod_category=#category.code#, 
+        prod_gbu=#gbu.code#, prod_lastupdated=now()
+        WHERE prod_id=#id#
+    </update>
+</sqlMap>

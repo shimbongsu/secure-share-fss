@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="GBU" >
+    <resultMap id="result" class="com.s7turn.search.engine.GBU" >
+       <result  property="id" column="gbu_id" columnIndex="1" />
+       <result  property="name" column="gbu_name" columnIndex="2" />
+       <result  property="code" column="gbu_code" columnIndex="3" />
+       <result  property="lastUpdatedTime" column="gbu_lastupdated" columnIndex="4" />
+       <result  property="description" column="gbu_desc" columnIndex="5" />
+    </resultMap>
+    <select id="findAll" resultMap="result">
+            select gbu_id, gbu_name, gbu_code, gbu_lastupdated, gbu_desc
+            from bi_biggbu
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+            select gbu_id, gbu_name, gbu_code, gbu_lastupdated, gbu_desc
+            from bi_biggbu where gbu_id=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+            select gbu_id, gbu_name, gbu_code, gbu_lastupdated, gbu_desc
+            from bi_biggbu
+            where gbu_code=#code#
+    </select>
+    <delete id="deleteGBU" >
+        delete from bi_biggbu
+        where gbu_id = #id#
+    </delete>
+    <insert id="insertGBU" >
+        insert into bi_biggbu( gbu_name, gbu_code, gbu_desc, gbu_lastupdated)
+        values( #name#, #code#, #description#, now())
+    </insert>
+    <update id="updateGBU" >
+        update bi_biggbu set gbu_name=#name#, gbu_code=#code#, gbu_desc=#description#, 
+              gbu_lastupdated=now()
+        where gbu_id=#id#
+    </update>
+</sqlMap>

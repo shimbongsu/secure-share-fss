@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Sku" >
+    <resultMap id="result" class="com.s7turn.search.engine.Sku" >
+       <result property="name" column="sku_name" columnIndex="1" />
+       <result property="code" column="sku_code" columnIndex="2" />
+       <result property="lastUpdatedTime" column="sku_lastupdated" columnIndex="3" />
+       <result property="description" column="sku_desc" columnIndex="4" />
+       <result property="variant" column="sku_variant" columnIndex="5" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.VariantTypeHandler"/>
+    </resultMap>
+    <select id="findByAll" resultMap="result">
+        select sku_name, sku_code, sku_lastupdated, sku_desc, sku_variant
+        from bi_sku;
+    </select>
+    <select id="findByCode" resultMap="result">
+        select sku_name, sku_code, sku_lastupdated, sku_desc, sku_variant
+        from bi_sku
+        where sku_code=#code#
+    </select>
+    <delete id="deleteSku" >
+        delete from bi_sku 
+        where sku_code = #code#
+    </delete>
+    <insert id="insertSku" >
+        insert into bi_sku( sku_name, sku_code, sku_lastupdated, sku_desc, sku_variant )
+        values( #name#, #code#, #description#, now(), #variant.code# )
+    </insert>
+    <update id="updateSku" >
+        update bi_sku set sku_id=#name#, sku_desc=#description#, 
+              sku_lastupdated=now(), sku_variant=#variant.code#
+        where sku_code=#code#
+    </update>
+</sqlMap>

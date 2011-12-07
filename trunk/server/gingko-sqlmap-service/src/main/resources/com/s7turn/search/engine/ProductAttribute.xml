@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ProductAttribute" >
+    <resultMap id="result" class="com.s7turn.search.engine.ProductAttribute" >
+       <result property="id" column="prodattr_id" columnIndex="1" />
+       <result property="product" column="pa_product" columnIndex="2" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.ProductTypeHandler"/>
+       <result property="attribute" column="pa_attr" columnIndex="3" />
+       <result property="value" column="pa_value" columnIndex="4" />
+       <result property="lastUpdatedTime" column="pa_lastupdated" columnIndex="5" />
+    </resultMap>
+    <select id="findByAll" resultMap="result">
+            select prodattr_id, pa_product, pa_attr, pa_value, 
+                   pa_lastupdated
+             from bi_prodattrs
+    </select>
+    <select id="findByCode" resultMap="result">
+            select prodattr_id, pa_product, pa_attr, pa_value, pa_lastupdated
+             from bi_prodattrs
+             where prodattr_id=#id#
+    </select>
+    <select id="findByProductWithAttributeName" resultMap="result">
+            select prodattr_id, pa_product, pa_attr, pa_value, pa_lastupdated
+             from bi_prodattrs
+             where pa_product=#product.id# and pa_attr=#attribute#
+    </select>
+    <delete id="deleteProductAttribute" >
+        delete from bi_prodattrs
+        where prodattr_id=#id#
+    </delete>
+    <insert id="insertProductAttribute" >
+        insert into bi_prodattrs( prodattr_id, pa_product, pa_attr, pa_value, pa_lastupdated )
+        values( nextval('bi_prodattrs_prodattr_id_seq'), #product.id#, #attribute#,#value#, now())
+    </insert>
+    <update id="updateProductAttribute" >
+        update bi_prodattrs set pa_product=#product.id#, pa_attr=#attribute#, pa_value=#value#, 
+                    pa_lastupdated=now()
+        where prodattr_id=#id#
+    </update>
+</sqlMap>

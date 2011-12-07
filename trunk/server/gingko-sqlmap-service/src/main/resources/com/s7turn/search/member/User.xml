@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="User" >
+    <resultMap id="result" class="com.s7turn.search.engine.member.User" >
+       <result  property="id" column="user_id" columnIndex="1" />
+       <result  property="loginId" column="login_id" columnIndex="2" />
+       <result  property="email" column="user_email" columnIndex="3" />
+       <result  property="screenName" column="user_screenname" columnIndex="4" />
+       <result  property="fullName" column="full_name" columnIndex="5" />
+       <result  property="rsa" column="passwd_rsa" columnIndex="6" />
+       <result  property="password" column="user_passwd" columnIndex="7" />
+       <result  property="retreivePassword" column="ret_password" columnIndex="8" />
+       <result  property="retreiveFlag" column="forget_flag" columnIndex="9" />
+       <result  property="lastUpdatedTime" column="last_updated" columnIndex="10" />
+       <result  property="createDate" column="create_date" columnIndex="11" />
+       <result  property="disabled" column="user_disabled" columnIndex="12" />
+       <result  property="locked" column="user_locked" columnIndex="13" />
+       <result  property="expired" column="user_expired" columnIndex="14" />
+       <result  property="security" column="user_security" columnIndex="15" />
+    </resultMap>
+    <select id="findAll" resultMap="result">
+            select user_id, login_id, user_email, user_screenname, full_name, 
+                   passwd_rsa, user_passwd, ret_password, forget_flag, 
+                   last_updated, create_date, user_disabled, user_locked, 
+                   user_expired, user_security
+            from member_user
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+            select user_id, login_id, user_email, user_screenname, full_name, 
+                   passwd_rsa, user_passwd, ret_password, forget_flag, 
+                   last_updated, create_date, user_disabled, user_locked, 
+                   user_expired, user_security
+            from member_user
+            where user_id=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+            select user_id, login_id, user_email, user_screenname, full_name, 
+                   passwd_rsa, user_passwd, ret_password, forget_flag, 
+                   last_updated, create_date, user_disabled, user_locked,
+                   user_expired, user_security
+            from member_user
+            where login_id=#code#
+    </select>
+    <delete id="deleteUser" >
+        delete from member_user
+        where user_id = #id#
+    </delete>
+    <insert id="insertUser" >
+        insert into member_user( login_id, user_email, user_screenname, full_name, 
+                   passwd_rsa, user_passwd, ret_password, forget_flag, 
+                   last_updated, create_date, user_disabled, user_locked, 
+                   user_expired, user_security )
+        values( #loginId#, #email#, #screenName#, #fullName#, #rsa#, #password#,
+                #retreivePassword#, false, now(), now(), true, false, false, #security# )
+    </insert>
+    <update id="createTable">
+        CREATE SEQUENCE member_user_user_id_seq;
+        CREATE TABLE member_user( user_id bigint default nextval('member_user_user_id_seq'),
+                   login_id varchar(30), user_email  varchar(30), user_screenname  varchar(30), full_name  varchar(30),
+                   passwd_rsa  varchar(56), user_passwd  varchar(56), ret_password  varchar(56),
+                   forget_flag boolean, last_updated timestamp, create_date timestamp,
+                   user_disabled boolean, user_locked boolean,
+                   user_expired boolean, user_security boolean )
+    </update>
+    <update id="updateUser" >
+        update member_user set user_email=#email#, user_screenname=#screenName#, full_name=#fullName#, 
+              passwd_rsa=#rsa#, user_passwd=#password#, forget_flag=false, last_updated=now(),
+              user_disabled=#disabled#, user_locked=#locked#, user_expired=#expired#,
+              user_security=#security#
+        where user_id=#id#
+    </update>
+    <update id="generateRetreivePassword" >
+        update member_user set passwd_rsa=#rsa#, forget_flag=true, 
+            ret_password=#retreivePassword#
+            last_updated=now()
+        where user_id=#id#
+    </update>
+</sqlMap>

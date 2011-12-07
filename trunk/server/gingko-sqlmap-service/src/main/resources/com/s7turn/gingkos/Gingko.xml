@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Gingko" >
+    <resultMap id="result" class="com.s7turn.gingkos.Gingko" >
+       <result property="gingkoId" column="gingko_id" columnIndex="1" />
+       <result property="content.guid" column="gko_content_id" columnIndex="2" />
+       <result property="user.id" column="gko_user" columnIndex="3" />
+       <result property="group.id" column="gko_group" columnIndex="4"/>
+       <result property="defaultGingko" column="gko_default" columnIndex="5"/>
+       <result property="read" column="gko_readable" columnIndex="6"/>       
+       <result property="edit" column="gko_editable" columnIndex="7"/>       
+       <result property="copy" column="gko_copyable" columnIndex="8"/>       
+       <result property="print" column="gko_printable" columnIndex="9"/>
+       <result property="list" column="gko_listable" columnIndex="10"/> 
+       <result property="beginTime" column="gko_begintime" columnIndex="11"/>
+       <result property="endTime" column="gko_endtime" columnIndex="12"/>
+       <result property="permanent" column="gko_permanent" columnIndex="13"/>
+    </resultMap>
+    <resultMap id="resultPerment" class="com.s7turn.gingkos.GingkoPerment" >
+       <result property="gcid" column="gc_id" columnIndex="1" />
+       <result property="guid" column="gc_uuid" columnIndex="2" />
+       <result property="publicKey" column="gc_public_key" columnIndex="3" />
+       <result property="privateKey" column="gc_private_key" columnIndex="4"/>
+       <result property="deleted" column="gc_deleted" columnIndex="5"/>
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE gingko_assign_gingko_id_seq;
+        CREATE TABLE gingko_assign( gingko_id bigint default nextval('gingko_assign_gingko_id_seq'),
+         gko_content_id varchar(64), gko_user bigint, gko_group bigint,
+         gko_default boolean, gko_readable boolean, gko_editable boolean, gko_copyable boolean, 
+         gko_printable boolean, gko_listable boolean, gko_lastupdated timestamp default now(),
+         gko_begintime timestamp, gko_endtime timestamp, gko_permanent boolean default true,
+         primary key (gingko_id)
+         );
+
+         CREATE SEQUENCE gingko_perments_gc_id_seq;
+
+         CREATE TABLE gingko_perments(
+                gc_id bigint default nextval('gingko_perments_gc_id_seq'), gc_uuid varchar(40),
+                gc_public_key text, gc_private_key text,
+                gc_deleted boolean, gc_deleted_time timestamp, gc_lastupdated timestamp,
+                primary key (gc_id));
+    </update>
+    <select id="findByAll" resultMap="result">
+        SELECT gingko_id, gko_content_id, gko_user, gko_group, gko_default, gko_readable,
+               gko_editable, gko_copyable, gko_printable, gko_listable, gko_lastupdated,
+               gko_begintime, gko_endtime, gko_permanent
+        FROM   gingko_assign
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT gingko_id, gko_content_id, gko_user, gko_group, gko_default, gko_readable,
+               gko_editable, gko_copyable, gko_printable, gko_listable, gko_lastupdated,
+               gko_begintime, gko_endtime, gko_permanent
+        FROM   gingko_assign
+        WHERE  gingko_id=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT gingko_id, gko_content_id, gko_user, gko_group, gko_default, gko_readable,
+               gko_editable, gko_copyable, gko_printable, gko_listable, gko_lastupdated,
+               gko_begintime, gko_endtime, gko_permanent
+        FROM   gingko_assign
+        WHERE  gko_content_id=#code#
+    </select>
+    <select id="findContentCingkos" resultMap="result">
+        SELECT gingko_id, gko_content_id, gko_user, gko_group, gko_default, gko_readable,
+               gko_editable, gko_copyable, gko_printable, gko_listable, gko_lastupdated,
+               gko_begintime, gko_endtime, gko_permanent
+        FROM   gingko_assign
+        WHERE  gko_content_id=#guid#
+    </select>
+    <select id="findContentCingkosWithUser" resultMap="result">
+        SELECT gingko_id, gko_content_id, gko_user, gko_group, gko_default, gko_readable,
+               gko_editable, gko_copyable, gko_printable, gko_listable, gko_lastupdated,
+               gko_begintime, gko_endtime, gko_permanent
+        FROM   gingko_assign LEFT JOIN community_groupmember cg ON cg.gmem_groupid=gingko_assign.gko_group
+        WHERE  gko_content_id=#guid# AND gko_user=#owner.id#
+               AND ( gingko_assign.gko_group is null OR cg.gmem_userid=#owner.id#)
+    </select>
+    <delete id="deleteGingko">
+        delete from gingko_assign 
+        where  gingko_id=#gingkoId#
+    </delete>
+    <insert id="insertGingko" >
+        INSERT INTO gingko_assign( gko_content_id, gko_user, gko_group,
+                    gko_default, gko_readable, gko_editable, gko_copyable, gko_printable, 
+                    gko_listable, gko_lastupdated,gko_begintime, gko_endtime, gko_permanent)
+        VALUES(     #content.guid#, #user.id#, #group.id#,
+                    #defaultGingko#,#read#,#edit#,#copy#,#print#,#list#,now(),
+                    #beginTime#, #endTime#, #permanent#)
+        <selectKey keyProperty="gingkoId" type="post">
+            SELECT currval('gingko_assign_gingko_id_seq') as gingkoId;
+        </selectKey>
+    </insert>
+    <update id="updateGingko">
+        UPDATE gingko_assign SET gko_user=#user.id#, gko_group=#group.id#,gko_default=#defaultGingko#,
+               gko_readable=#read#,gko_editable=#edit#, gko_copyable=#copy#, gko_printable=#print#, 
+               gko_listable=#list#, gko_lastupdated=now(),
+               gko_begintime=#beginTime#, gko_endtime=#endTime#, gko_permanent=#permanent#
+        WHERE  gingko_id=#gingkoId#
+    </update>
+    <insert id="insertGingkoPerments">
+        INSERT INTO gingko_perments( gc_uuid, gc_public_key, gc_private_key, gc_deleted , gc_lastupdated )
+        VALUES( #guid#, #publicKey#, #privateKey#, false, now() )
+    </insert>
+    <update id="deleteGingkoPerments">
+        UPDATE gingko_perments SET gc_deleted = true, gc_deleted_time = now()
+        WHERE gc_id=#gc_id#
+    </update>
+
+    <select id="findGingkoPerments" resultMap="resultPerment">
+        SELECT gc_id, gc_uuid, gc_public_key, gc_private_key, gc_deleted FROM gingko_perments
+        WHERE gc_id=#gcid#
+    </select>
+    <select id="findGingkoPermentsByUuid" resultMap="resultPerment">
+        SELECT gc_id, gc_uuid, gc_public_key, gc_private_key, gc_deleted FROM gingko_perments
+        WHERE gc_uuid=#guid#
+    </select>
+
+</sqlMap>

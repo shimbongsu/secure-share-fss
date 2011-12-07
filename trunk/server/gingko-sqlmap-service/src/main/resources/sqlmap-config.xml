@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings
+        cacheModelsEnabled="true"
+        enhancementEnabled="true"
+        lazyLoadingEnabled="true"
+        maxRequests="32"
+        maxSessions="10"
+        maxTransactions="5"
+        useStatementNamespaces="true"/>
+    <!--
+    Membership
+    -->
+    <sqlMap resource="com/s7turn/search/member/User.xml" />
+    <sqlMap resource="com/s7turn/search/member/Avator.xml" />
+    <sqlMap resource="com/s7turn/search/member/UserDetail.xml" />
+    <sqlMap resource="com/s7turn/search/member/AccessHistory.xml" />
+    <sqlMap resource="com/s7turn/search/commons/PhysicalFile.xml" />
+    
+    <!--
+    Community
+    -->
+    <sqlMap resource="com/s7turn/community/Blog.xml" />
+    <sqlMap resource="com/s7turn/community/BlogEntry.xml" />
+    <sqlMap resource="com/s7turn/community/Comment.xml" />
+    <sqlMap resource="com/s7turn/community/Friend.xml" />
+    <sqlMap resource="com/s7turn/community/Gallery.xml" />
+    <sqlMap resource="com/s7turn/community/Group.xml" />
+    <sqlMap resource="com/s7turn/community/GroupTeam.xml" />
+    <sqlMap resource="com/s7turn/community/Message.xml" />
+    <sqlMap resource="com/s7turn/community/Photo.xml" />
+    
+    <!--
+      Gingko system
+    -->
+    <sqlMap resource="com/s7turn/gingkos/Gingko.xml" />
+    <sqlMap resource="com/s7turn/gingkos/GingkoContent.xml" />
+    <sqlMap resource="com/s7turn/gingkos/GingkoToken.xml" />
+</sqlMapConfig>

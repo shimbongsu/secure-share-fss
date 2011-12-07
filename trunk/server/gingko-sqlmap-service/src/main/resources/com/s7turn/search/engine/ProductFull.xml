@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ProductFull" >
+    <resultMap id="result" class="com.s7turn.search.engine.ProductFull" >
+       <result property="id" column="full_id" columnIndex="1" />
+       <result property="productId" column="full_prodid" columnIndex="2" />
+       <result property="gbu" column="full_gbu" columnIndex="3" />
+       <result property="category" column="full_category" columnIndex="4"/>
+       <result property="subCategory" column="full_subcategory" columnIndex="5"/>
+       <result property="brand" column="full_brand" columnIndex="6"/>
+       <result property="variant" column="full_variant" columnIndex="7"/>
+       <result property="sku" column="full_sku" columnIndex="8" />
+       <result property="siteCode" column="full_site_code" columnIndex="9" />
+       <result property="siteIdentify" column="full_site_pid" columnIndex="10" />
+       <result property="url" column="full_url" columnIndex="11" />
+       <result property="code" column="full_code" columnIndex="12" />
+       <result property="name" column="full_name" columnIndex="13" />
+       <result property="description" column="full_desc" columnIndex="14" />
+       <result property="website" column="full_website" columnIndex="15"  typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.WebsiteTypeHandler"/>
+       <result property="lastUpdatedTime" column="full_lastupdated" columnIndex="16" />
+    </resultMap>
+    <select id="findAll" resultMap="result">
+        SELECT full_id,  full_prodid,  full_gbu,   full_category,  full_subcategory,  full_brand,   full_variant,
+            full_sku,  full_site_code ,  full_site_pid,  full_url,  full_code,  full_name,  
+            full_desc,  full_website, full_lastupdated
+        FROM bi_productfull
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT full_id,  full_prodid,  full_gbu,   full_category,  full_subcategory,  full_brand,   full_variant,
+            full_sku,  full_site_code ,  full_site_pid,  full_url,  full_code,  full_name,  full_desc,  full_website, full_lastupdated
+        FROM bi_productfull
+        WHERE full_id=#id#
+    </select>
+    <select id="findExists" resultMap="result">
+        SELECT full_id,  full_prodid,  full_gbu,   full_category,  full_subcategory,  full_brand,   full_variant,
+            full_sku,  full_site_code ,  full_site_pid,  full_url,  full_code,  full_name,  full_desc,  full_website, full_lastupdated
+        FROM bi_productfull
+        WHERE full_prodid=#productId# AND full_website=#website.id#
+    </select>    
+    <select id="findByCode" resultMap="result">
+        SELECT full_id,  full_prodid,  full_gbu,   full_category,  full_subcategory,  full_brand,   full_variant,
+            full_sku,  full_site_code ,  full_site_pid,  full_url,  full_code,  full_name,  full_desc,  full_website, full_lastupdated
+        FROM bi_productfull
+        WHERE full_code=#code#
+    </select>
+    <delete id="deleteProductFull" >
+        DELETE FROM bi_productfull 
+        WHERE full_id=#id#
+    </delete>
+    <insert id="insertProductFull" >
+        INSERT INTO bi_productfull(full_id,full_prodid,full_gbu,full_category,  full_subcategory,  full_brand,   full_variant,
+            full_sku,  full_site_code ,  full_site_pid,  full_url,  full_code,  full_name,  full_desc,  full_website, full_lastupdated )
+        VALUES(nextval('seq_product_full_id'), #productId#, #gbu#, #category#, #subCategory#, #brand#, #variant#, #sku#,
+           #siteCode#, #siteIdentify#, #url#, #code#, #name#, #description#, #website.id#, now())
+    </insert>
+    <update id="updateProductFull" >
+        UPDATE bi_productfull SET full_gbu=#gbu#, full_category=#category#, full_subcategory=#subCategory#, full_brand=#brand#,
+               full_variant=#variant#, full_sku=#sku#, full_site_code=#siteCode#, full_site_pid=#siteIdentify#, full_url=#url#,
+               full_code=#code#, full_name=#name#, full_desc=#description#, full_lastupdated = now()
+        WHERE full_id=#id#
+    </update>
+</sqlMap>

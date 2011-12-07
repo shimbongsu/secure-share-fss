@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Blog">
+    <resultMap id="result" class="com.s7turn.search.community.Blog" >
+       <result property="id" column="blog_id" columnIndex="1" />
+       <result property="name" column="blog_name" columnIndex="2" />
+       <result property="blogType" column="blog_blogtype" columnIndex="3" />
+       <result property="description" column="blog_desc" columnIndex="4" />
+       <result property="owner" column="blog_ownerid" columnIndex="5" />
+       <result property="status" column="blog_status" columnIndex="6" />
+       <result property="tags" column="community_tags" columnIndex="7" />
+       <result property="createTime" column="blog_createtime" columnIndex="8" />
+       <result property="lastUpdatedTime" column="blog_lastupdated" columnIndex="9" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE community_blog_blog_id_seq;
+        CREATE TABLE community_blogs( blog_id bigint default nextval('community_blog_blog_id_seq'),
+         blog_name varchar(30), blog_blogtype int, blog_desc text,  blog_ownerid bigint, 
+         blog_status varchar(20), community_tags varchar(300), blog_createtime timestamp, 
+         blog_lastupdated timestamp, primary key( blog_id ) );
+    </update>    
+    <select id="findAll" resultMap="result">
+        SELECT blog_id, blog_name, blog_blogtype, blog_desc, blog_ownerid,  blog_status, 
+        community_tags, blog_createtime, blog_lastupdated
+        FROM community_blogs
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT blog_id, blog_name, blog_blogtype, blog_desc, blog_ownerid,  blog_status, 
+        community_tags, blog_createtime, blog_lastupdated
+        FROM community_blogs
+        WHERE blog_id=#id#
+    </select>    
+    <select id="findByOwnerForUser" resultMap="result">
+        SELECT blog_id, blog_name, blog_blogtype, blog_desc, blog_ownerid,  blog_status, 
+        community_tags, blog_createtime, blog_lastupdated
+        FROM community_blogs
+        WHERE blog_ownerid=#id# AND blog_blogtype=0
+    </select>
+    <select id="findByOwnerForGroup" resultMap="result">
+        SELECT blog_id, blog_name, blog_blogtype, blog_desc, blog_ownerid,  blog_status, 
+        community_tags, blog_createtime, blog_lastupdated
+        FROM community_blogs
+        WHERE blog_ownerid=#id# AND blog_blogtype=1
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT blog_id, blog_name, blog_blogtype, blog_desc, blog_ownerid,  blog_status, 
+        community_tags, blog_createtime, blog_lastupdated
+        FROM community_blogs
+        WHERE blog_name=#code#
+    </select>
+    <delete id="deleteBlog" >
+        DELETE FROM community_blogs
+        WHERE blog_id=#id#
+    </delete>
+    <insert id="insertBlog" >
+        INSERT INTO  community_blogs ( blog_name, blog_blogtype, 
+                blog_desc, blog_ownerid,  blog_status, community_tags, 
+                blog_createtime, blog_lastupdated)
+        VALUES( #name#, #blogType#, #description#, #owner#, 
+                #status#, #tags#, now(), now())
+    </insert>
+    <update id="updateBlog" >
+        UPDATE community_blogs SET blog_name=#name#, blog_blogtype=#blogType#, 
+                blog_desc=#description#, blog_ownerid=#owner#,  blog_status=#status#, 
+                community_tags=#tags#, blog_lastupdated=now()
+        WHERE blog_id=#id#
+    </update>
+</sqlMap>

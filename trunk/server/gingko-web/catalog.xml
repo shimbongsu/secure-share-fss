@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <nextCatalog catalog="private/cache/retriever/catalog.xml"/>
+    <nextCatalog catalog="file:/C:/Documents%20and%20Settings/Long/.netbeans/6.5/var/cache/mavencachedirs/1349584358//retriever/catalog.xml"/>
+    <nextCatalog catalog="file:/C:/Users/Long/.netbeans/6.5/var/cache/mavencachedirs/1017485693//retriever/catalog.xml"/>
+</catalog>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="GroupTeam">
+    <resultMap id="result" class="com.s7turn.search.community.GroupTeam" >
+       <result property="id" column="team_id" columnIndex="1" />
+       <result property="name" column="team_name" columnIndex="2" />
+       <result property="description" column="team_desc" columnIndex="3" />
+       <result property="group.id" column="team_group" columnIndex="4" />
+       <result property="parentTeam.id" column="team_parent" columnIndex="5" />
+       <result property="teamType" column="team_type" columnIndex="6" />
+       <result property="createDate" column="team_createdate" columnIndex="7" />
+       <result property="lastUpdatedTime" column="team_lastupdated" columnIndex="8" />
+    </resultMap>
+    <resultMap id="resultMember" class="com.s7turn.search.community.GroupMember" >
+       <result property="id" column="tmem_id" columnIndex="1" />
+       <result property="group.id" column="tmem_groupid" columnIndex="2" />
+       <result property="team.id" column="tmem_teamid" columnIndex="3" />
+       <result property="joinTime" column="tmem_jointime" columnIndex="4" />
+       <result property="user.id" column="tmem_userid" columnIndex="5" />
+       <result property="user.loginId" column="login_id" columnIndex="6" />
+       <result property="user.email" column="user_email" columnIndex="7" />
+       <result property="user.fullName" column="full_name" columnIndex="8" />
+       <result property="user.screenName" column="user_screenname" columnIndex="9" />
+       <result property="team.name" column="team_name" columnIndex="10" />
+       <result property="group.name" column="group_name" columnIndex="11" />
+       <result property="lastUpdatedTime" column="tmem_lastupdated" columnIndex="12" />
+
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE group_teams_team_id_seq;
+
+        CREATE TABLE group_teams( team_id bigint default nextval('group_teams_team_id_seq'),
+                team_name varchar(30), team_desc text,
+                team_group bigint, team_parent int, team_type int,
+                team_createdate timestamp, team_lastupdated timestamp,
+                primary key( group_id ));
+
+        CREATE SEQUENCE team_members_tmem_id_seq;
+
+        CREATE TABLE team_members( tmem_id bigint default nextval('team_members_tmem_id_seq'),
+        				tmem_groupid bigint, tmem_jointime timestamp, tmem_userid bigint, tmem_teamid bigint,
+                        tmem_lastupdated timestamp,
+                        primary key( tmem_id ));
+    </update> 
+    <select id="findAll" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams
+        WHERE team_id=#id#
+    </select>    
+    <select id="findByCode" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams
+        WHERE team_name=#code#
+    </select>
+    <select id="findByTeamName" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams
+        WHERE team_group=#group.id# AND team_name=#name#
+    </select>
+    <select id="findByTeamNameAny" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams
+        WHERE team_group=#group.id# AND team_name like #name#
+    </select>
+    <select id="findByGroup" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams
+        WHERE team_group=#id#
+    </select>
+    <select id="findAllRootTeams" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams
+        WHERE team_group=#id# AND (team_parent = 0 OR team_parent IS NULL )
+    </select>
+    <select id="findChildrenTeams" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams
+        WHERE team_group=#group.id# AND team_parent = #id#
+    </select>
+    <select id="findByMemberInTeam" resultMap="result">
+        SELECT team_id, team_name, team_desc, team_group, team_parent,
+        team_type, team_createdate, team_lastupdated
+        FROM group_teams INNER JOIN team_members ON team_members.tmem_teamid=group_teams.team_id
+        WHERE team_group=#group.id# AND team_members.tmem_userid = #user.id# 
+    </select>
+    <delete id="deleteGroupTeam" >
+        DELETE FROM group_teams
+        WHERE team_id=#id#
+    </delete>
+    <insert id="insertGroupTeam" >
+        INSERT INTO group_teams(team_name, team_desc, team_group,
+        team_parent, team_type, team_createdate, team_lastupdated)
+        VALUES( #name#, #description#, #group.id#, #parentTeam.id#,
+        #teamType#, now(), now() );
+        <selectKey keyProperty="id" type="post">
+            SELECT currval('group_teams_team_id_seq') as id
+        </selectKey>
+    </insert>
+    <update id="updateGroupTeam" >
+        UPDATE group_teams SET team_name=#name#, team_desc=#description#,
+            team_type=#teamType#, team_lastupdated=now()
+        WHERE team_id=#id#
+    </update>
+
+    <select id="findTeamMembers" resultMap="resultMember">
+        SELECT DISTINCT t.tmem_id, t.tmem_groupid, t.tmem_teamid, t.tmem_jointime, t.tmem_userid,
+               u.login_id, u.user_email, u.full_name, u.user_screenname, gt.team_name,  g.group_name,
+               t.tmem_lastupdated
+        FROM team_members t INNER JOIN member_user u ON t.tmem_userid=u.user_id
+                            INNER JOIN community_groups g ON t.tmem_groupid = g.group_id
+                            LEFT JOIN group_teams gt ON t.tmem_groupid = gt.team_id
+        WHERE tmem_groupid=#group.id# AND tmem_teamid=#team.id#
+    </select>
+
+    <select id="findMemberInTeam" resultMap="resultMember">
+        SELECT DISTINCT t.tmem_id, t.tmem_groupid, t.tmem_teamid, t.tmem_jointime, t.tmem_userid,  
+               u.login_id, u.user_email, u.full_name, u.user_screenname, gt.team_name,  g.group_name,
+               t.tmem_lastupdated
+        FROM team_members t INNER JOIN member_user u ON t.tmem_userid=u.user_id
+                            INNER JOIN community_groups g ON t.tmem_groupid = g.group_id
+                            LEFT JOIN group_teams gt ON t.tmem_groupid = gt.team_id
+        WHERE tmem_groupid=#group.id#
+        <dynamic>
+            <isNotNull prepend="AND" property="team">
+                tmem_teamid=#team.id#
+            </isNotNull>
+        </dynamic>
+
+    </select>
+    <select id="findMemberInGroup" resultMap="resultMember">
+        SELECT DISTINCT t.tmem_id, t.tmem_groupid, null as tmem_teamid, t.tmem_jointime, t.tmem_userid, 
+               u.login_id, u.user_email, u.full_name, u.user_screenname, '' as team_name,  g.group_name,
+               t.tmem_lastupdated
+        FROM team_members t INNER JOIN member_user u ON t.tmem_userid=u.user_id
+                            INNER JOIN community_groups g ON t.tmem_groupid = g.group_id
+        WHERE tmem_groupid=#group.id#
+    </select>
+    <select id="findGroupMembers" resultMap="resultMember">
+        SELECT DISTINCT t.tmem_id, t.tmem_groupid, t.tmem_teamid, t.tmem_jointime, t.tmem_userid, 
+               u.login_id, u.user_email, u.full_name, u.user_screenname, gt.team_name,  g.group_name,
+               t.tmem_lastupdated
+        FROM team_members t INNER JOIN member_user u ON t.tmem_userid=u.user_id
+                            INNER JOIN community_groups g ON t.tmem_groupid = g.group_id
+        WHERE tmem_groupid=#group.id#
+    </select>
+    <delete id="deleteTeamMember" >
+        DELETE FROM team_members
+        WHERE tmem_userid=#user.id# AND tmem_teamid=#team.id#
+    </delete>
+    <insert id="insertTeamMember" >
+        INSERT INTO team_members(tmem_userid, tmem_groupid, tmem_teamid, tmem_jointime, tmem_lastupdated)
+        VALUES( #user.id#, #group.id#, #team.id#, now(), now() )
+    </insert>
+
+</sqlMap>

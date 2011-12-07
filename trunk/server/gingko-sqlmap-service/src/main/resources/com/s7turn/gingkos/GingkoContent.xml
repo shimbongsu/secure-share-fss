@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="GingkoContent" >
+    <resultMap id="result" class="com.s7turn.gingkos.GingkoContent" >
+       <result property="guid" column="gu_id" columnIndex="1" />
+       <result property="name" column="gc_name" columnIndex="2" />
+       <result property="type" column="gc_type" columnIndex="3" />
+       <result property="folder" column="gc_isfolder" columnIndex="4"/>
+       <result property="mimeType" column="gc_mimetype" columnIndex="5"/>
+       <result property="length" column="gc_length" columnIndex="6" />
+       <result property="description" column="gc_desc" columnIndex="7"/>
+       <result property="tags" column="gc_tags" columnIndex="8"/>
+       <result property="contents" column="gc_contents" columnIndex="9"/>
+       <result property="storage" column="gc_storage" columnIndex="10" />
+       <result property="icon" column="gc_icon" columnIndex="11"/>
+       <result property="thumb" column="gc_thumb" columnIndex="12"/>
+       <result property="url" column="gc_url" columnIndex="13"/>
+       <result property="owner.id" column="gc_owner" columnIndex="14" />
+       <result property="createTime" column="gc_createtime" columnIndex="15"/>
+       <result property="lastUpdated" column="gc_lastupdated" columnIndex="16"/>
+       <result property="version" column="gc_version" columnIndex="17"/>
+       <result property="deleted" column="gc_deleted" columnIndex="18" />
+       <result property="relatedId" column="gc_related_id" columnIndex="19"/>
+       <result property="companyId" column="gc_companyid" columnIndex="20"/>
+       <result property="parent.guid" column="gc_parent" columnIndex="21"/>
+       <result property="owner.fullName" column="full_name" columnIndex="22"/>
+       <result property="owner.screenName" column="user_screenname" columnIndex="23"/>
+       <result property="owner.loginId" column="login_id" columnIndex="24"/>
+       <result property="owner.email" column="user_email" columnIndex="25"/>
+    </resultMap>
+
+    <update id="createTable">
+        CREATE SEQUENCE gingko_content_gc_id_seq;
+        CREATE TABLE gingko_content( gu_id varchar(64),
+                     gc_name varchar(256),gc_type varchar(30),gc_isfolder boolean,
+                     gc_mimetype varchar(30),gc_length int,gc_desc varchar(800),
+                     gc_tags varchar(100),gc_contents bytea,gc_storage varchar(100),
+                     gc_icon varchar(100),gc_thumb varchar(100),gc_url varchar(100),
+                     gc_owner bigint,gc_createtime timestamp,gc_lastupdated timestamp, gc_companyid varchar(12),
+                     gc_version varchar(20),gc_deleted boolean default false,gc_related_id bigint,
+                     gc_parent varchar(64),
+                     primary key (gu_id)
+         );
+
+                
+    </update>    
+    <select id="findByAll" resultMap="result">
+        SELECT gu_id, gc_name, gc_type, gc_isfolder, gc_mimetype, gc_length, gc_desc,
+               gc_tags, gc_contents, gc_storage, gc_icon, gc_thumb, gc_url, gc_owner, 
+               gc_createtime, gc_lastupdated, gc_version, gc_deleted, gc_related_id, gc_companyid,
+               gc_parent, login_id, user_email, user_screenname, full_name
+        FROM   gingko_content INNER JOIN member_user ON gingko_content.gc_owner=member_user.user_id
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT gu_id, gc_name, gc_type, gc_isfolder, gc_mimetype, gc_length, gc_desc,
+               gc_tags, gc_contents, gc_storage, gc_icon, gc_thumb, gc_url, gc_owner, 
+               gc_createtime, gc_lastupdated, gc_version, gc_deleted, gc_related_id, gc_companyid,
+               gc_parent, login_id, user_email, user_screenname, full_name
+        FROM   gingko_content INNER JOIN member_user ON gingko_content.gc_owner=member_user.user_id
+        WHERE  gu_id=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT gu_id, gc_name, gc_type, gc_isfolder, gc_mimetype, gc_length, gc_desc,
+               gc_tags, gc_contents, gc_storage, gc_icon, gc_thumb, gc_url, gc_owner, 
+               gc_createtime, gc_lastupdated, gc_version, gc_deleted, gc_related_id, gc_companyid,
+               gc_parent, login_id, user_email, user_screenname, full_name
+        FROM   gingko_content INNER JOIN member_user ON gingko_content.gc_owner=member_user.user_id
+        WHERE  gu_id=#id#
+    </select>
+    <select id="findByUser" resultMap="result">
+        SELECT gu_id, gc_name, gc_type, gc_isfolder, gc_mimetype, gc_length, gc_desc,
+               gc_tags, gc_contents, gc_storage, gc_icon, gc_thumb, gc_url, gc_owner, 
+               gc_createtime, gc_lastupdated, gc_version, gc_deleted, gc_related_id, gc_companyid,
+               gc_parent, login_id, user_email, user_screenname, full_name
+        FROM   gingko_content INNER JOIN member_user ON gingko_content.gc_owner=member_user.user_id
+        WHERE  gc_owner=#userId#
+    </select>
+    <select id="findByContents" resultMap="result">
+        SELECT gu_id, gc_name, gc_type, gc_isfolder, gc_mimetype, gc_length, gc_desc,
+               gc_tags, gc_contents, gc_storage, gc_icon, gc_thumb, gc_url, gc_owner, 
+               gc_createtime, gc_lastupdated, gc_version, gc_deleted, gc_related_id, gc_companyid,
+               gc_parent, login_id, user_email, user_screenname, full_name
+        FROM   gingko_content INNER JOIN member_user ON gingko_content.gc_owner=member_user.user_id
+        WHERE  gc_owner=#owner.id#
+        <dynamic>
+            <isNotNull prepend="AND" property="parent">
+                 gc_parent = #parent.guid#
+            </isNotNull>
+            <isNotNull prepend="AND" property="type">
+                 gc_type=#type#
+            </isNotNull>
+            <isEqual prepend="AND" property="relatedId" compareValue="1">
+                 gc_isfolder=true
+            </isEqual>
+            <isEqual prepend="AND" property="relatedId" compareValue="2">
+                 gc_isfolder=false
+            </isEqual>
+            <isNotNull prepend="AND" property="name">
+                 gc_name like #name#
+            </isNotNull>
+        </dynamic>
+    </select>
+    <delete id="deleteGingkoContent" >
+        delete from gingko_content 
+        where gu_id=#guid# and gc_owner=#owner.id#
+    </delete>
+    <insert id="insertGingkoContent" >
+        INSERT INTO gingko_content( gu_id, gc_name, gc_type, gc_isfolder, gc_mimetype,
+                    gc_length, gc_desc, gc_tags, gc_contents, gc_storage, gc_icon, gc_thumb, 
+                    gc_url, gc_owner, gc_version, gc_deleted, gc_related_id, gc_parent, gc_companyid,
+                    gc_createtime, gc_lastupdated  )
+        VALUES     (#guid#, #name#, #type#, #folder#, #mimeType#, #length#, #description#, #tags#,
+                    #contents#, #storage#, #icon#, #thumb#, #url#, #owner.id#, #version#,
+                    #deleted#, #relatedId#, #parent.guid#, #companyId#, now(), now())
+    </insert>
+    <update id="updateGingkoContent" >
+        UPDATE gingko_content SET gc_name=#name#,
+                    gc_length=#length#, gc_desc=#description#, gc_tags=#tags#, 
+                    gc_contents=#contents#, gc_storage=#storage#, gc_icon=#icon#, 
+                    gc_url=#url#, gc_owner=#owner.id#, gc_companyid=#companyId#,
+                    gc_version=#version#, gc_related_id=#relatedId#, gc_parent=#parent.guid#,
+                    gc_lastupdated =now()
+        WHERE  gu_id=#guid#
+    </update>
+</sqlMap>

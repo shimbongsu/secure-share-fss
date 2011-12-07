@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Avator">
+    <resultMap id="result" class="com.s7turn.search.engine.member.Avator" >
+       <result property="id" column="avator_id" columnIndex="1" />
+       <result property="avatorForId" column="avator_forid" columnIndex="2" />
+       <result property="avatorType" column="avator_type" columnIndex="3" />
+       <result property="avatorUrl" column="avator_url" columnIndex="4" />
+       <result property="lastUpdatedTime" column="avator_lastupdated" columnIndex="5" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE member_avator_avator_id_seq;
+        CREATE TABLE member_avator(avator_id bigint default nextval('member_avator_avator_id_seq'),
+         avator_type int, avator_forid bigint, avator_lastupdated timestamp, avator_url varchar(100),
+         primary key( avator_id ) );
+    </update>
+    <select id="findAll" resultMap="result">
+        SELECT avator_id,avator_type, avator_forid, avator_lastupdated, avator_url
+        FROM member_avator
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT avator_id,avator_type, avator_forid, avator_lastupdated, avator_url
+        FROM member_avator
+        WHERE avator_id=#id#
+    </select>    
+    <select id="findByCode" resultMap="result">
+        SELECT avator_id, avator_type, avator_forid, avator_lastupdated, avator_url
+        FROM member_avator
+        WHERE avator_url=#code#
+    </select>
+    <select id="findByTypeWithId" resultMap="result">
+        SELECT avator_id, avator_type, avator_forid, avator_lastupdated, avator_url
+        FROM member_avator
+        WHERE avator_type=#avatorType# AND avator_forid=#avatorForId#
+    </select>    
+    <delete id="deleteAvator" >
+        DELETE FROM member_avator
+        WHERE avator_id=#id#
+    </delete>
+    <insert id="insertAvator" >
+        INSERT INTO member_avator( avator_type, avator_forid, avator_lastupdated, avator_url )
+        VALUES( #avatorType#, #avatorForId#, now(), #avatorUrl# )
+    </insert>
+    <update id="updateAvator" >
+        UPDATE member_avator SET avator_lastupdated=now(), avator_url=#avatorUrl#
+        WHERE avator_id=#id#
+    </update>
+</sqlMap>

@@ -1,0 +1,78 @@
+.content_home{
+margin:0 auto;
+width:701px;
+}
+
+
+.home_logo{
+background:url(../images/home_logo.jpg) no-repeat center bottom;
+height:105px;
+}
+
+
+.home_logo span{
+display:none;
+}
+
+.welcome{
+text-align:right;
+margin:5px 0;
+}
+
+.welcome a{
+margin-left:8px;
+}
+
+.search{
+background:url(../images/home_search.jpg) no-repeat left top;
+height:117px;
+width:100%;
+margin-bottom:20px;
+}
+
+.nav{
+float:left;
+}
+
+
+.search ul{
+display:inline;
+}
+
+
+.search ul li{
+display:inline;
+margin-right:50px;
+line-height:30px;
+}
+
+.nav_on{
+color:#FFFFFF;
+font-size:14px;
+font-weight:bold;
+margin-right:25px;
+}
+
+.search_list{
+clear:left;
+margin-left:42px;
+margin-top:30px;
+}
+
+.btn_search{
+margin-left:15px;
+background: url(../images/btn_search.jpg) no-repeat left center;
+border-width:0px;
+width:55px;
+height:20px;
+}
+.search_list select{
+width:135px;}
+
+.product_logo{
+float:left;
+width:130px;
+height:50px;
+margin:5px 5px 0 5px;
+text-align:center;
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="PhysicalFile" >
+    <resultMap id="result" class="com.s7turn.search.engine.PhysicalFile" >
+       <result property="id" column="pf_id" columnIndex="1" />
+       <result property="fileName" column="pf_filename" columnIndex="2" />
+       <result property="mimeType" column="pf_mimetype" columnIndex="3" />
+       <result property="originalFileName" column="pf_org_filename" columnIndex="4" />
+       <result property="description" column="pf_desc" columnIndex="5" />
+       <result property="md5Code" column="pf_md5" columnIndex="6"/>
+       <result property="fileSize" column="pf_filesize" columnIndex="7"/>
+       <result property="userId" column="pf_owneruser" columnIndex="8"/>
+       <result property="status" column="pf_status" columnIndex="9"/>
+       <result property="lastUpdatedTime" column="pf_lastupdatedtime" columnIndex="10"/>
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE common_phyfiles_pf_id_seq;
+        CREATE TABLE common_phyfiles( pf_id bigint default nextval('common_phyfiles_pf_id_seq'),
+         pf_filename varchar(100), pf_mimetype int, pf_org_filename varchar(100),  
+         pf_desc text, pf_md5 varchar(40), pf_filesize int, pf_owneruser bigint,
+         pf_status int, pf_lastupdatedtime timestamp, primary key( pf_id ));
+    </update>        
+    <select id="findAll" resultMap="result">
+        SELECT pf_id, pf_filename, pf_mimetype, pf_org_filename, pf_desc, pf_md5,
+               pf_filesize, pf_owneruser, pf_status, pf_lastupdatedtime
+        FROM common_phyfiles
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT pf_id, pf_filename, pf_mimetype, pf_org_filename, pf_desc, pf_md5,
+               pf_filesize, pf_owneruser, pf_status, pf_lastupdatedtime
+        FROM common_phyfiles
+        WHERE pf_id=#id#
+    </select>
+    <select id="findByUserId" resultMap="result">
+        SELECT pf_id, pf_filename, pf_mimetype, pf_org_filename, pf_desc, pf_md5,
+               pf_filesize, pf_owneruser, pf_status, pf_lastupdatedtime
+        FROM common_phyfiles 
+        WHERE pf_owneruser=#userId#
+     </select>
+     
+    <select id="findByCode" resultMap="result">
+        SELECT pf_id, pf_filename, pf_mimetype, pf_org_filename, pf_desc, pf_md5,
+               pf_filesize, pf_owneruser, pf_status, pf_lastupdatedtime
+        FROM common_phyfiles 
+        WHERE pf_filename=#code#
+    </select>
+    <select id="findByUserAndStatus" resultMap="result">
+        SELECT pf_id, pf_filename, pf_mimetype, pf_org_filename, pf_desc, pf_md5,
+               pf_filesize, pf_owneruser, pf_status, pf_lastupdatedtime
+        FROM common_phyfiles 
+        WHERE pf_owneruser=#userId# AND pf_status=#status#
+    </select>
+    <delete id="deletePhysicalFile" >
+        DELETE FROM common_phyfiles 
+        WHERE pf_id = #id#
+    </delete>
+    <insert id="insertPhysicalFile" >
+        INSERT INTO  common_phyfiles( pf_filename, pf_mimetype, pf_org_filename, pf_desc, pf_md5,
+               pf_filesize, pf_owneruser, pf_status, pf_lastupdatedtime )
+        VALUES( #fileName#, #mimeType#, #originalFileName#, #description#, #md5Code#,
+               #fileSize#, #userId#, #status#, now())
+        <selectKey keyProperty="id" resultClass="java.lang.Long" type="post">
+            SELECT currval('common_phyfiles_pf_id_seq') AS id
+        </selectKey>    
+    </insert>
+    <update id="updatePhysicalFile" >        
+        UPDATE common_phyfiles SET pf_filename=#fileName#, pf_mimetype=#mimeType#,
+                pf_org_filename=#originalFileName#, pf_desc=#description#, 
+                pf_md5=#md5Code#, pf_filesize=#fileSize#, pf_owneruser=#userId#,
+                pf_status=#status#, pf_lastupdatedtime =now()
+        WHERE pf_id=#id#
+    </update>
+</sqlMap>

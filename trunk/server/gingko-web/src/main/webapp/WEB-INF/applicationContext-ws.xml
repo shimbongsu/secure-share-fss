@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                          http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                          http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
+       default-lazy-init="true">
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <bean id="loginServiceBean" class="com.s7turn.gingkos.services.impl.LoginServiceImpl" scope="prototype">
+		<property name="userService" ref="userServiceBean"/>
+        <property name="tokenService" ref="tokenServiceBean" />
+	</bean>
+
+    <bean id="digitalWebServiceImpl" class="com.s7turn.gingkos.services.impl.DigitalWebServiceImpl" scope="prototype">
+		<property name="gingkoContextService" ref="gingkoContentServiceBean" />
+        <property name="tokenService" ref="tokenServiceBean" />
+	</bean>
+
+    <bean id="gingkoWebServiceBean" class="com.s7turn.gingkos.services.impl.GingkoWebServiceImpl" scope="prototype">
+		<property name="contentService" ref="gingkoContentServiceBean" />
+        <property name="tokenService" ref="tokenServiceBean" />
+        <property name="gingkoService" ref="gingkoServiceBean" />
+        <property name="componentService" ref="defaultGingkoServiceManagerImpl" />
+        <property name="folderIcon" value="/js/resources/images/filetypes/folder.png" />
+        <property name="folderThumb" value="/js/resources/images/filetypes/folder.png" />
+	</bean>
+
+	<jaxws:endpoint id="LoginService" implementor="#loginServiceBean"
+		address="/LoginService">
+	</jaxws:endpoint>
+    
+	<jaxws:endpoint id="GingkoService" implementor="#gingkoWebServiceBean"
+		address="/GingkoService">
+	</jaxws:endpoint>
+	<jaxws:endpoint id="DigitalService" implementor="#digitalWebServiceImpl"
+		address="/DigitalService">
+	</jaxws:endpoint>
+</beans>

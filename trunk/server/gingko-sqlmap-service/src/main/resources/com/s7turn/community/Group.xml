@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Group">
+    <resultMap id="result" class="com.s7turn.search.community.Group" >
+       <result property="id" column="group_id" columnIndex="1" />
+       <result property="name" column="group_name" columnIndex="2" />
+       <result property="description" column="group_desc" columnIndex="3" />
+       <result property="userId" column="group_owneruser" columnIndex="4" />
+       <result property="actorId" column="group_actor" columnIndex="5" />
+       <result property="groupType" column="group_type" columnIndex="6" />
+       <result property="tags" column="community_tags" columnIndex="7" />
+       <result property="createDate" column="group_createdate" columnIndex="8" />
+       <result property="lastUpdatedTime" column="group_lastupdated" columnIndex="9" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE community_groups_group_id_seq;
+
+        CREATE TABLE community_groups( group_id bigint default nextval('community_groups_group_id_seq'), 
+                group_name varchar(30), group_desc text, group_owneruser bigint, group_type int, 
+                community_tags varchar(200), group_createdate timestamp, group_lastupdated timestamp,
+                group_actor bigint, primary key( group_id ));
+
+    </update> 
+    <select id="findAll" resultMap="result">
+        SELECT group_id, group_name, group_desc, group_owneruser, group_actor, 
+        group_type, community_tags, group_createdate, group_lastupdated
+        FROM community_groups
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT group_id, group_name, group_desc, group_owneruser, group_actor, 
+        group_type, community_tags, group_createdate, group_lastupdated
+        FROM community_groups
+        WHERE group_id=#id#
+    </select>    
+    <select id="findByOwner" resultMap="result">
+        SELECT group_id, group_name, group_desc, group_owneruser, group_actor, 
+        group_type, community_tags, group_createdate, group_lastupdated
+        FROM community_groups
+        WHERE group_owneruser=#userId#
+    </select>
+    <select id="findByUser" resultMap="result">
+        SELECT DISTINCT group_id, group_name, group_desc, group_owneruser, group_actor,
+        group_type, community_tags, group_createdate, group_lastupdated
+        FROM community_groups LEFT JOIN team_members ON community_groups.group_id=team_members.tmem_groupid
+        WHERE team_members.tmem_userid=#id# OR group_owneruser=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT group_id, group_name, group_desc, group_owneruser, group_actor, 
+        group_type, community_tags, group_createdate, group_lastupdated
+        FROM community_groups
+        WHERE group_name=#code#
+    </select>
+    <delete id="deleteGroup" >
+        DELETE FROM community_groups
+        WHERE group_id=#id#
+    </delete>
+    <insert id="insertGroup" >
+        INSERT INTO community_groups(group_name, group_desc, group_owneruser, 
+                group_actor, group_type, community_tags, group_createdate, group_lastupdated)
+        VALUES( #name#, #description#, #userId#, #actorId#, #groupType#, #tags#, now(), now() );
+        <selectKey keyProperty="id" type="post">
+            SELECT currval('community_groups_group_id_seq') as id
+        </selectKey>
+    </insert>
+    <update id="updateGroup" >
+        UPDATE community_groups SET group_name=#name#, group_desc=#description#, 
+        	group_owneruser=#userId#, group_actor=#actorId#, community_tags=#tags#, 
+                group_type=#groupType#,
+        	group_lastupdated=now()
+        WHERE group_id=#id#
+    </update>
+</sqlMap>

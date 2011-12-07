@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Variant" >
+    <resultMap id="result" class="com.s7turn.search.engine.Variant" >
+       <result property="name" column="vt_name" columnIndex="1" />
+       <result property="code" column="vt_code" columnIndex="2" />
+       <result property="lastUpdatedTime" column="vt_updatetime" columnIndex="3" />
+       <result property="description" column="vt_desc" columnIndex="4" />
+       <result property="brand" column="vt_brand" columnIndex="5" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.BrandTypeHandler"/>
+    </resultMap>
+    <select id="findByAll" resultMap="result">
+        select vt_name, vt_code, vt_updatetime, vt_desc, vt_brand
+        from bi_variant
+    </select>
+    <select id="findByCode" resultMap="result">
+        select vt_name, vt_code, vt_updatetime, vt_desc, vt_brand
+        from bi_variant
+        where vt_code=#code#
+    </select>
+    <delete id="deleteVariant" >
+        delete from bi_variant 
+        where vt_code = #code#
+    </delete>
+    <insert id="insertVariant" >
+        insert into bi_variant( vt_name, vt_code, vt_updatetime, vt_desc, vt_brand )
+        values( #name#, #code#, #description#, now(), #brand.code# )
+    </insert>
+    <update id="updateVariant" >
+        update bi_variant set vt_id=#name#, vt_desc=#description#, 
+              vt_updatetime=now(), vt_brand=#brand.code#
+        where vt_code=#code#
+    </update>
+</sqlMap>

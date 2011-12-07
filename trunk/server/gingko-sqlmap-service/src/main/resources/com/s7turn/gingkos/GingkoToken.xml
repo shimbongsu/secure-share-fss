@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="GingkoToken" >
+    <resultMap id="result" class="com.s7turn.gingkos.GingkoToken" >
+       <result property="userId" column="user_id" columnIndex="1" />
+       <result property="token" column="token_id" columnIndex="2" />
+       <result property="address" column="remote_addr" columnIndex="3" />
+       <result property="lastUpdateTime" column="last_updated" columnIndex="4"/>
+       <result property="active" column="token_status" columnIndex="5"/>
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE token_session_seq;
+        CREATE TABLE token_session(
+         token_id varchar(32) not null,
+         user_id bigint,
+         remote_addr varchar(36),
+         last_updated int8,
+         token_status boolean,
+         primary key (token_id)
+         );
+    </update>
+    <select id="findByAll" resultMap="result">
+        SELECT user_id, token_id, remote_addr, last_updated, token_status
+        FROM token_session
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT user_id, token_id, remote_addr, last_updated, token_status
+        FROM token_session
+        WHERE  token_id=#id#
+    </select>
+    <select id="findByToken" resultMap="result">
+        SELECT user_id, token_id, remote_addr, last_updated, token_status
+        FROM token_session
+        WHERE  token_id=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT user_id, token_id, remote_addr, last_updated, token_status
+        FROM token_session
+        WHERE  token_id=#id#
+    </select>
+    <select id="findByUserId" resultMap="result">
+        SELECT user_id, token_id, remote_addr, last_updated, token_status
+        FROM token_session
+        WHERE  user_id=#user.id#
+    </select>
+    <delete id="deleteGingkoToken">
+        delete from token_session
+        where  token_id=#token#
+    </delete>
+    <insert id="insertGingkoToken" >
+        INSERT INTO token_session( user_id, token_id, remote_addr, last_updated, token_status )
+        VALUES( #userId#, #token#, #address#, now()::VARCHAR, true )
+    </insert>
+    <update id="updateGingkoToken">
+        UPDATE token_session SET last_updated=now()::VARCHAR
+        WHERE  token_id=#token#
+    </update>
+</sqlMap>

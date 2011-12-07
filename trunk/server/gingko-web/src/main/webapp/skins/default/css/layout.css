@@ -1,0 +1,109 @@
+#header {
+	background-color: #fff;
+	min-width: 1000px;
+}
+#basectn {
+	background: #e6f3d7;
+	clear: both;
+	height: auto;
+	min-height: 487px;
+	min-width: 1000px;
+}
+
+#container, x:-moz-any-link { /* for firefox */
+	overflow: hidden;
+}
+* html #basectn { /* for ie6.0 */
+	height: 487px;
+}
+
+
+
+#categorization{
+	margin: 0 auto;
+	float: auto;
+	clear: left;
+	vertical-align: top;
+	text-align: center;	
+}
+
+div.boxing {  
+    display:table;  
+ 	width: expression(document.body.clientWidth > 1000? "auto" : "1000px" );
+ 	min-width: 1000px;
+ 	position:relative;  
+   	overflow:hidden;  
+   	vertical-align:middle;  
+   	align: center;
+}
+
+div.boxingwrap {  
+	clear: both;
+    vertical-align:middle;  
+    margin-top: 100px;
+    margin-bottom: 20px;
+ 	height:auto;
+}
+ 
+* html div.boxingwrap{
+ 	margin-top: 100px;
+ } 
+ 
+div#search_box {  
+	clear: both;
+} 
+
+div.category_list{
+	clear: both;
+	float: left;
+	position: relative;
+	height: 120px;
+	width: 100%;
+}
+
+div.category_list .gbu_item{
+	float: left;
+	width: 120px;
+}
+
+div.category_list .gbu_item .gbu_category{
+	
+}
+
+div.brand_list{
+	clear: both;
+	position: relative;
+	width: 400px;
+	height: 130px;
+	float: left;
+}
+
+div.brand_list .brand_item{
+	float: left;
+	width: 80px
+}
+
+.result_list{
+    clear: both;
+}
+
+.result_list .result_item{
+	width: 750px;
+}
+
+.sidebar {
+	background: url(../../../images/green/linebar.gif) repeat-x left top;
+	float: left;
+	width: 159px;
+}
+* html .sidebar { /* for ie6.0 */
+	width: 156px;
+}
+#footer{
+	background: #278449 url(../../../images/green/footer_bg.gif) repeat-x left top;
+	height: 29px;
+	line-height: 29px;
+}
+* html #header, * html #container, * html #footer { /* for ie6.0 */
+	width: expression(document.body.clientWidth > 1004? "auto" : "1004px" );
+}

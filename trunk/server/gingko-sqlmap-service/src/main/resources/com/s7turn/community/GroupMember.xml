@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="GroupMember">
+    <resultMap id="result" class="com.s7turn.search.community.GroupMember" >
+       <result property="id" column="gmem_id" columnIndex="1" />
+       <result property="groupId" column="gmem_groupid" columnIndex="2" />
+       <result property="joinTime" column="gmem_jointime" columnIndex="3" />
+       <result property="userId" column="gmem_userid" columnIndex="4" />
+       <result property="role" column="gmem_role" columnIndex="5" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE community_groupmember_gmem_id_seq;
+        CREATE TABLE community_groupmember( gmem_id bigint default nextval('community_groupmember_gmem_id_seq'), 
+         gmem_jointime timestamp, gmem_role varchar(10), gmem_userid bigint, gmem_groupid bigint,
+         primary key( gmem_id ));
+
+    </update> 
+    <select id="findAll" resultMap="result">
+    		SELECT gmem_id , gmem_jointime, gmem_role, gmem_userid, gmem_groupid 
+    		FROM community_groupmember
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+    		SELECT gmem_id , gmem_jointime, gmem_role, gmem_userid, gmem_groupid 
+    		FROM community_groupmember
+        WHERE gmem_id=#id#
+    </select>    
+    <select id="findByUser" resultMap="result">
+    		SELECT gmem_id , gmem_jointime, gmem_role, gmem_userid, gmem_groupid 
+    		FROM community_groupmember
+        WHERE gmem_userid=#userId#
+    </select>
+    <select id="findByGroup" resultMap="result">
+    		SELECT gmem_id , gmem_jointime, gmem_role, gmem_userid, gmem_groupid 
+    		FROM community_groupmember
+        WHERE gmem_groupid=#groupId#
+    </select>
+    <select id="findByGroupWithRole" resultMap="result">
+    		SELECT gmem_id , gmem_jointime, gmem_role, gmem_userid, gmem_groupid 
+    		FROM community_groupmember
+        WHERE gmem_groupid=#groupId# AND gmem_role=#roleId#
+    </select>
+    <select id="findByCode" resultMap="result">
+    		SELECT gmem_id , gmem_jointime, gmem_role, gmem_userid, gmem_groupid 
+    		FROM community_groupmember
+        WHERE gmem_role=#code#
+    </select>
+    <delete id="deleteGroupMember" >
+        DELETE FROM community_groupmember
+        WHERE gmem_id=#id#
+    </delete>
+    <insert id="insertGroupMember" >
+        INSERT INTO community_groupmember(gmem_jointime, gmem_role, gmem_userid, gmem_groupid)
+        VALUES( #joinTime#, #role#, #userId#, #groupId#);
+    </insert>
+    <update id="updateGroupMember" >
+        UPDATE community_groupmember SET gmem_jointime=#joinTime#, gmem_role=#role#
+        WHERE gmem_id=#id#
+    </update>
+</sqlMap>

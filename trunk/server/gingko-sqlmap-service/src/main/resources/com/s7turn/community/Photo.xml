@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Photo">
+    <resultMap id="result" class="com.s7turn.search.community.Photo" >
+       <result property="id" column="photo_id" columnIndex="1" />
+       <result property="name" column="photo_name" columnIndex="2" />
+       <result property="description" column="photo_desc" columnIndex="3" />
+       <result property="userId" column="photo_owneruser" columnIndex="4" />
+       <result property="fileUrl" column="photo_fileurl" columnIndex="5" />
+       <result property="fileType" column="photo_filetype" columnIndex="6" />
+       <result property="fileSize" column="photo_filesize" columnIndex="7" />
+       <result property="tags" column="community_tags" columnIndex="8" />
+       <result property="galleryId" column="photo_gallery" columnIndex="9" />
+       <result property="createDate" column="photo_createdate" columnIndex="10" />
+       <result property="thumbFileUrl" column="photo_thumbfileurl" columnIndex="11" />
+       <result property="thumbFileId" column="photo_thumbfileid" columnIndex="12" />
+       <result property="smallFileUrl" column="photo_smallfileurl" columnIndex="13" />
+       <result property="smallFileId" column="photo_smallfileid" columnIndex="14" />
+       <result property="fileId" column="photo_fileid" columnIndex="15" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE community_photos_photo_id_seq;
+
+        CREATE TABLE community_photos( photo_id bigint default nextval('community_photos_photo_id_seq'), 
+                photo_name varchar(30), photo_desc text, photo_owneruser bigint, 
+                photo_fileurl varchar(120), photo_filetype varchar(10), photo_filesize varchar(10),
+                community_tags varchar(200), photo_gallery bigint, photo_createdate timestamp,
+                group_actor bigint, photo_thumbfileurl varchar(120), photo_smallfileurl varchar(120),
+                photo_thumbfileid bigint, photo_smallfileid bigint, photo_fileid bigint, primary key( photo_id ));
+
+    </update> 
+    <select id="findAll" resultMap="result">
+        SELECT photo_id, photo_name, photo_desc, photo_owneruser, 
+                photo_fileurl, photo_filetype, photo_filesize,
+                community_tags, photo_gallery,photo_createdate,
+                photo_thumbfileurl, photo_thumbfileid, photo_smallfileurl,
+                photo_smallfileid, photo_fileid 
+        FROM community_photos
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT photo_id, photo_name, photo_desc, photo_owneruser, 
+                photo_fileurl, photo_filetype, photo_filesize,
+                community_tags, photo_gallery,photo_createdate,
+                photo_thumbfileurl, photo_thumbfileid, photo_smallfileurl,
+                photo_smallfileid, photo_fileid 
+        FROM community_photos
+        WHERE photo_id=#id#
+    </select>    
+    <select id="findByGallery" resultMap="result">
+        SELECT photo_id, photo_name, photo_desc, photo_owneruser, 
+                photo_fileurl, photo_filetype, photo_filesize,
+                community_tags, photo_gallery,photo_createdate,
+                photo_thumbfileurl, photo_thumbfileid, photo_smallfileurl,
+                photo_smallfileid, photo_fileid 
+        FROM community_photos
+        WHERE photo_gallery=#galleryId#
+    </select>
+    <select id="findByUser" resultMap="result">
+        SELECT photo_id, photo_name, photo_desc, photo_owneruser, 
+                photo_fileurl, photo_filetype, photo_filesize,
+                community_tags, photo_gallery,photo_createdate,
+                photo_thumbfileurl, photo_thumbfileid, photo_smallfileurl,
+                photo_smallfileid, photo_fileid 
+        FROM community_photos
+        WHERE photo_owneruser=#userId#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT photo_id, photo_name, photo_desc, photo_owneruser, 
+                photo_fileurl, photo_filetype, photo_filesize,
+                community_tags, photo_gallery,photo_createdate,
+                photo_thumbfileurl, photo_thumbfileid, photo_smallfileurl,
+                photo_smallfileid, photo_fileid 
+        FROM community_photos
+        WHERE photo_name=#code#
+    </select>
+    <delete id="deletePhoto" >
+        DELETE FROM community_photos
+        WHERE photo_id=#id#
+    </delete>
+    <insert id="insertPhoto" >
+        INSERT INTO community_photos(photo_name, photo_desc, photo_owneruser, 
+                photo_fileurl, photo_filetype, photo_filesize,
+                community_tags, photo_gallery, photo_createdate,photo_thumbfileurl, 
+                photo_thumbfileid, photo_smallfileurl,
+                photo_smallfileid, photo_fileid )
+        VALUES( #name#, #description#, #userId#, #fileUrl#, #fileType#, #fileSize#, 
+                #tags#, #galleryId#, now(), #thumbFileUrl#, #thumbFileId#, #smallFileUrl#, #smallFileId#, #fileId#);
+    </insert>
+    <update id="updatePhoto" >
+        UPDATE community_photos SET photo_name=#name#, photo_desc=#description#, photo_owneruser=#userId#, 
+                photo_fileurl=#fileUrl#, photo_filetype=#fileType#, photo_filesize=#fileSize#,
+                community_tags=#tags#, photo_gallery=#galleryId#, photo_createdate=now(), 
+                photo_thumbfileurl=#thumbFileUrl#, 
+                photo_thumbfileid=#thumbFileId#, photo_smallfileurl=#smallFileUrl#,
+                photo_smallfileid=#smallFileId#, photo_fileid=#fileId#
+        WHERE photo_id=#id#
+    </update>
+</sqlMap>
