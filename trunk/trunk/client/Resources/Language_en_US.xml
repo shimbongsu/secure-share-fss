@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="GB18030"?>
+<Language name="zh_CN">
+	<Form id="140" name="IDD_LOGIN_DIALOG" caption="登录">
+		<lable id="1034">用户ID</lable>
+		<lable id="1035">密码</lable>
+		<lable id="1039">注册新帐号(&amp;R)</lable>
+		<lable id="1040">忘记密码？(&amp;G)</lable>
+		<lable id="1029">设置(&amp;S)</lable>
+		<lable id="1">登录(&amp;L)</lable>
+	</Form>
+	<Form id="139" name="IDD_PASSWORD_DIALOG" caption="输入密码">
+		<lable id="1035">您的密码</lable>
+		<lable id="1038">再输一次</lable>
+		<lable id="1">确定(&amp;O)</lable>
+		<lable id="2">取消(&amp;C)</lable>
+	</Form>	
+	<Form id="137" name="IDD_SHARE" caption="共享设置">
+		<lable id="1014">用户ID/Email</lable>
+		<lable id="1009">验证/添加(&amp;V)</lable>
+		<lable id="1011">移除(&amp;R)</lable>
+		<lable id="1012">共享图(&amp;M)</lable>
+		<lable id="1029">请求共享权享(&amp;Q)</lable>
+	</Form>		
+	<Form id="136" name="IDD_SECURITY" caption="安全隐私">
+		<lable id="1017">共享选项</lable>
+		<lable id="1018">权限选项</lable>
+		<lable id="1028">限制性</lable>
+		<lable id="1025">无限制</lable>
+		<lable id="1026">只在组织内部</lable>
+		<lable id="1027">只在单元内部</lable>
+	</Form>
+	<Form id="135" name="IDD_DETAIL" caption="详细信息">
+		<lable id="1011">标题</lable>
+		<lable id="1013">作者</lable>
+		<lable id="1015">关键字</lable>
+		<lable id="1017">详细描述</lable>
+	</Form>
+	<Form id="129" name="IDD_MAINDLG" caption="Gingko文件共享">
+		<lable id="1006">文件名</lable>
+		<lable id="1002">只加密文件（手工输入密码）</lable>
+		<lable id="1001">浏览(&amp;B)</lable>
+		<lable id="1029">设置(&amp;S)</lable>
+		<lable id="1007">删除(&amp;D)</lable>
+		<lable id="1">确定(&amp;O)</lable>
+		<lable id="2">关闭(&amp;C)</lable>
+	</Form>
+	<Form id="138" name="IDD_OPTIONS_DIALOG" caption="系统设置">
+		<lable id="1064">服务器设置</lable>
+		<lable id="1056">根节点服务器</lable>
+		<lable id="1057">内部服务器</lable>
+		<lable id="1042">代理选项</lable>
+		<lable id="1027">直接连接</lable>
+		<lable id="1050">与IE相同</lable>
+		<lable id="1051">自定义</lable>
+		<lable id="1058">代理服务器</lable>
+		<lable id="1059">端口</lable>
+		<lable id="1060">用户名</lable>
+		<lable id="1061">密码</lable>
+		<lable id="1043">杂项</lable>
+		<lable id="1054">连接超时时间</lable>
+		<lable id="1063">界面语言</lable>
+		<lable id="1">确定(&amp;O)</lable>
+		<lable id="2">关闭(&amp;C)</lable>		
+	</Form>	
+	<Form id="141" name="IDD_REQ_PERM_DIALOG" caption="请求共享权限">	
+		<lable id="1068">责任人</lable>
+		<lable id="1069">所有者</lable>
+		<lable id="1070">可读</lable>
+		<lable id="1071">可写</lable>
+		<lable id="1072">可打印</lable>
+		<lable id="1073">可删除</lable>
+		<lable id="1075">发送给该所有人或责任人的简短内容</lable>
+		<lable id="1077">想要获取的共享权限</lable>
+		<lable id="1">确定(&amp;O)</lable>
+		<lable id="2">关闭(&amp;C)</lable>
+	</Form>
+	<Form id="142" name="IDD_ASSOCIATE_DIALOG" caption="共享关系图">	
+		<lable id="1">关闭(&amp;C)</lable>
+		<lable id="1029">打印(&amp;P)</lable>
+	</Form>	
+	<Global>
+		<lable id="1">详细信息</lable>
+		<lable id="2">安全隐私</lable>
+		<lable id="3">共享设置</lable>
+		<lable id="4">只读公开</lable>
+		<lable id="5">全部公开</lable>
+		<lable id="6">私有的</lable>
+		<lable id="7">需要请求权限</lable>
+		<lable id="8">只限所有者</lable>
+		<lable id="9">所有者授权</lable>
+		<lable id="10">责任人授权</lable>
+		<lable id="11">责任人可以设置责任人</lable>
+		<lable id="12">系统管理员授权</lable>
+		<lable id="13">系统管理员可以设置责任人</lable>
+		<lable id="14">用户ID/Email</lable>
+		<lable id="15">用户名</lable>
+		<lable id="16">所有者</lable>
+		<lable id="17">责任人</lable>
+		<lable id="18">可读</lable>
+		<lable id="19">可写</lable>
+		<lable id="20">可打印</lable>
+		<lable id="21">可删除</lable>
+		<lable id="22">警告</lable>
+		<lable id="23">错误</lable>
+		<lable id="24">%s不允许登录到Gingko系统。可能是用户帐号不存在或密码错误。</lable>
+		<lable id="25">无法打开文件（%s），请确认该文件是否存在，并且该文件没有被其它程序以独占方式打开。</lable>
+		<lable id="26">请输入文件名！</lable>
+		<lable id="27">请输入用户帐号（ID）！</lable>
+		<lable id="28">请输入密码！</lable>
+		<lable id="29">你两次输入的密码不匹配！请重新输入！</lable>
+		<lable id="30">请您确认？</lable>
+		<lable id="31">您正在删除%s，请您确认是否继续？</lable>
+		<lable id="32">%s不是一个有效的用户帐号（ID），同时，它也不是一个有效的Email，系统不允许添加。</lable>
+		<lable id="33">没有指定有效的数字文件。</lable>
+		<lable id="34">图像居中</lable>
+		<lable id="35">拉申图像</lable>
+		<lable id="36">剪裁图像</lable>
+		<lable id="37">请输入数字文件名称或选择一个文件，并再试一次。</lable>
+	</Global>
+</Language>

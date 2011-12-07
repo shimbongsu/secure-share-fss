@@ -1,0 +1,26 @@
+TARGETNAME=Crypto
+TARGETTYPE=DRIVER_LIBRARY
+TC_ARCH=x86
+TC_AES_EXT=$(_BUILDARCH)
+_WIN32=1
+NT4_DRIVER=1
+INCLUDES = ../Bluefish;../Common
+USER_C_FLAGS=$(USER_C_FLAGS) -D_UNICODE -DNT4_DRIVER=1
+LINKER_FLAGS=$(LINKER_FLAGS) -map
+NO_SAFESEH=1
+
+NTTARGETFILE0 = "$(OBJ_PATH)\$(O)\Aes_$(TC_AES_EXT).obj"
+
+SOURCES = \
+	Aes_$(TC_AES_EXT).asm \
+	Aeskey.c \
+	Aestab.c \
+	Blowfish.c \
+	Cast.c \
+	Des.c \
+	Rmd160.c \
+	Serpent.c \
+	Sha1.c \
+	Sha2.c \
+	Twofish.c \
+	Whirlpool.c

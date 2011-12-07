@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="Crypto"
+	ProjectGUID="{993245CF-6B70-47EE-91BB-39F8FC6DC0E7}"
+	RootNamespace="Crypto"
+	TargetFrameworkVersion="131072"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+		<Platform
+			Name="x64"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="WXP free|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP free ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0500"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP checked|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP checked ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501;NDIS51_MINIPORT=1;NDIS51=1;NDIS_LEGACY_MINIPORT=1;TC_ARCH=x86"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP free (PREfast)|Win32"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0500"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP checked (PREfast)|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501;NT4_DRIVER=1"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K free|Win32"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K free ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K checked|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K free (PREfast)|Win32"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K checked (PREfast)|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory=".\"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP free|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP free ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0500"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP checked|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP checked ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501;NDIS51_MINIPORT=1;NDIS51=1;NDIS_LEGACY_MINIPORT=1;TC_ARCH=x86"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP free (PREfast)|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP free . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0500"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP checked (PREfast)|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP checked . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501;NT4_DRIVER=1"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K free|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K free ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K checked|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked ."
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K free (PREfast)|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K free . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=0;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="WXP2K checked (PREfast)|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="0"
+			InheritedPropertySheets=".\Crypto.vsprops"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ -prefast"
+				ReBuildCommandLine="$(DDKBUILD_PATH) -WXP2K checked . -cZ -prefast"
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="DBG=1;WINVER=0x0501"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
+			<File
+				RelativePath=".\Aes_x64.asm"
+				>
+			</File>
+			<File
+				RelativePath=".\Aes_x86.asm"
+				>
+			</File>
+			<File
+				RelativePath=".\Aeskey.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Aestab.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Blowfish.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Cast.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Des.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Rmd160.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Serpent.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Sha1.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Sha2.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Twofish.c"
+				>
+			</File>
+			<File
+				RelativePath=".\Whirlpool.c"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
+			<File
+				RelativePath=".\Aes.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Aesopt.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Aestab.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Blowfish.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Cast.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Des.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Rmd160.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Serpent.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Sha1.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Sha2.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Twofish.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Whirlpool.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;mc;ico;cur;bmp;dlg;rc2"
+			>
+		</Filter>
+		<Filter
+			Name="Special Files"
+			Filter="*"
+			>
+			<File
+				RelativePath=".\makefile"
+				>
+			</File>
+			<File
+				RelativePath=".\Makefile.inc"
+				>
+			</File>
+			<File
+				RelativePath=".\sources"
+				>
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

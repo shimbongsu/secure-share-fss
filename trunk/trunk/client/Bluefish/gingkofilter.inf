@@ -1,0 +1,102 @@
+;;;
+;;; GingkoFilter
+;;;
+;;;
+;;; Copyright (c) 2009, JPoet High Performance & Reliability Solution
+;;;
+
+[Version]
+signature   =   "$Windows NT$"
+Class		=	"ActivityMonitor"						;This is determined by the work this filter driver does
+ClassGuid 	= 	{911E4065-BA93-4846-91D5-784A9E4604D9}	;This value is determined by the Class
+Provider 	=   %JPoet%
+DriverVer   =   01/02/2009,1.0.0.1
+CatalogFile     = GingkoFilter.cat                              ; A CatalogFile entry is required for a WHQL signature.
+                                                                ; The actual catalog file will be provided by WHQL.  The
+                                                                ; catalog file for this sample is not provided for use.
+
+
+[DestinationDirs]
+DefaultDestDir	         = 12
+GingkoFilter.DriverFiles      = 12 			;%windir%\system32\drivers
+
+;;
+;; Default install sections
+;;
+
+[DefaultInstall]
+OptionDesc          = %GingkoFilterServiceDesc%
+CopyFiles           = GingkoFilter.DriverFiles
+
+[SourceDisksNames]
+1 = %Disk1%
+
+[SourceDisksFiles]
+GingkoFilter.sys = 1
+
+[DefaultInstall.Services]
+AddService          = %GingkoFilterServiceName%,,GingkoFilter.Service
+
+;;
+;; Default uninstall sections
+;;
+
+[DefaultUninstall]
+DelFiles   = GingkoFilter.DriverFiles
+DelReg			 = GingkoFilter.DelRegistry
+
+[DefaultUninstall.Services]
+DelService = GingkoFilter,0x200		; Flags note to stop service first
+
+;
+; Services Section
+;
+
+[GingkoFilter.Service]
+DisplayName      = %GingkoFilterServiceName%
+Description      = %GingkoFilterServiceDesc%
+ServiceBinary    = %12%\GingkoFilter.sys		;%windir%\system32\drivers\GingkoFilter.sys
+ServiceType      = 2					;SERVICE_FILE_SYSTEM_DRIVER
+StartType        = 3					;SERVICE_DEMAND_START
+ErrorControl     = 1					;SERVICE_ERROR_NORMAL
+LoadOrderGroup   = "FSFilter Activity Monitor"
+AddReg           = GingkoFilter.AddRegistry
+
+;
+; Registry Modifications
+;
+
+[GingkoFilter.AddRegistry]
+HKLM,%GingkoFilterRegistry%,%GingkoFilterMaxRecords%,0x00010001 ,500
+HKLM,%GingkoFilterRegistry%,%GingkoFilterMaxNames%,0x00010001 ,500
+HKLM,%GingkoFilterRegistry%,%GingkoFilterDebugFlags%,0x00010001 ,0
+HKLM,%GingkoFilterRegistry%,%GingkoFilterAttachMode%,0x00010001 ,2
+
+[GingkoFilter.DelRegistry]
+HKLM,%GingkoFilterRegistry%,%GingkoFilterMaxRecords%
+HKLM,%GingkoFilterRegistry%,%GingkoFilterMaxNames%
+HKLM,%GingkoFilterRegistry%,%GingkoFilterDebugFlags%
+HKLM,%GingkoFilterRegistry%,%GingkoFilterAttachMode%
+
+;
+; Copy Files
+;
+
+[GingkoFilter.DriverFiles]
+GingkoFilter.sys
+
+;;
+;; String Section
+;;
+
+[Strings]
+JPoet			   = "JPoet High Performance & Reliability Solution"
+GingkoFilterServiceDesc = "GingkoFilter Driver"
+GingkoFilterServiceName = "GingkoFilter"
+GingkoFilterRegistry    = "system\currentcontrolset\services\GingkoFilter"
+GingkoFilterMaxRecords  = "MaxRecords"
+GingkoFilterMaxNames	   = "MaxNames"
+GingkoFilterDebugFlags  = "DebugFlags"
+GingkoFilterAttachMode  = "AttachMode"
+Disk1              = "GingkoFilter Source Media"
+

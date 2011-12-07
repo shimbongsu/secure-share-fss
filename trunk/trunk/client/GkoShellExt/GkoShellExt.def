@@ -1,0 +1,10 @@
+; GkoShellExt.def : Declares the module parameters.
+
+LIBRARY      "GkoShellExt.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+	DllInstall		PRIVATE
