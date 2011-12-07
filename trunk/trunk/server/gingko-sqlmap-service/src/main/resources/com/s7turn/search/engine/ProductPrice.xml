@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ProductPrice" >
+    <resultMap id="result" class="com.s7turn.search.engine.ProductPrice" >
+       <result property="id" column="price_id" columnIndex="1" />
+       <result property="website" column="pp_website" columnIndex="2" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.WebsiteTypeHandler"/>
+       <result property="product" column="pp_prod" columnIndex="3" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.ProductTypeHandler"/>
+       <result property="price" column="pp_price" columnIndex="4" />
+       <result property="type" column="pp_ptype" columnIndex="5" />
+       <result property="lastUpdatedTime" column="pp_lastupdated" columnIndex="6" />
+    </resultMap>
+    <select id="findByAll" resultMap="result">
+            select price_id, pp_website, pp_prod, pp_price, pp_ptype, pp_lastupdated
+             from bi_prodprice
+    </select>
+    <select id="findByCode" resultMap="result">
+            select price_id, pp_website, pp_prod, pp_price, pp_ptype, pp_lastupdated
+             from bi_prodprice
+             where price_id=#id#
+    </select>
+    <select id="findByProductWithWebsite" resultMap="result">
+            select price_id, pp_website, pp_prod, pp_price, pp_ptype, pp_lastupdated
+             from bi_prodprice
+             where pp_website=#website.uuid# and pp_prod=#product.id# and pp_ptype=#type#
+    </select>
+    <delete id="deleteProductPrice" >
+        delete from bi_prodprice
+        where price_id=#id#
+    </delete>
+    <insert id="insertProductPrice" >
+        insert into bi_prodprice( price_id, pp_website, pp_prod, pp_price, pp_ptype, pp_lastupdated )
+        values( nextval('bi_prodprice_price_id_seq'), #website.uuid#, #product.id#,#price#, #type#, now())
+    </insert>
+    <update id="updateProductPrice" >
+        update bi_prodprice set  pp_website=#website.uuid#, pp_prod=#product.id#, 
+        pp_price=#price#, pp_ptype=#type#, pp_lastupdated = now()
+        where price_id=#id#
+    </update>
+</sqlMap>

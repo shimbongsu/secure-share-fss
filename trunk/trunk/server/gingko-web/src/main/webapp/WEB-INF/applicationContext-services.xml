@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+       default-lazy-init="true">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/gingkodb"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="postgres"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxWait" value="1000"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="defaultAutoCommit" value="true"/>
+    </bean>
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation" value="classpath:sqlmap-config.xml" />
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+	<bean id="userServiceBean" class="com.s7turn.search.engine.member.services.ibatis.UserServiceBean"   scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+        <bean id="userDetailServiceBean" class="com.s7turn.search.engine.member.services.ibatis.UserDetailServiceBean"   scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="accessHistoryServiceBean" class="com.s7turn.search.engine.member.services.ibatis.AccessHistoryServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="defaultAvatorBean" class="com.s7turn.search.engine.member.Avator">
+		<property name="avatorUrl" value="/images/default_avator.jpg"/>
+	</bean>
+        <bean id="avatorServiceBean" class="com.s7turn.search.engine.member.services.ibatis.AvatorServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+		<property name="defaultAvator" ref="defaultAvatorBean" />
+	</bean>
+
+        <!-- Common Beans -->
+    <bean id="physicalFileServiceBean" class="com.s7turn.search.engine.services.ibatis.PhysicalFileServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+        <property name="accessUrlPattern" value="viewfile?fileId=%1$s" />
+	</bean>
+        
+        <!-- Community Service Beans -->
+	<bean id="blogServiceBean" class="com.s7turn.search.engine.community.services.ibatis.BlogServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>        
+	<bean id="blogEntryServiceBean" class="com.s7turn.search.engine.community.services.ibatis.BlogEntryServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>        
+	<bean id="commentServiceBean" class="com.s7turn.search.engine.community.services.ibatis.CommentServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>        
+	<bean id="friendServiceBean" class="com.s7turn.search.engine.community.services.ibatis.FriendServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>        
+	<bean id="galleryServiceBean" class="com.s7turn.search.engine.community.services.ibatis.GalleryServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>        
+	<bean id="groupMemberServiceBean" class="com.s7turn.search.engine.community.services.ibatis.GroupMemberServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>        
+	<bean id="groupServiceBean" class="com.s7turn.search.engine.community.services.ibatis.GroupServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>        
+	<bean id="teamServiceBean" class="com.s7turn.search.engine.community.services.ibatis.GroupTeamServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+    <bean id="messageServiceBean" class="com.s7turn.search.engine.community.services.ibatis.MessageServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>        
+	<bean id="photoServiceBean" class="com.s7turn.search.engine.community.services.ibatis.PhotoServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="tokenServiceBean" class="com.s7turn.gingkos.services.ibatis.TokenServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+</beans>

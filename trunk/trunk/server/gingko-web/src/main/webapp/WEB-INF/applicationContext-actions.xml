@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+       default-lazy-init="true">
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+            </list>
+        </property>
+    </bean>
+    <bean id="memberAction" class="com.s7turn.search.member.struts.MemberAction" scope="prototype">
+        <property name="userService" ref="userServiceBean" />
+        <property name="detailService" ref="userDetailServiceBean" />
+        <!-- <property name="mailUtil" ref="mailUtil"/> -->
+    </bean>
+    <bean id="profileAction" class="com.s7turn.search.member.struts.ProfileAction" scope="prototype">
+        <property name="userService" ref="userServiceBean" />
+        <property name="userDetailService" ref="userDetailServiceBean" />
+        <property name="friendService" ref="friendServiceBean"/>
+        <property name="storePath" value="D:/site/storefoler/images" />
+        <property name="type" value="images" />
+        <property name="module" value="gallery" />
+        <property name="avatorService" ref="avatorServiceBean" />
+        <property name="physicalFileService" ref="physicalFileServiceBean"/>
+    </bean>
+    <bean id="fileUploadAction" class="com.s7turn.common.struts.FileUploadAction" scope="prototype">
+        <property name="storePath" value="D:/site/storefoler/images/" />
+        <property name="type" value="images" />
+        <property name="module" value="gallery" />
+        <property name="physicalFileService" ref="physicalFileServiceBean"/>
+    </bean>
+    <!-- Community Service Beans -->
+    <bean id="blogAction" class="com.s7turn.community.struts.BlogAction" scope="prototype">
+        <property name="blogService" ref="blogServiceBean"/>
+        <property name="blogEntryService" ref="blogEntryServiceBean"/>
+    </bean>    
+    <bean id="commentAction" class="com.s7turn.community.struts.CommentAction" scope="prototype">
+        <property name="commentService" ref="commentServiceBean" />
+    </bean>    
+    <bean id="friendAction" class="com.s7turn.community.struts.FriendAction" scope="prototype">
+        <property name="friendService" ref="friendServiceBean"/>
+        <property name="userService" ref="userServiceBean"/>
+        <property name="userDetailService" ref="userDetailServiceBean"/>
+    </bean>
+    <bean id="galleryAction" class="com.s7turn.community.struts.GalleryAction" scope="prototype">
+        <property name="storePath" value="D:/site/storefoler/images/" />
+        <property name="type" value="images" />
+        <property name="module" value="gallery" />
+        <property name="thumbWidth" value="120" />
+        <property name="thumbHeight" value="120" />
+        <property name="smallWidth" value="800" />
+        <property name="smallHeight" value="600" />
+        <property name="galleryService" ref="galleryServiceBean"/>
+        <property name="photoService" ref="photoServiceBean"/>
+        <property name="userService" ref="userServiceBean" />
+        <property name="physicalFileService" ref="physicalFileServiceBean"/>
+    </bean>
+    <bean id="groupAction" class="com.s7turn.community.struts.GroupAction" scope="prototype">
+        <property name="groupService" ref="groupServiceBean"/>
+        <property name="teamService" ref="teamServiceBean"/>
+        <property name="userService" ref="userServiceBean" />
+    </bean>
+    <bean id="messageAction" class="com.s7turn.community.struts.MessageAction" scope="prototype">
+        <property name="userService" ref="userServiceBean"/>
+        <property name="messageService" ref="messageServiceBean"/>
+    </bean>
+    <bean id="gingkoAction" class="com.s7turn.gingkos.struts.GingkoAction" scope="prototype">
+        <property name="userService" ref="userServiceBean"/>
+        <property name="componentService" ref="defaultGingkoServiceManagerImpl"/>
+        <property name="commentService" ref="commentServiceBean"/>
+        <property name="physicalFileService" ref="physicalFileServiceBean"/>
+        <property name="folderIcon" value="/js/resources/images/filetypes/folder.png" />
+        <property name="folderThumb" value="/js/resources/images/filetypes/folder.png" />
+    </bean>
+    <bean id="gingkoUploadAction" class="com.s7turn.gingkos.struts.GingkoUploadAction" scope="prototype">
+        <property name="storePath" value="D:/site/storefoler/images/" />
+        <property name="type"   value="images" />
+        <property name="module" value="gingko" />
+        <property name="gingkoComponentService" ref="defaultGingkoServiceManagerImpl"/>
+        <property name="mapper" ref="gingkoMimetypeMapperBean" />
+        <property name="userService" ref="userServiceBean" />
+        <property name="physicalFileService" ref="physicalFileServiceBean"/>
+        <property name="plugins">
+            <list>
+                <ref bean="setFileIconThumbPlugin" />
+            </list>
+        </property>
+    </bean>
+</beans>

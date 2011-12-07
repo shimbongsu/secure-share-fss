@@ -1,0 +1,184 @@
+body {
+	font: 12px Verdana, Arial, Helvetica, sans-serif, "宋体";
+	background-color:#278449;
+	color:#025521;
+}
+table { 
+	border-collapse:collapse;
+	border:0;
+	width:auto; 
+}
+* { padding:0; margin:0;}
+img { border:0;}
+a,img {
+    star:expression(this.onFocus=this.blur()); 
+	outline:none;
+}
+a {
+	color:#025521; 
+	text-decoration:none;
+}
+a:hover { 
+	color:#009900;
+}
+.need_sign_red { color:#df0021; margin:0 4px;}
+/* header */
+.logo { height:100%; overflow:hidden;
+}
+.s7turn_logo {
+	background: url(../../../images/s7turn_logo.gif) no-repeat 12px 12px;
+	height:59px;
+	width:128px;
+	float:left;
+}
+.bamboo_logo {
+	height:59px;
+	width:128px;
+	float:right;
+	background: url(../../../images/bamboo_logo.gif) no-repeat 12px 2px;
+}
+.logo h1, .bamboo_logo h2 { display:none;}
+/* globalnav */
+.globalnav {
+	height:39px;
+	background: url(../../../images/green/globalnav_bg.gif) repeat-x 100% bottom;
+}
+.globalnav ul {
+	list-style-type:none;
+	padding-left:30px;	
+}
+.globalnav li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	line-height:38px;
+}
+.globalnav li a {
+	float: left;
+	background: url(../../../images/green/globalnav_l.gif) no-repeat top left;
+	text-decoration: none;
+	text-align: center;
+	padding-left:18px;
+}
+.globalnav li a span {
+	float: left;
+	display: block;
+	background: url(../../../images/green/globalnav_r.gif) no-repeat top right;
+	color: #f5ffd1;
+	padding-right:18px;
+}
+.globalnav li a last.span { background: url(../../images/green/globalnav_l.gif) no-repeat top 149px;}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+.globalnav li a span {
+	float: none;
+}
+/* End IE5-Mac hack */
+.globalnav li a:hover span {
+	color: #efffb4;
+}
+.globalnav li a:hover {
+	background: url(../../../images/green/globalnav_l.gif) no-repeat left -34px;
+}
+.globalnav li a:hover span {
+	background: url(../../../images/green/globalnav_r.gif) no-repeat right top;
+}
+.globalnav li.current a,
+.globalnav li.current a:hover,
+.globalnav li.current a:active,
+.globalnav li.current a:focus {
+	background: url(../../../images/green/globalnav_current_l.gif) no-repeat left top;
+}
+.globalnav li.current a span,
+.globalnav li.current a:hover span,
+.globalnav li.current a:active span,
+.globalnav li.current a:focus span {
+	background: url(../../../images/green/globalnav_current_r.gif) no-repeat right top;
+	color: #efffb4;
+	font-weight:bold;
+}
+/* end globalnav */
+
+.status {float:right; line-height:38px; color:#fff;}
+.globalnav .search_box {line-height:38px;  text-align: center;}
+.status em {color:#f5ffd1; padding:0 10px 0 0; font-style:normal;}
+.logoutbar { float:right; margin:8px 10px 0 10px}
+.logout {
+	background: url(../../../images/green/exit.gif) no-repeat right top;
+	border:0px;
+	width:59px;
+	height:23px;
+}
+/* end header */
+
+/* sidebar */
+.sidebar ul { list-style-type:none; margin-top:20px; width:156px;}
+.sidebar li a {
+	background: url(../../../images/green/sidebar_bg.gif) no-repeat left top;
+	line-height:22px;
+	color:#fff;
+	padding:0 10px 0 30px;
+	text-decoration:none;
+	display:block;
+}
+* html .sidebar li a {
+	height:22px;
+}
+.sidebar li a:hover {
+	color:#eefdb8;
+	background-color:#739c8c;
+}
+.sidebar li.select a {
+	background: url(../../../images/green/sidebar_select_bg.gif) no-repeat left top;
+	line-height:24px;
+	color:#eefdb8;
+	padding:0 10px 0 30px;
+	text-decoration:none;
+	display:block;
+}
+/* end sidebar */
+/* content */
+.titlebar {
+	background:#6c9786 url(../../../images/green/titlebar_bg.gif) repeat-y right top;
+	border-bottom: 1px solid #fff;
+	height:24px;
+	line-height:24px;
+	color:#fff;
+	font-weight:bold;
+}
+.titlebar img { padding:3px 8px 0 8px}
+.content_box { width:820px; float:left; padding:10px;}
+/* end content */
+
+/* footer */
+.copyright { font-size:11px; color:#fff; text-align:right; padding-right:20px;}
+/* end footer */
+/* error */
+.error_cue_box {
+	background-color: #ffffcc;
+	padding: 10px;
+	margin-bottom:10px;
+	border: 1px solid #96965e;
+}
+.error_cue_box ul {
+	padding: 0px;
+	margin:0 0 0 30px;
+}
+.error_cue_box li {
+	color: #333;
+	list-style-position: outside;
+	list-style-type: disc;
+	padding: 3px 0;
+}
+.error_cue_box h5{
+	font-size: 12px;
+	font-weight: bold;
+	color: #CC0000;
+	background: url(../../../images/green/error_cue_icon.gif) no-repeat 0 0;
+	padding-left: 30px;
+	line-height:22px;
+}
+.error_cue_box b {
+	font-weight: normal;
+	color: #CC0000;
+}
+/* end error */

@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.objectFactory" value="spring" />
+    <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.objectFactory.spring.autoWire" value="name" />
+    <constant name="struts.configuration.xml.reload" value="true" />
+    <constant name="struts.i18n.reload" value="true" />
+    <constant name="struts.multipart.maxSize" value="204857600" /> 
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+    <package name="common" extends="struts-default" namespace="">
+        <global-results>
+			<result name="sysuccess">/common/end.jsp</result>
+            <result name="alert">/common/weberror.jsp</result>
+         </global-results>
+
+         <global-exception-mappings>
+			<exception-mapping exception="org.springframework.dao.DataAccessException"
+				result="alert" />
+			<exception-mapping exception="org.springframework.orm.ObjectRetrievalFailureException"
+				result="alert" />
+			<exception-mapping exception="com.bamboo.common.exceptions.AlertException"
+				result="alert" />
+			<exception-mapping exception="java.lang.Exception" result="alert" />
+		</global-exception-mappings>
+        <action name="fileUpload" class="fileUploadAction" method="uploadFile">
+            <interceptor-ref name="fileUpload">  
+                 <param name="maximumSize">  
+                     104857600
+                  </param>  
+             </interceptor-ref>
+             <interceptor-ref name="defaultStack" />
+            <result name="success">${returnUrl}</result>
+            <result name="error">${returnUrl}</result>
+        </action>
+        <action name="viewfile" class="fileUploadAction" method="viewPhysicalFile">
+                <result name="success" type="stream">
+                        <param name="contentType">${physicalFile.mimeType}</param>
+                        <param name="inputName">inputStream</param>
+                        <param name="contentDisposition">inline;filename="${physicalFile.fileName}"</param>
+                        <param name="bufferSize">4096</param>
+                </result>
+        </action>
+    </package>
+    <package name="member" extends="json-default" namespace="/member">
+          <global-results>
+			<result name="sysuccess">/common/end.jsp</result>
+            <result name="alert">/common/weberror.jsp</result>
+         </global-results>
+
+         <global-exception-mappings>
+			<exception-mapping exception="org.springframework.dao.DataAccessException"
+				result="alert" />
+			<exception-mapping exception="org.springframework.orm.ObjectRetrievalFailureException"
+				result="alert" />
+			<exception-mapping exception="com.bamboo.common.exceptions.AlertException"
+				result="alert" />
+			<exception-mapping exception="java.lang.Exception" result="alert" />
+		</global-exception-mappings>
+  
+        <action name="member" class="memberAction">
+            <result name="changepassword">/WEB-INF/pages/member/changePassword.jsp</result>
+        </action> 
+        <action name="registerCheckuser" class="memberAction" method="checkuser">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+                    passed
+              </param>
+            </result>
+        </action>
+        <action name="registerActivation" class="memberAction" method="activation">
+             <result name="success" type="redirect" >${ctx}/member/myprofile.go</result>
+        </action>
+         <action name="register" class="memberAction">
+              <result name="register">/WEB-INF/pages/member/register.jsp</result>
+              <result name="success" type="redirect" >${ctx}/member/myprofile.go</result>
+            <result name="unsaved">/WEB-INF/pages/member/register.jsp</result>
+         </action>
+        <action name="login" class="memberAction" method="login">
+            <result name="loginfailed" >/WEB-INF/pages/member/login.jsp</result>
+            <result name="unlogged"  >/WEB-INF/pages/member/login.jsp</result>
+        </action>
+        <action name="glogin" class="memberAction" method="login">
+            <result name="unlogged">/WEB-INF/pages/member/glogin.jsp</result>
+        </action>
+        <action name="profile" class="profileAction" method="execute">
+            <result name="saveSuccess" type="redirect">${ctx}/member/myprofile.go</result>
+            <result name="success">/WEB-INF/pages/member/profile.jsp</result>
+            <result name="input">/WEB-INF/pages/member/editProfileDetail.jsp</result>
+           
+        </action>
+        <action name="myprofile" class="profileAction" method="myprofile">
+            <result name="success">/WEB-INF/pages/member/myprofile.jsp</result>
+        </action>
+        <action name="avatorUpload" class="profileAction" method="uploadFile">
+            <interceptor-ref name="fileUpload">
+                 <param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
+                 <param name="maximumSize">3670016</param>
+             </interceptor-ref>
+            <interceptor-ref name="defaultStack" />
+             <result name="success">${returnUrl}</result>
+             <result name="input">/WEB-INF/pages/member/avator.jsp</result>
+             <result name="error">${returnUrl}</result>
+        </action>
+        
+        <action name="mock_*" class="profileAction" method="mock">
+            <result name="success">/WEB-INF/pages/member/{1}.jsp</result>
+        </action>
+        <action name="_*" class="profileAction" method="{1}">
+            <result name="success">/WEB-INF/pages/member/{1}.jsp</result>
+        </action>
+
+        <action name="avator" class="profileAction" method="changeAvator">
+            <result name="success">/WEB-INF/pages/member/avator.jsp</result>
+        </action>
+        <action name="viewAvator" class="profileAction" method="viewAvator">
+            <result name="success" type="redirect">${avatorUrl}</result>
+        </action>        
+    </package>
+    <package name="messages" extends="json-default" namespace="/messages">
+        <action name="list" class="messageAction" method="list">
+            <result name="success">/WEB-INF/pages/community/messages/list.jsp</result>
+        </action>
+        <action name="jlist" class="messageAction" method="list">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, messages, messages\[\d*\], messages\[\d*\].*
+              </param>            
+            </result>
+        </action>
+        <action name="jgetboxes" class="messageAction" method="messageBoxes">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+                    actionStatus, boxes,boxes\[\d*\],boxes\[\d*\].*
+              </param>
+            </result>
+        </action>
+        <action name="read" class="messageAction" method="read">
+            <result name="success">/WEB-INF/pages/community/messages/view.jsp</result>
+        </action>
+        <action name="jread" class="messageAction" method="read">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, message, message\..*
+              </param> 
+            </result>
+        </action>        
+        <action name="send" class="messageAction" method="send">
+            <result name="success">/WEB-INF/pages/community/messages/list.jsp</result>
+        </action>
+        <action name="delete" class="messageAction" method="delete">
+            <result name="success">/WEB-INF/pages/community/messages/list.jsp</result>
+        </action>
+        <action name="jsend" class="messageAction" method="send">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+                    actionStatus
+              </param>
+            </result>
+        </action>
+        <action name="jsaveAsDraft" class="messageAction" method="saveAsDraft">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+                    actionStatus
+              </param>
+            </result>
+        </action>
+        <action name="jdelete" class="messageAction" method="delete">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+                    actionStatus
+              </param>
+            </result>
+        </action>
+    </package>
+    <package name="blogs" extends="json-default" namespace="/blogs">
+        <action name="myblogs" class="blogAction" method="myblog">
+            <result name="success">/WEB-INF/pages/community/blogs/list.jsp</result>
+        </action>
+        <action name="jmyblogs" class="blogAction" method="myblog">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+              	totalCount, limit, startat, actionStatus, blogs, blogs\[\d*\],blogs\[\d*\]\..*,
+              	blogEntryList, blogEntryList\[\d*\], blogEntryList\[\d*\]\..*
+              </param>            
+            </result>
+        </action>
+        <action name="jlist" class="blogAction" method="list">
+            <result name="success" type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+              	totalCount, limit, startat, actionStatus, blogs, blogs\[\d*\],blogs\[\d*\]\..*,
+              	blogEntryList, blogEntryList\[\d*\], blogEntryList\[\d*\]\..*
+              </param>            
+            </result>
+        </action>
+        <action name="list" class="blogAction" method="list">
+            <result name="success">/WEB-INF/pages/community/blogs/list.jsp</result>
+        </action>        
+        <action name="view" class="blogAction" method="view">
+            <result name="success">/WEB-INF/pages/community/blogs/read.jsp</result>
+        </action>        
+        <action name="create" class="blogAction" method="execute">
+            <result name="success">/WEB-INF/pages/community/blogs/create.jsp</result>
+        </action>
+        <action name="createEntry" class="blogAction" method="execute">
+            <result name="success">/WEB-INF/pages/community/blogs/write.jsp</result>
+        </action>
+        <action name="saveBlog" class="blogAction" method="saveBlog">
+            <result name="success">/WEB-INF/pages/community/blogs/list.jsp</result>
+        </action>
+        <action name="saveEntry" class="blogAction" method="saveEntry">
+            <result name="success" type="redirect">/community/blogs/myblogs</result>
+        </action>
+        <action name="read" class="blogAction" method="execute">
+            <result name="success">/WEB-INF/pages/community/blogs/view.jsp</result>
+        </action>
+        <action name="delete" class="blogAction" method="delete">
+            <result name="success">/WEB-INF/pages/community/blogs/list.jsp</result>
+        </action>
+    </package>   
+    <package name="gallery" extends="json-default" namespace="/gallery">
+        <action name="mygalleries" class="galleryAction" method="list">
+            <result name="success">/WEB-INF/pages/community/gallery/list.jsp</result>
+        </action>
+        <action name="jmygalleries" class="galleryAction" method="list">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, galleryList, galleryList\[\d*\], galleryList\[\d*\].*
+                </param>
+            </result>
+        </action>
+        <action name="list" class="galleryAction" method="list">
+            <result name="success">/WEB-INF/pages/community/gallery/list.jsp</result>
+        </action>        
+        <action name="view" class="galleryAction" method="view">
+            <result name="success">/WEB-INF/pages/community/gallery/view.jsp</result>
+        </action>
+        <action name="jview" class="galleryAction" method="view">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, photos, photos\[\d*\], photos\[\d*\].*
+                </param>
+            </result>
+        </action>
+        <action name="jdelete" class="galleryAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+        </action>
+        <action name="create" class="galleryAction" method="view">
+            <result name="success">/WEB-INF/pages/community/gallery/create.jsp</result>
+        </action>
+        <action name="update" class="galleryAction" method="view">
+            <result name="success">/WEB-INF/pages/community/gallery/update.jsp</result>
+        </action>
+        <action name="createGallery" class="galleryAction" method="create">
+            <result name="success" type="redirect">/gallery/list</result>
+        </action>
+        <action name="updateGallery" class="galleryAction" method="update">
+            <result name="success" type="redirect">/gallery/list</result>
+        </action>
+        <action name="delete" class="galleryAction" method="delete">
+            <result name="success">/WEB-INF/pages/community/gallery/list.jsp</result>
+        </action>
+        <action name="photoViewer" class="galleryAction" method="photosList">
+            <result name="success">/WEB-INF/pages/community/gallery/photo_viewer.jsp</result>
+        </action>
+        <action name="editPhoto" class="galleryAction" method="viewPhoto">
+            <result name="success">/WEB-INF/pages/community/gallery/photo_editor.jsp</result>
+        </action>
+        <action name="photosList" class="galleryAction" method="photosList">
+            <result type="json">
+              <param name="excludeNullProperties">true</param>
+              <param name="ignoreHierarchy">false</param>
+              <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, gallery, gallery.id, gallery.name,gallery.description,gallery.actorId,gallery.createBy,
+                    gallery.galleryType, gallery.security, gallery.tags, gallery.lastUpdatedTime,
+                    photos, photos.*
+              </param>
+            </result>
+        </action>
+        <action name="uploadPhoto" class="galleryAction" method="uploadPhoto">
+            <interceptor-ref name="fileUpload">
+                 <param name="maximumSize">     
+                     104857600
+                  </param>  
+             </interceptor-ref>
+             <interceptor-ref name="defaultStack" />
+            <result name="success">${returnUrl}</result>
+            <result name="error">/WEB-INF/pages/community/gallery/view.jsp</result>        
+            <result name="input">/WEB-INF/pages/community/gallery/uploadfailed.jsp</result>
+        </action>
+    </package>
+    <package name="group" extends="json-default" namespace="/groups">
+        <action name="mygroups" class="groupAction" method="list">
+            <result name="success">/WEB-INF/pages/community/groups/list.jsp</result>
+        </action>
+        <action name="list" class="groupAction" method="list">
+            <result name="success">/WEB-INF/pages/community/groups/list.jsp</result>
+        </action>        
+        <action name="view" class="groupAction" method="execute">
+            <result name="success">/WEB-INF/pages/community/groups/read.jsp</result>
+        </action>
+        <action name="createGroup" class="groupAction" method="create">
+            <result name="success" type="redirect">/groups/mygroups</result>
+        </action>
+        <action name="updateGroup" class="groupAction" method="update">
+            <result name="success" type="redirect">/groups/mygroups</result>
+        </action>
+        <action name="delete" class="groupAction" method="delete">
+            <result name="success">/WEB-INF/pages/community/groups/list.jsp</result>
+        </action>
+        <action name="jdelete" class="groupAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+        </action>
+        <action name="jlist" class="groupAction" method="list">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, groups, groups\[\d*\], groups\[\d*\].*,
+                    teams, teams\[\d*\], teams\[\d*\].*, members, members\[\d*\], members\[\d*\].*
+                </param>
+            </result>
+        </action>
+        <action name="jgetTeams" class="groupAction" method="fetchTeams">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, teams, teams\[\d*\], teams\[\d*\].*
+                </param>
+            </result>
+        </action>
+        <action name="jview" class="groupAction" method="viewGroup">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, group, group\..*
+                </param>
+            </result>
+        </action>
+        <action name="jcreateGroup" class="groupAction" method="create">
+           <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, group, group\..*
+                </param>
+            </result>
+        </action>
+        <action name="jupdateGroup" class="groupAction" method="update">
+           <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, group, group\..*
+                </param>
+            </result>
+        </action>
+        <action name="jcreateTeam" class="groupAction" method="createTeam">
+           <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, team, team\..*
+                </param>
+            </result>
+        </action>
+        <action name="jupdateTeam" class="groupAction" method="updateTeam">
+           <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, team, team\..*
+                </param>
+            </result>
+        </action>
+        <action name="jviewTeam" class="groupAction" method="viewTeam">
+           <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, team, team\..*
+                </param>
+            </result>
+        </action>
+        <action name="jinvite" class="groupAction" method="requestJoinGroup">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus, user, user\..*, group, group\..*
+                </param>
+            </result>
+        </action>
+        <action name="jaccept" class="groupAction" method="accept">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus, user, user\..*, group, group\..*
+                </param>
+            </result>
+        </action>
+    </package>
+    <package name="friend" extends="json-default" namespace="/friends">
+        <action name="friendsIndex" class="friendAction" >
+             <result name="success">/WEB-INF/pages/community/friends/friendIndex.jsp</result>
+        </action>
+        <action name="myfriends" class="friendAction" method="list">
+            <result name="success">/WEB-INF/pages/community/friends/friendIndex.jsp</result>
+        </action>
+        <action name="jmyfriends" class="friendAction" method="list">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, friends, friends\[\d*\], friends\[\d*\].*
+                </param>            
+            </result>
+        </action>
+        <action name="jfindMember" class="friendAction" method="findUsers">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, userDetails, userDetails\[\d*\], userDetails\[\d*\].*
+                </param>            
+            </result>
+        </action>
+        <action name="list" class="friendAction" method="list">
+            <result name="success">/WEB-INF/pages/community/friends/searchFriends.jsp</result>
+        </action>        
+        <action name="jlist" class="friendAction" method="list">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus, friends, friends\[\d*\], friends\[\d*\].*
+                </param>            
+            </result>
+        </action>
+        <action name="delete" class="friendAction" method="delete">
+            <result name="success">/WEB-INF/pages/community/friends/list.jsp</result>
+        </action>
+        <action name="jdelete" class="friendAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus,friend, friend\..*
+                </param>
+            </result>
+        </action>
+        <action name="jrequest" class="friendAction" method="requestFriend">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus,friend, friend\..*
+                </param>
+            </result>
+        </action>
+        <action name="jaccept" class="friendAction" method="acceptFriend">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+        </action>
+    </package>
+    <package name="comment" extends="struts-default" namespace="/comments">
+        <action name="list" class="commentAction" method="list">
+            <result name="success">/WEB-INF/pages/community/comments/list.jsp</result>
+        </action>        
+        <action name="view" class="commentAction" method="execute">
+            <result name="success">/WEB-INF/pages/community/comments/read.jsp</result>
+        </action>        
+        <action name="create" class="commentAction" method="execute">
+            <result name="success">/WEB-INF/pages/community/comments/create.jsp</result>
+        </action>
+        <action name="delete" class="commentAction" method="delete">
+            <result name="success">/WEB-INF/pages/community/comments/list.jsp</result>
+        </action>
+    </package>
+    <package name="gingko" extends="json-default" namespace="/gingko">
+        <action name="jupload" class="gingkoUploadAction" method="uploadFile">
+            <interceptor-ref name="fileUpload">
+                 <param name="maximumSize">     
+                     104857600
+                  </param>  
+             </interceptor-ref>
+             <interceptor-ref name="defaultStack" />
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+            <result name="error" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>            
+        </action>
+        <action name="jfetch" class="gingkoAction" method="fetch">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus,
+                    folders, folders\[\d*\], folders\[\d*\].*
+                </param>
+            </result>
+        </action>
+        <action name="jcreateFolder" class="gingkoAction" method="createFolder">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+        </action>
+        <action name="jlist" class="gingkoAction" method="list">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus,
+                    contents, contents\[\d*\], contents\[\d*\].*
+                </param>
+            </result>
+        </action>
+        <action name="jacquireGingkos" class="gingkoAction" method="acquireGingkos">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    totalCount, limit, startat, actionStatus,
+                    gingkos, gingkos\[\d*\], gingkos\[\d*\].*
+                </param>
+            </result>
+        </action>
+        <action name="jsaveGingko" class="gingkoAction" method="saveGingko">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+        </action>
+        <action name="jdelete" class="gingkoAction" method="delete">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+        </action>
+        <action name="jupdateFolder" class="gingkoAction" method="updateFolder">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+        </action>
+        <action name="jget" class="gingkoAction" method="get">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus,content, content\..*
+                </param>
+            </result>
+        </action>
+        <action name="jdelGingko" class="gingkoAction" method="removeGingko">
+            <result name="success" type="json">
+                <param name="excludeNullProperties">true</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="includeProperties">
+                    actionStatus
+                </param>
+            </result>
+        </action>
+        <action name="jdownload" class="gingkoAction" method="download">
+                <result name="success" type="stream">
+                        <param name="contentType">${physicalFile.mimeType}</param>
+                        <param name="inputName">inputStream</param>
+                        <param name="contentDisposition">attachment;filename="${physicalFile.fileName}"</param>
+                        <param name="bufferSize">4096</param>
+                </result>
+        </action>
+    </package>
+</struts>

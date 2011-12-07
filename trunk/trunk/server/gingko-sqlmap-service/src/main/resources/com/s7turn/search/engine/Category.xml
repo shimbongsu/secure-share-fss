@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Category" >
+    <resultMap id="result" class="com.s7turn.search.engine.Category" >
+       <result property="id" column="cat_id" columnIndex="1" />
+       <result property="name" column="cat_name" columnIndex="2" />
+       <result property="code" column="cat_code" columnIndex="3" />
+       <result property="lastUpdatedTime" column="cat_lastupdated" columnIndex="4" />
+       <result property="description" column="cat_desc" columnIndex="5" />
+       <result property="gbu" column="cat_gbu" columnIndex="6" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.GBUTypeHandler"/>
+    </resultMap>
+    <select id="findAll" resultMap="result">
+        select cat_id, cat_name, cat_code, cat_lastupdated, cat_desc, cat_gbu,
+        gbu_code, gbu_name
+        from bi_category INNER JOIN bi_biggbu ON bi_category.cat_gbu=bi_biggbu.gbu_id
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        select cat_id, cat_name, cat_code, cat_lastupdated, cat_desc, cat_gbu,
+        gbu_code, gbu_name
+        from bi_category INNER JOIN bi_biggbu ON bi_category.cat_gbu=bi_biggbu.gbu_id
+        where cat_id=#id#
+    </select>
+    <select id="findByGbu" resultMap="result">
+        select cat_id, cat_name, cat_code, cat_lastupdated, cat_desc, cat_gbu,
+        gbu_code, gbu_name
+        from bi_category INNER JOIN bi_biggbu ON bi_category.cat_gbu=bi_biggbu.gbu_id
+        where cat_gbu=#id#
+    </select>
+
+    <select id="findByCode" resultMap="result">
+        select cat_id, cat_name, cat_code, cat_lastupdated, cat_desc, cat_gbu,
+        gbu_code, gbu_name
+        from bi_category INNER JOIN bi_biggbu ON bi_category.cat_gbu=bi_biggbu.gbu_id
+        where cat_code=#code#
+    </select>
+    <delete id="deleteCategory" >
+        delete from bi_category 
+        where cat_id = #id#
+    </delete>
+    <insert id="insertCategory" >
+        insert into bi_category( cat_name, cat_code, cat_desc, cat_lastupdated,  cat_gbu )
+        values( #name#, #code#, #description#, now(), #gbu.code# )
+    </insert>
+    <update id="updateCategory" >
+        update bi_category set cat_name=#name#, cat_code=#code#, cat_desc=#description#, 
+              cat_lastupdated=now(), cat_gbu=#gbu.code#
+        where cat_id=#id#
+    </update>
+</sqlMap>

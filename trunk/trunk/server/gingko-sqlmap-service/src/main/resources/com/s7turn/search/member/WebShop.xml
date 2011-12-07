@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="WebShop" >
+    <resultMap id="result" class="com.s7turn.search.engine.member.WebShop" >
+       <result  property="id" column="shop_id" columnIndex="1" />
+       <result  property="name" column="shop_name" columnIndex="2" />
+       <result  property="description" column="shop_desc" columnIndex="3" />
+       <result  property="country" column="shop_country" columnIndex="4" />
+       <result  property="province" column="shop_province" columnIndex="5" />
+       <result  property="city" column="shop_city" columnIndex="6" />
+       <result  property="address" column="shop_address" columnIndex="7" />
+       <result  property="postalCode" column="shop_postal" columnIndex="8" />
+       <result  property="fax" column="shop_fax" columnIndex="9" />
+       <result  property="telphone" column="shop_tel1" columnIndex="10" />
+       <result  property="telphoneExt" column="shop_telext" columnIndex="11" />
+       <result  property="telphone2" column="shop_tel2" columnIndex="12" />
+       <result  property="telphone2Ext" column="shop_tel2ext" columnIndex="13" />
+       <result  property="userId" column="shop_owneruser" columnIndex="14" />
+       <result  property="lastUpdatedTime" column="last_updated" columnIndex="15" />
+    </resultMap>
+    <select id="findAll" resultMap="result">
+            select shop_id, shop_name, shop_desc, shop_country, 
+                shop_province, shop_city, shop_address, shop_postal,
+                shop_fax, shop_tel1, shop_telext, shop_tel2,
+                shop_tel2ext, shop_owneruser, last_updated
+            from member_shop
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+            select shop_id, shop_name, shop_desc, shop_country, 
+                shop_province, shop_city, shop_address, shop_postal,
+                shop_fax, shop_tel1, shop_telext, shop_tel2,
+                shop_tel2ext, shop_owneruser, last_updated
+            from member_shop
+            where shop_id=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+            select shop_id, shop_name, shop_desc, shop_country, 
+                shop_province, shop_city, shop_address, shop_postal,
+                shop_fax, shop_tel1, shop_telext, shop_tel2,
+                shop_tel2ext, shop_owneruser, last_updated
+            from member_shop
+            where shop_name=#code#
+    </select>
+    <select id="findByUserId" resultMap="result">
+            select shop_id, shop_name, shop_desc, shop_country, 
+                shop_province, shop_city, shop_address, shop_postal,
+                shop_fax, shop_tel1, shop_telext, shop_tel2,
+                shop_tel2ext, shop_owneruser, last_updated
+            from member_shop
+            where shop_owneruser = #userId#
+    </select>
+    <select id="findByNullUserId" resultMap="result">
+            select shop_id, shop_name, shop_desc, shop_country, 
+                shop_province, shop_city, shop_address, shop_postal,
+                shop_fax, shop_tel1, shop_telext, shop_tel2,
+                shop_tel2ext, shop_owneruser, last_updated
+            from member_shop
+            where shop_owneruser is null
+    </select>
+    
+    <delete id="deleteWebShop" >
+        delete from member_shop
+        where shop_id = #id#
+    </delete>
+    <insert id="insertWebShop" >
+        insert into member_shop( shop_name, shop_desc, shop_country, 
+                shop_province, shop_city, shop_address, shop_postal,
+                shop_fax, shop_tel1, shop_telext, shop_tel2,
+                shop_tel2ext, shop_owneruser, last_updated )
+        values( #name#, #description#, #country#, #province#, #city#, #address#,
+                #postalCode#, #fax#, #telphone#, #telphoneExt#, #telphone2#, #telphone2Ext#, 
+                #userId#, now())
+    </insert>
+    <update id="updateWebShop" >
+        update member_shop set shop_name=#name#, shop_desc=#description#, shop_country=#country#, 
+                shop_province=#province#, shop_city=#city#, shop_address=#address#, shop_postal=#postalCode#,
+                shop_fax=#fax#, shop_tel1=#telphone#, shop_telext=#telphoneExt#, shop_tel2=#telphone2#,
+                shop_tel2ext=#telphone2Ext#, shop_owneruser=#userId#, last_updated=now()
+        where shop_id=#id#
+    </update>
+</sqlMap>

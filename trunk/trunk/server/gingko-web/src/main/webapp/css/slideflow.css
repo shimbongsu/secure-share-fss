@@ -1,0 +1,68 @@
+#slideflow {
+	height: 90px;
+	position: relative;
+	padding-bottom:20px;
+	cursor: default;
+}
+
+#slideflow img {
+	position:absolute;
+	top:0px;
+}
+
+#slideflow canvas {
+	position:absolute;
+	top:0px;
+}
+
+#slideflow var {
+	position:absolute;
+	top:0px;
+}
+/* For future use - these don't work with IE6 */
+.closedHand {
+	cursor: url(../images/closedhand.cur), move !important;
+}
+
+.openHand {
+	cursor: url(../images/openhand.cur),  default !important;
+}
+
+.selectable {
+	cursor: pointer !important;
+}
+
+#imageName {
+	font: 18px bold;float:left;
+}
+
+#imageDesc {
+	font: 18px bold;float:left;
+}
+
+.fadeSlider {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+	border:0;
+}
+.fadeSlider .fadeSliderbutton {
+	margin-top: 0 !important;
+}
+
+#sl0base {
+	background: url(../images/slideflowslider-bg.gif) no-repeat;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#sl0slider {
+	background: url(../images/seekslider.gif) no-repeat;
+	margin-top: 6px;
+	float :left;
+	cursor: default;
+}
+
+#sl0slider:hover, #sl0slider.hover {
+	background: url(../images/seekslider-hover.gif) no-repeat;
+}

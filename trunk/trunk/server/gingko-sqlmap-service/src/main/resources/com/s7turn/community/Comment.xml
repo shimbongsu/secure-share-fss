@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Comment">
+    <resultMap id="result" class="com.s7turn.search.community.Comment" >
+       <result property="id" column="comment_id" columnIndex="1" />
+       <result property="commentForId" column="comment_forid" columnIndex="2" />
+       <result property="commentForType" column="comment_fortype" columnIndex="3" />
+       <result property="content" column="comment_content" columnIndex="4" />
+       <result property="lastUpdatedTime" column="comment_lastupdatedtime" columnIndex="5" />
+       <result property="replyId" column="comment_replyid" columnIndex="6" />
+       <result property="subject" column="comment_subject" columnIndex="7" />
+       <result property="userId" column="comment_userid" columnIndex="8" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE comments_comment_id_seq;
+        CREATE TABLE comments( comment_id bigint default nextval('comments_comment_id_seq'),
+                comment_forid bigint, comment_fortype VARCHAR(10), comment_content text, 
+        comment_lastupdatedtime timestamp, comment_replyid bigint null, comment_subject varchar(30),
+        comment_userid bigint null, primary key( comment_id ) );
+    </update> 
+    <select id="findAll" resultMap="result">
+        SELECT comment_id, comment_forid, comment_fortype, comment_content, comment_lastupdatedtime, comment_replyid, comment_subject, comment_userid
+        FROM comments
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT comment_id, comment_forid, comment_fortype, comment_content, comment_lastupdatedtime, comment_replyid, comment_subject, comment_userid
+        FROM comments
+        WHERE comment_id=#id#
+    </select>    
+    <select id="findByForType" resultMap="result">
+        SELECT comment_id, comment_forid, comment_fortype, comment_content, comment_lastupdatedtime, comment_replyid, comment_subject, comment_userid
+        FROM comments
+        WHERE comment_fortype=#commentForType# AND comment_forid=#commentForId#
+    </select>
+    <select id="findByUser" resultMap="result">
+        SELECT comment_id, comment_forid, comment_fortype, comment_content, comment_lastupdatedtime, comment_replyid, comment_subject, comment_userid
+        FROM comments
+        WHERE comment_userid=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT comment_id, comment_forid, comment_fortype, comment_content, comment_lastupdatedtime, comment_replyid, comment_subject, comment_userid
+        FROM comments
+        WHERE comment_subject=#code#
+    </select>
+    <delete id="deleteComment" >
+        DELETE FROM comments  
+        WHERE comment_id=#id#
+    </delete>
+    <insert id="insertComment" >
+        INSERT INTO comments ( comment_forid, comment_fortype, comment_content, comment_lastupdatedtime, comment_replyid, comment_subject, comment_userid)
+        VALUES( #commentForId#, #commentForType#, #content#, now(), #replyId#, #subject#, #userId#)
+    </insert>
+    <update id="updateComment" >
+        UPDATE comments SET comment_forid=#commentForId#, comment_fortype=#commentForType#, 
+        comment_content=#content#, comment_lastupdatedtime=now(), 
+        comment_replyid=#replyId#, comment_subject=#subject#, 
+        comment_userid=#userId#
+        WHERE comment_id=#id#
+    </update>
+</sqlMap>

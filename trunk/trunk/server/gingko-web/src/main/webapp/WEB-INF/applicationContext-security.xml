@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd"> 
+  <http auto-config="false">
+    <intercept-url pattern="/member/**" access="ROLE_USER" />
+    <intercept-url pattern="/blogs/**" access="ROLE_USER" />
+    <intercept-url pattern="/messages/**" access="ROLE_USER" />
+    <intercept-url pattern="/groups/**" access="ROLE_USER" />
+    <intercept-url pattern="/friends/**" access="ROLE_USER" />
+    <intercept-url pattern="/gallery/**" access="ROLE_USER" />
+    <intercept-url pattern="/orders/**" access="ROLE_USER" />
+    <intercept-url pattern="/gingko/**" access="ROLE_USER" />
+    <intercept-url pattern="/member/login*" filters="none"/>
+    <intercept-url pattern="/member/register*" filters="none"/>
+    <form-login login-page="/member/login.go"/>
+    <anonymous />
+    <http-basic />
+    <logout />
+  </http>
+	<authentication-provider user-service-ref="customUserDetailsService">
+	  <!--
+          <password-encoder hash="sha"/>
+      -->
+	</authentication-provider>  
+  <beans:bean id="customUserDetailsService" class="com.s7turn.search.engine.member.services.ibatis.CustomUserDetailsService">
+    <beans:property name="userService" ref="userServiceBean"/>
+  </beans:bean>
+</beans:beans>

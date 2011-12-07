@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Friend">
+    <resultMap id="result" class="com.s7turn.search.community.Friend" >
+       <result property="id" column="friend_id" columnIndex="1" />
+       <result property="userId" column="friend_userid" columnIndex="2" />
+       <result property="friendUser.id" column="friend_anotheruser" columnIndex="3" />
+       <result property="friendType" column="friend_friendtype" columnIndex="4" />
+       <result property="lastUpdatedTime" column="friend_lastupdated" columnIndex="5" />
+       <result property="friendUser.loginId" column="user_loginid" columnIndex="6" />
+       <result property="friendUser.fullName" column="user_fullname" columnIndex="7" />
+       <result property="friendUser.screenName" column="user_screenname" columnIndex="8" />
+       <result property="friendUser.email" column="user_email" columnIndex="9" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE community_friend_friend_id_seq;
+
+        CREATE TABLE community_friend( friend_id bigint default nextval('community_friend_friend_id_seq'), 
+                friend_userid bigint, friend_anotheruser bigint, friend_friendtype int, friend_lastupdated timestamp, 
+                primary key( friend_id ));
+
+    </update> 
+    <select id="findAll" resultMap="result">
+        SELECT friend_id, friend_userid, friend_anotheruser, friend_friendtype, friend_lastupdated
+        FROM community_friend
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT friend_id, friend_userid, friend_anotheruser, friend_friendtype, friend_lastupdated,
+        member_user.login_id as user_loginid, member_user.full_name as user_fullname,
+        member_user.user_screenname as user_screenname, member_user.user_email as user_email
+        FROM community_friend INNER JOIN member_user ON community_friend.friend_anotheruser = member_user.user_id
+        WHERE friend_id=#id#
+    </select>    
+    <select id="findByUser" resultMap="result">
+        SELECT friend_id, friend_userid, friend_anotheruser, friend_friendtype, friend_lastupdated,
+        member_user.login_id as user_loginid, member_user.full_name as user_fullname,
+        member_user.user_screenname as user_screenname, member_user.user_email as user_email
+        FROM community_friend INNER JOIN member_user ON community_friend.friend_anotheruser = member_user.user_id
+        WHERE friend_userid=#userId#
+    </select>
+    <select id="findFriendTypeById" resultMap="result">
+        SELECT friend_id, friend_userid, friend_anotheruser, friend_friendtype, friend_lastupdated,
+        member_user.login_id as user_loginid, member_user.full_name as user_fullname,
+        member_user.user_screenname as user_screenname, member_user.user_email as user_email
+        FROM community_friend INNER JOIN member_user ON community_friend.friend_anotheruser = member_user.user_id
+        WHERE friend_userid=#userId# and friend_anotheruser=#friendUser.id#
+    </select>
+    <select id="findByUserWithFriendName" resultMap="result">
+        SELECT friend_id, friend_userid, friend_anotheruser, friend_friendtype, friend_lastupdated,
+        member_user.login_id as user_loginid, member_user.full_name as user_fullname,
+        member_user.user_screenname as user_screenname, member_user.user_email as user_email
+        FROM community_friend INNER JOIN member_user ON community_friend.friend_anotheruser = member_user.user_id
+        WHERE friend_userid=#userId# AND
+         ( member_user.login_id like #friendUser.fullName#
+        OR member_user.full_name like #friendUser.fullName#
+        OR member_user.user_screenname like #friendUser.fullName# )
+    </select>
+    <select id="findByUserWithType" resultMap="result">
+        SELECT friend_id, friend_userid, friend_anotheruser, friend_friendtype, friend_lastupdated,
+        member_user.login_id as user_loginid, member_user.full_name as user_fullname,
+        member_user.user_screenname as user_screenname, member_user.user_email as user_email
+        FROM community_friend INNER JOIN member_user ON community_friend.friend_anotheruser = member_user.user_id
+        WHERE friend_userid=#userId# AND friend_friendtype=#friendType#
+    </select>
+    <select id="findByFriendToUser" resultMap="result">
+        SELECT friend_id, friend_userid, friend_anotheruser, friend_friendtype, friend_lastupdated,
+        member_user.login_id as user_loginid, member_user.full_name as user_fullname,
+        member_user.user_screenname as user_screenname, member_user.user_email as user_email
+        FROM community_friend INNER JOIN member_user ON community_friend.friend_anotheruser = member_user.user_id
+        WHERE friend_anotheruser=#userId#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT friend_id, friend_userid, friend_anotheruser, friend_friendtype, friend_lastupdated,
+        member_user.login_id as user_loginid, member_user.full_name as user_fullname,
+        member_user.user_screenname as user_screenname, member_user.user_email as user_email
+        FROM community_friend INNER JOIN member_user ON community_friend.friend_anotheruser = member_user.user_id
+        WHERE friend_userid=#code#
+    </select>
+    <delete id="deleteFriend" >
+        DELETE FROM community_friend  
+        WHERE friend_id=#id#
+              AND friend_userid=#userId#
+              AND friend_anotheruser=#friendUser.id#
+    </delete>
+    <insert id="insertFriend">
+        INSERT INTO community_friend (friend_userid, friend_anotheruser, 
+        friend_friendtype, friend_lastupdated)
+        VALUES( #userId#, #friendUser.id#, #friendType#, now() );
+    </insert>
+    <update id="updateFriend" >
+        UPDATE community_friend SET friend_userid=#userId#, 
+        friend_anotheruser=#friendUser.id#,
+        friend_friendtype=#friendType#, friend_lastupdated=now()
+        WHERE friend_id=#id#  
+    </update>
+    <update id="acceptFriend" >
+        UPDATE community_friend SET friend_userid=#userId#, 
+        friend_anotheruser=#friendUser.id#, 
+        friend_friendtype=#friendType#, friend_lastupdated=now()
+        WHERE friend_userid=#userId# AND friend_anotheruser=#friendUser.id#
+    </update>
+</sqlMap>

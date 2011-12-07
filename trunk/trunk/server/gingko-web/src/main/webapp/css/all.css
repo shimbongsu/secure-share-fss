@@ -1,0 +1,113 @@
+
+body{
+	margin:0;
+	padding:0;
+	font-size:12px;
+	color:#666666;
+	font-family:"ËÎÌו";
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+a{
+color:#666666;
+text-decoration: none;
+}
+
+
+a:hover{
+color:#FF6600;
+text-decoration:underline;
+
+}
+.content{
+margin:auto;
+width:955px;
+}
+
+ul,li{
+list-style-type:none;
+}
+
+em{
+color:#FF6600;
+font-style:normal;}
+
+
+img {
+border:0 none;
+}
+
+
+
+
+
+/*----------------------footer------------------*/
+.footer{
+float:left;
+width:100%;
+text-align:center;
+margin-top:20px;
+
+}
+
+.footer ul{
+display:inline;
+margin:auto;
+}
+
+.footer ul li{
+display:inline;
+}
+
+.footer ul li a{
+color:#999999;
+}
+
+.footer ul li a:hover{
+color:#666;
+text-decoration:underline;
+}
+
+.footer span{
+color:#999999;
+} 
+
+/*-----------end footer----------*/
+.spacer{
+clear:left;
+height:60px;}
+
+.tabs{
+	float: left;
+}
+
+.tabs .header{
+	padding: 2px;
+	float: left;
+	width: 580px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.tabs .header .tab1{
+	width:78px; height:23px; padding-top:6px; overflow:hidden; text-align:center; 
+	background:url(../images/bqd_of.gif) no-repeat;
+	float: left;
+	border: 1px;
+}
+
+.tabs .header .on1{
+	width:78px; height:23px; padding-top:6px; overflow:hidden; text-align:center; 
+	background:url(../images/bqd_on.gif) no-repeat;
+}
+
+.tabbk{
+	background:url(../images/bqd_bg.gif) repeat;
+}
+
+.body{
+	border: 1px solid #dddddd;
+}
+
+.body_content{
+	background: #ffffff;
+}

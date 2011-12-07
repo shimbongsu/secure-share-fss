@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Brand" >
+    <resultMap id="result" class="com.s7turn.search.engine.Brand" >
+       <result property="id" column="brand_id" columnIndex="1" />
+       <result property="name" column="brd_name" columnIndex="2" />
+       <result property="logo" column="brd_logo" columnIndex="3" />
+       <result property="producer" column="brd_producer" columnIndex="4" />
+       <result property="briefing" column="brd_brief" columnIndex="5" />
+       <result property="brandUrl" column="brd_url" columnIndex="6" />
+       <result property="producerUrl" column="brd_producerurl" columnIndex="7" />
+       <result property="lastUpdatedTime" column="brd_lastupdated" columnIndex="8" />
+       <result property="gbu" column="brd_gbu" columnIndex="9" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.GBUTypeHandler"/>
+       <result property="category" column="brd_category" columnIndex="10" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.CategoryTypeHandler"/>
+       <result property="subCategory" column="brd_subcategory" columnIndex="11" typeHandler="com.s7turn.search.engine.services.ibatis.typehanders.SubCategoryTypeHandler"/>
+    </resultMap>
+    <select id="findAll" resultMap="result">
+            select brand_id, brd_name, brd_logo, brd_producer, 
+                    brd_brief, brd_url, brd_producerurl,
+                    brd_lastupdated, brd_gbu, brd_category, brd_subcategory
+             from bi_brand;
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+            select brand_id, brd_name, brd_logo, brd_producer, 
+                    brd_brief, brd_url, brd_producerurl,
+                    brd_lastupdated, brd_gbu, brd_category, brd_subcategory
+             from bi_brand 
+             where brand_id=#id#
+    </select>    
+    <select id="findByGbu" resultMap="result">
+            select brand_id, brd_name, brd_logo, brd_producer, 
+                    brd_brief, brd_url, brd_producerurl,
+                    brd_lastupdated, brd_gbu, brd_category, brd_subcategory
+             from bi_brand 
+             where brd_gbu=#id#
+    </select>
+    <select id="findByCategory" resultMap="result">
+            select brand_id, brd_name, brd_logo, brd_producer, 
+                    brd_brief, brd_url, brd_producerurl,
+                    brd_lastupdated, brd_gbu, brd_category, brd_subcategory
+             from bi_brand 
+             where brd_category=#id#
+    </select>
+    <select id="findBySubCategory" resultMap="result">
+            select brand_id, brd_name, brd_logo, brd_producer, 
+                    brd_brief, brd_url, brd_producerurl,
+                    brd_lastupdated, brd_gbu, brd_category, brd_subcategory
+             from bi_brand 
+             where brd_subcategory=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+            select brand_id, brd_name, brd_logo, brd_producer, 
+                    brd_brief, brd_url, brd_producerurl,
+                    brd_lastupdated, brd_gbu, brd_category, brd_subcategory
+             from bi_brand 
+             where brd_name=#name#
+    </select>
+    <select id="findByName" resultMap="result">
+             select brand_id, brd_name, brd_logo, brd_producer, 
+                    brd_brief, brd_url, brd_producerurl,
+                    brd_lastupdated, brd_gbu, brd_category, brd_subcategory
+             from bi_brand 
+             where brd_name like #name#
+    </select>    
+    <delete id="deleteBrand" >
+        delete from bi_brand 
+        where brand_id = #id#
+    </delete>
+    <insert id="insertBrand" >
+        insert into bi_brand( brand_id, brd_name, brd_logo, brd_producer, 
+                    brd_brief, brd_url, brd_producerurl,
+                    brd_lastupdated, brd_gbu, brd_category, brd_subcategory)
+        values( nextval('bi_brand_brand_id_seq'), #name#, #logo#, #producer#,
+                    #briefing#, #brandUrl#, #producerUrl#, #lastUpdatedTime#,
+                    #gbu.id#, #category.id#
+                    #subCategory.id#)
+    </insert>
+    <update id="updateBrand" >
+        update bi_brand set brd_name=#name#, brd_logo=#logo#, brd_producer=#producer#, 
+                    brd_brief=#briefing#, brd_url=#brandUrl#, brd_producerurl#producerUrl#,
+                    brd_lastupdated=#lastUpdatedTime#,
+                    brd_gbu=#gbu.id#,brd_category=#category.id#
+                    brd_subcategory=#subCategory.id#
+        where brand_id=#id#
+    </update>
+</sqlMap>

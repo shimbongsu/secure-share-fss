@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Gallery">
+    <resultMap id="result" class="com.s7turn.search.community.Gallery" >
+       <result property="id" column="gallery_id" columnIndex="1" />
+       <result property="name" column="gallery_name" columnIndex="2" />
+       <result property="description" column="gallery_desc" columnIndex="3" />
+       <result property="actorId" column="gallery_actor" columnIndex="4" />
+       <result property="galleryType" column="gallery_type" columnIndex="5" />
+       <result property="createBy" column="gallery_owner" columnIndex="6" />
+       <result property="tags" column="community_tags" columnIndex="7" />
+       <result property="security" column="gallery_security" columnIndex="8" />
+       <result property="lastUpdatedTime" column="gallery_lastupdated" columnIndex="9" />
+    </resultMap>
+    <update id="createTable">
+        CREATE SEQUENCE community_gallery_gallery_id_seq;
+
+        CREATE TABLE community_gallery( gallery_id bigint default nextval('community_gallery_gallery_id_seq'), 
+                gallery_name varchar(30), gallery_desc text, gallery_actor bigint, 
+                gallery_type int, gallery_owner bigint, community_tags varchar(200), 
+                gallery_security int, gallery_lastupdated timestamp,
+                primary key( gallery_id ));
+
+    </update> 
+    <select id="findAll" resultMap="result">
+        SELECT gallery_id, gallery_name, gallery_desc, gallery_actor, gallery_type, 
+               gallery_owner, community_tags, gallery_security, gallery_lastupdated
+        FROM community_gallery
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+        SELECT gallery_id, gallery_name, gallery_desc, gallery_actor, gallery_type, 
+               gallery_owner, community_tags, gallery_security, gallery_lastupdated
+        FROM community_gallery
+        WHERE gallery_id=#id#
+    </select>    
+    <select id="findByOwnerWithType" resultMap="result">
+        SELECT gallery_id, gallery_name, gallery_desc, gallery_actor, gallery_type, 
+               gallery_owner, community_tags, gallery_security, gallery_lastupdated
+        FROM community_gallery
+        WHERE gallery_owner=#createBy# AND gallery_type=#galleryType#
+    </select>
+    <select id="findByOwnerType" resultMap="result">
+        SELECT gallery_id, gallery_name, gallery_desc, gallery_actor, gallery_type, 
+               gallery_owner, community_tags, gallery_security, gallery_lastupdated
+        FROM community_gallery
+        WHERE  gallery_type=#galleryType#
+    </select>
+    <select id="findByCode" resultMap="result">
+        SELECT gallery_id, gallery_name, gallery_desc, gallery_actor, gallery_type, 
+               gallery_owner, community_tags, gallery_security, gallery_lastupdated
+        FROM community_gallery
+        WHERE gallery_name=#code#
+    </select>
+    <delete id="deleteGallery" >
+        DELETE FROM community_gallery
+        WHERE gallery_id=#id#
+    </delete>
+    <insert id="insertGallery" >
+        INSERT INTO community_gallery (gallery_name, gallery_desc, gallery_actor,
+                gallery_type, gallery_owner, community_tags, gallery_security, gallery_lastupdated)
+        VALUES( #name#, #description#, #actorId#, #galleryType#, #createBy#, #tags#, #security#, now() );
+        <selectKey keyProperty="id" type="post">
+            SELECT currval('community_gallery_gallery_id_seq') as id
+        </selectKey>        
+    </insert>
+    <update id="updateGallery" >
+        UPDATE community_gallery SET 
+                gallery_name=#name#, gallery_desc=#description#, gallery_actor=#actorId#,
+                gallery_type=#galleryType#, gallery_owner=#createBy#, gallery_security=#security#,
+                community_tags=#tags#, gallery_lastupdated=now()
+        WHERE gallery_id=#id#
+    </update>
+</sqlMap>

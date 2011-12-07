@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+       default-lazy-init="true">
+	<bean id="gingkoContentServiceBean" class="com.s7turn.gingkos.services.ibatis.GingkoContentServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="gingkoServiceBean" class="com.s7turn.gingkos.services.ibatis.GingkoServiceBean" scope="prototype">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+    <bean id="defaultGingkoBean" class="com.s7turn.gingkos.Gingko" scope="prototype" >
+        <property name="copy" value="false" />
+        <property name="list" value="true" />
+        <property name="print" value="false" />
+        <property name="read" value="true" />
+        <property name="edit" value="false" />
+        <property name="defaultGingko" value="true" />
+    </bean>
+    <bean id="gingkoMimetypeMapperBean" class="com.s7turn.gingkos.services.GingkoMimeTypeMapper">
+        <property name="defaultMimeType" value="application/octet-stream" />
+        <property name="mimetypeMappings">
+            <map>
+                <entry><key><value>.dwg</value></key><value>application/acad</value></entry>
+                <entry><key><value>.asd</value></key><value>application/astound</value></entry>
+                <entry><key><value>.asn</value></key><value>application/astound</value></entry>
+                <entry><key><value>.tsp</value></key><value>application/dsptype</value></entry>
+                <entry><key><value>.dxf</value></key><value>application/dxf</value></entry>
+                <entry><key><value>.spl</value></key><value>application/futuresplash</value></entry>
+                <entry><key><value>.gz</value></key><value>application/gzip</value></entry>
+                <entry><key><value>.ptlk</value></key><value>application/listenup</value></entry>
+                <entry><key><value>.hqx</value></key><value>application/mac-binhex40</value></entry>
+                <entry><key><value>.mbd</value></key><value>application/mbedlet</value></entry>
+                <entry><key><value>.mif</value></key><value>application/mif</value></entry>
+                <entry><key><value>.xls</value></key><value>application/msexcel</value></entry>
+                <entry><key><value>.xla</value></key><value>application/msexcel</value></entry>
+                <entry><key><value>.ppt</value></key><value>application/mspowerpoint</value></entry>
+                <entry><key><value>.ppz</value></key><value>application/mspowerpoint</value></entry>
+                <entry><key><value>.pps</value></key><value>application/mspowerpoint</value></entry>
+                <entry><key><value>.pot</value></key><value>application/mspowerpoint</value></entry>
+                <entry><key><value>.doc</value></key><value>application/msword</value></entry>
+                <entry><key><value>.dot</value></key><value>application/msword</value></entry>
+                <entry><key><value>.oda</value></key><value>application/oda</value></entry>
+                <entry><key><value>.pdf</value></key><value>application/pdf</value></entry>
+                <entry><key><value>.ai</value></key><value>application/postscript</value></entry>
+                <entry><key><value>.eps</value></key><value>application/postscript</value></entry>
+                <entry><key><value>.ps</value></key><value>application/postscript</value></entry>
+                <entry><key><value>.rtc</value></key><value>application/rtc</value></entry>
+                <entry><key><value>.rtf</value></key><value>application/rtf</value></entry>
+                <entry><key><value>.smp</value></key><value>application/studiom</value></entry>
+                <entry><key><value>.tbk</value></key><value>application/toolbook</value></entry>
+                <entry><key><value>.vmd</value></key><value>application/vocaltec-media-desc</value></entry>
+                <entry><key><value>.vmf</value></key><value>application/vocaltec-media-file</value></entry>
+                <entry><key><value>.bcpio</value></key><value>application/x-bcpio</value></entry>
+                <entry><key><value>.z</value></key><value>application/x-compress</value></entry>
+                <entry><key><value>.cpio</value></key><value>application/x-cpio</value></entry>
+                <entry><key><value>.csh</value></key><value>application/x-csh</value></entry>
+                <entry><key><value>.dcr</value></key><value>application/x-director</value></entry>
+                <entry><key><value>.dir</value></key><value>application/x-director</value></entry>
+                <entry><key><value>.dxr</value></key><value>application/x-director</value></entry>
+                <entry><key><value>.dvi</value></key><value>application/x-dvi</value></entry>
+                <entry><key><value>.evy</value></key><value>application/x-envoy</value></entry>
+                <entry><key><value>.gtar</value></key><value>application/x-gtar</value></entry>
+                <entry><key><value>.hdf</value></key><value>application/x-hdf</value></entry>
+                <entry><key><value>.php</value></key><value>application/x-httpd-php</value></entry>
+                <entry><key><value>.phtml</value></key><value>application/x-httpd-php</value></entry>
+                <entry><key><value>.latex</value></key><value>application/x-latex</value></entry>
+                <entry><key><value>.mif</value></key><value>application/x-mif</value></entry>
+                <entry><key><value>.nc</value></key><value>application/x-netcdf</value></entry>
+                <entry><key><value>.cdf</value></key><value>application/x-netcdf</value></entry>
+                <entry><key><value>.nsc</value></key><value>application/x-nschat</value></entry>
+                <entry><key><value>.sh</value></key><value>application/x-sh</value></entry>
+                <entry><key><value>.shar</value></key><value>application/x-shar</value></entry>
+                <entry><key><value>.swf</value></key><value>application/x-shockwave-flash</value></entry>
+                <entry><key><value>.tar</value></key><value>application/x-tar</value></entry>
+                <entry><key><value>.tcl</value></key><value>application/x-tcl</value></entry>
+                <entry><key><value>.tex</value></key><value>application/x-tex</value></entry>
+                <entry><key><value>.zip</value></key><value>application/zip</value></entry>
+                <entry><key><value>.au</value></key><value>audio/basic</value></entry>
+                <entry><key><value>.snd</value></key><value>audio/basic</value></entry>
+                <entry><key><value>.es</value></key><value>audio/echospeech</value></entry>
+                <entry><key><value>.tsi</value></key><value>audio/tsplayer</value></entry>
+                <entry><key><value>.vox</value></key><value>audio/voxware</value></entry>
+                <entry><key><value>.aif</value></key><value>audio/x-aiff</value></entry>
+                <entry><key><value>.aiff</value></key><value>audio/x-aiff</value></entry>
+                <entry><key><value>.aifc</value></key><value>audio/x-aiff</value></entry>
+                <entry><key><value>.dus</value></key><value>audio/x-dspeeh</value></entry>
+                <entry><key><value>.cht</value></key><value>audio/x-dspeeh</value></entry>
+                <entry><key><value>.mid</value></key><value>audio/x-midi</value></entry>
+                <entry><key><value>.midi</value></key><value>audio/x-midi</value></entry>
+                <entry><key><value>.mp2</value></key><value>audio/x-mpeg</value></entry>
+                <entry><key><value>.ram</value></key><value>audio/x-pn-realaudio</value></entry>
+                <entry><key><value>.ra</value></key><value>audio/x-pn-realaudio</value></entry>
+                <entry><key><value>.rpm</value></key><value>audio/x-pn-realaudio-plugin</value></entry>
+                <entry><key><value>.stream</value></key><value>audio/x-qt-stream</value></entry>
+                <entry><key><value>.wav</value></key><value>audio/x-wav</value></entry>
+                <entry><key><value>.dwf</value></key><value>drawing/x-dwf</value></entry>
+                <entry><key><value>.cod</value></key><value>image/cis-cod</value></entry>
+                <entry><key><value>.ras</value></key><value>image/cmu-raster</value></entry>
+                <entry><key><value>.fif</value></key><value>image/fif</value></entry>
+                <entry><key><value>.gif</value></key><value>image/gif</value></entry>
+                <entry><key><value>.ief</value></key><value>image/ief</value></entry>
+                <entry><key><value>.jpeg</value></key><value>image/jpeg</value></entry>
+                <entry><key><value>.jpg</value></key><value>image/jpeg</value></entry>
+                <entry><key><value>.jpe</value></key><value>image/jpeg</value></entry>
+                <entry><key><value>.tiff</value></key><value>image/tiff</value></entry>
+                <entry><key><value>.tif</value></key><value>image/tiff</value></entry>
+                <entry><key><value>.mcf</value></key><value>image/vasa</value></entry>
+                <entry><key><value>.wbmp</value></key><value>image/vnd.wap.wbmp</value></entry>
+                <entry><key><value>.wrl</value></key><value>model/vrml</value></entry>
+                <entry><key><value>.csv</value></key><value>text/comma-separated-values</value></entry>
+                <entry><key><value>.css</value></key><value>text/css</value></entry>
+                <entry><key><value>.htm</value></key><value>text/html</value></entry>
+                <entry><key><value>.html</value></key><value>text/html</value></entry>
+                <entry><key><value>.shtml</value></key><value>text/html</value></entry>
+                <entry><key><value>.js</value></key><value>text/javascript</value></entry>
+                <entry><key><value>.txt</value></key><value>text/plain</value></entry>
+                <entry><key><value>.rtx</value></key><value>text/richtext</value></entry>
+                <entry><key><value>.rtf</value></key><value>text/rtf</value></entry>
+                <entry><key><value>.tsv</value></key><value>text/tab-separated-values</value></entry>
+                <entry><key><value>.wml</value></key><value>text/vnd.wap.wml</value></entry>
+                <entry><key><value>.wmlc</value></key><value>application/vnd.wap.wmlc</value></entry>
+                <entry><key><value>.wmls</value></key><value>text/vnd.wap.wmlscript</value></entry>
+                <entry><key><value>.wmlsc</value></key><value>application/vnd.wap.wmlscriptc</value></entry>
+                <entry><key><value>.etx</value></key><value>text/x-setext</value></entry>
+                <entry><key><value>.sgm</value></key><value>text/x-sgml</value></entry>
+                <entry><key><value>.sgml</value></key><value>text/x-sgml</value></entry>
+                <entry><key><value>.talk</value></key><value>text/x-speech</value></entry>
+                <entry><key><value>.spc</value></key><value>text/x-speech</value></entry>
+                <entry><key><value>.mpeg</value></key><value>video/mpeg</value></entry>
+                <entry><key><value>.mpg</value></key><value>video/mpeg</value></entry>
+                <entry><key><value>.mpe</value></key><value>video/mpeg</value></entry>
+                <entry><key><value>.qt</value></key><value>video/quicktime</value></entry>
+                <entry><key><value>.mov</value></key><value>video/quicktime</value></entry>
+                <entry><key><value>.viv</value></key><value>video/vnd.vivo</value></entry>
+                <entry><key><value>.vivo</value></key><value>video/vnd.vivo</value></entry>
+                <entry><key><value>.avi</value></key><value>video/x-msvideo</value></entry>
+                <entry><key><value>.movie</value></key><value>video/x-sgi-movie</value></entry>
+                <entry><key><value>.vts</value></key><value>workbook/formulaone</value></entry>
+                <entry><key><value>.vtts</value></key><value>workbook/formulaone</value></entry>
+                <entry><key><value>.3dmf</value></key><value>x-world/x-3dmf</value></entry>
+                <entry><key><value>.3dm</value></key><value>x-world/x-3dmf</value></entry>
+                <entry><key><value>.qd3d</value></key><value>x-world/x-3dmf</value></entry>
+                <entry><key><value>.qd3</value></key><value>x-world/x-3dmf</value></entry>
+                <entry><key><value>.wrl</value></key><value>x-world/x-vrml</value></entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="defaultGingkoProviderImpl" class="com.s7turn.gingkos.services.DefaultGingkoProviderImpl" scope="prototype">
+		<property name="gingkoService" ref="gingkoServiceBean"/>
+	</bean>
+	<bean id="rootFolderBean" class="com.s7turn.gingkos.GingkoContent" scope="prototype">
+	      <property name="guid" value=""/>
+          <property name="icon" value="/js/resources/images/folder.gif"/>
+          <property name="thumb" value="/js/resources/images/folder_thumb.gif"/>
+	</bean>
+	<bean id="defaultGingkoBaseContentProviderImpl" class="com.s7turn.gingkos.services.DefaultGingkoBaseContentProviderImpl" scope="prototype">
+		<property name="gingkoProvider" ref="defaultGingkoProviderImpl"/>
+                <property name="contentService" ref="gingkoContentServiceBean"/>
+                <property name="rootFolder" ref="rootFolderBean"/>
+	</bean>
+	<bean id="defaultGingkoFolderProviderImpl" class="com.s7turn.gingkos.services.DefaultGingkoFolderProviderImpl" scope="prototype">
+		<property name="gingkoProvider" ref="defaultGingkoProviderImpl"/>
+                <property name="contentService" ref="gingkoContentServiceBean"/>
+                <property name="rootFolder" ref="rootFolderBean"/>
+	</bean>
+	<bean id="defaultGingkoServiceManagerImpl" class="com.s7turn.gingkos.services.DefaultGingkoServiceManager" scope="prototype">
+                <property name="contentService" ref="gingkoContentServiceBean"/>
+                <property name="gingkoBaseProvider" ref="defaultGingkoBaseContentProviderImpl" />
+                <property name="gingkoFolderProvider" ref="defaultGingkoFolderProviderImpl" />
+                <!--
+                <property name="searchProvider" ref=""/>
+                <property name="services"/>
+                -->
+	</bean>
+
+    <!--Plugins-->
+    <bean id="setFileIconThumbPlugin" class="com.s7turn.gingkos.services.plugins.SetIconAndThumbImagePlugin">
+        <property name="iconHeight" value="120"/>
+        <property name="iconWidth" value="120"/>
+        <property name="thumbHeight" value="600"/>
+        <property name="thumbWidth" value="800"/>
+        <property name="physicalFileService" ref="physicalFileServiceBean"/>
+        <property name="gingkoContentService" ref="gingkoContentServiceBean" />
+        <property name="acceptedFiletype" value="*" />
+        <property name="defaultIcon" value="/js/resources/images/filetypes/any.png"/>
+        <property name="defaultThumb" value="/js/resources/images/filetypes/any.png"/>
+        <property name="fileTypeIconMapper">
+            <map>
+                <entry>
+                    <key><value>.pdf</value></key>
+                    <value>/js/resources/images/filetypes/pdf.png</value>
+                </entry>
+                <entry>
+                    <key><value>.doc</value></key>
+                    <value>/js/resources/images/filetypes/doc.png</value>
+                </entry>
+                <entry>
+                    <key><value>.xls</value></key>
+                    <value>/js/resources/images/filetypes/xls.png</value>
+                </entry>
+                <entry>
+                    <key><value>.ppt</value></key>
+                    <value>/js/resources/images/filetypes/ppt.png</value>
+                </entry>
+                <entry>
+                    <key><value>.mp3</value></key>
+                    <value>/js/resources/images/filetypes/mp3.png</value>
+                </entry>
+                <entry>
+                    <key><value>.mpg</value></key>
+                    <value>/js/resources/images/filetypes/mpg.png</value>
+                </entry>
+                <entry>
+                    <key><value>.rm</value></key>
+                    <value>/js/resources/images/filetypes/rm.png</value>
+                </entry>
+                <entry>
+                    <key><value>.ram</value></key>
+                    <value>/js/resources/images/filetypes/ram.png</value>
+                </entry>
+                <entry>
+                    <key><value>.mov</value></key>
+                    <value>/js/resources/images/filetypes/mov.png</value>
+                </entry>
+                <entry>
+                    <key><value>.ra</value></key>
+                    <value>/js/resources/images/filetypes/ra.png</value>
+                </entry>
+                <entry>
+                    <key><value>.ram</value></key>
+                    <value>/js/resources/images/filetypes/ram.png</value>
+                </entry>
+                <entry>
+                    <key><value>.zip</value></key>
+                    <value>/js/resources/images/filetypes/zip.png</value>
+                </entry>
+                <entry>
+                    <key><value>.rar</value></key>
+                    <value>/js/resources/images/filetypes/rar.png</value>
+                </entry>
+                <entry>
+                    <key><value>.gz</value></key>
+                    <value>/js/resources/images/filetypes/zip.png</value>
+                </entry>
+                <entry>
+                    <key><value>.wav</value></key>
+                    <value>/js/resources/images/filetypes/wav.png</value>
+                </entry>
+                <entry>
+                    <key><value>.wmv</value></key>
+                    <value>/js/resources/images/filetypes/wmv.png</value>
+                </entry>
+                <entry>
+                    <key><value>.wma</value></key>
+                    <value>/js/resources/images/filetypes/wma.png</value>
+                </entry>
+            </map>
+        </property>
+        <property name="fileTypeThumbMapper">
+            <map>
+                <entry>
+                    <key><value>.pdf</value></key>
+                    <value>/js/resources/images/filetypes/pdf.png</value>
+                </entry>
+                <entry>
+                    <key><value>.doc</value></key>
+                    <value>/js/resources/images/filetypes/doc.png</value>
+                </entry>
+                <entry>
+                    <key><value>.xls</value></key>
+                    <value>/js/resources/images/filetypes/xls.png</value>
+                </entry>
+                <entry>
+                    <key><value>.ppt</value></key>
+                    <value>/js/resources/images/filetypes/ppt.png</value>
+                </entry>
+                <entry>
+                    <key><value>.mp3</value></key>
+                    <value>/js/resources/images/filetypes/mp3.png</value>
+                </entry>
+                <entry>
+                    <key><value>.mpg</value></key>
+                    <value>/js/resources/images/filetypes/mpg.png</value>
+                </entry>
+                <entry>
+                    <key><value>.rm</value></key>
+                    <value>/js/resources/images/filetypes/rm.png</value>
+                </entry>
+                <entry>
+                    <key><value>.ram</value></key>
+                    <value>/js/resources/images/filetypes/ram.png</value>
+                </entry>
+                <entry>
+                    <key><value>.mov</value></key>
+                    <value>/js/resources/images/filetypes/mov.png</value>
+                </entry>
+                <entry>
+                    <key><value>.ra</value></key>
+                    <value>/js/resources/images/filetypes/ra.png</value>
+                </entry>
+                <entry>
+                    <key><value>.ram</value></key>
+                    <value>/js/resources/images/filetypes/ram.png</value>
+                </entry>
+                <entry>
+                    <key><value>.zip</value></key>
+                    <value>/js/resources/images/filetypes/zip.png</value>
+                </entry>
+                <entry>
+                    <key><value>.rar</value></key>
+                    <value>/js/resources/images/filetypes/rar.png</value>
+                </entry>
+                <entry>
+                    <key><value>.gz</value></key>
+                    <value>/js/resources/images/filetypes/zip.png</value>
+                </entry>
+                <entry>
+                    <key><value>.wav</value></key>
+                    <value>/js/resources/images/filetypes/wav.png</value>
+                </entry>
+                <entry>
+                    <key><value>.wmv</value></key>
+                    <value>/js/resources/images/filetypes/wmv.png</value>
+                </entry>
+                <entry>
+                    <key><value>.wma</value></key>
+                    <value>/js/resources/images/filetypes/wma.png</value>
+                </entry>
+            </map>
+        </property>
+        <property name="imageTypes">
+            <list>
+                <value>.jpg</value>
+                <value>.gif</value>
+                <value>.png</value>
+            </list>
+        </property>
+    </bean>
+</beans>

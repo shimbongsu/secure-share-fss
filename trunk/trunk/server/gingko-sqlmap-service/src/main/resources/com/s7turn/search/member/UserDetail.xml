@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="UserDetail" >
+    <resultMap id="result" class="com.s7turn.search.engine.member.UserDetail" >
+       <result  property="id" column="user_id" columnIndex="1" />
+       <result  property="name" column="actual_name" columnIndex="2" />
+       <result  property="breifing" column="user_breifing" columnIndex="3" />
+       <result  property="birthday" column="birthday" columnIndex="4" />
+       <result  property="certType" column="cert_type" columnIndex="5" />
+       <result  property="idCard" column="idcard" columnIndex="6" />
+       <result  property="country" column="user_country" columnIndex="7" />
+       <result  property="province" column="user_province" columnIndex="8" />
+       <result  property="city" column="user_city" columnIndex="9" />
+       <result  property="address" column="user_address" columnIndex="10" />
+       <result  property="telephone" column="user_tel" columnIndex="11" />
+       <result  property="mobile" column="user_mobile" columnIndex="12" />
+       <result  property="title" column="user_title" columnIndex="13" />
+       <result  property="lastUpdatedTime" column="last_updated" columnIndex="14" />
+       <result  property="user.id" column="acc_user_id" columnIndex="15" />
+       <result  property="user.fullName" column="acc_userfullname" columnIndex="16" />
+       <result  property="user.screenName" column="acc_userscreenname" columnIndex="17" />
+       <result  property="user.loginId" column="acc_login_id" columnIndex="18" />
+       <result  property="user.disabled" column="acc_disabled" columnIndex="19" />
+       <result  property="user.locked" column="acc_locked" columnIndex="20" />
+       <result  property="user.expired" column="acc_expired" columnIndex="21" />
+       <result  property="user.createDate" column="acc_createdate" columnIndex="22" />
+       <result  property="user.lastUpdatedTime" column="acc_lastupdatedtime" columnIndex="23" />
+    </resultMap>
+    <select id="findAll" resultMap="result">
+            select  member_userdetail.user_id,  actual_name, user_breifing,
+                    birthday, cert_type, idcard, user_country, user_province, user_city,
+                    user_address, user_tel, user_mobile, user_title,
+                    member_userdetail.last_updated, u.user_id as acc_user_id,
+                    u.full_name as acc_userfullname, u.user_screenname as acc_userscreenname, u.login_id as acc_login_id,
+                    u.user_disabled as acc_disabled, u.user_locked as acc_locked,
+                    u.user_expired as acc_expired, u.create_date as acc_createdate,
+                    u.last_updated as acc_lastupdatedtime, u.user_email as acc_useremail
+            from member_userdetail inner join member_user u on member_userdetail.user_id=u.user_id
+    </select>
+    <select id="findByPrimaryKey" resultMap="result">
+            select  member_userdetail.user_id,  actual_name, user_breifing,
+                    birthday, cert_type, idcard, user_country, user_province, user_city,
+                    user_address, user_tel, user_mobile, user_title,
+                    member_userdetail.last_updated, u.user_id as acc_user_id,
+                    u.full_name as acc_userfullname, u.user_screenname as acc_userscreenname, u.login_id as acc_login_id,
+                    u.user_disabled as acc_disabled, u.user_locked as acc_locked,
+                    u.user_expired as acc_expired, u.create_date as acc_createdate,
+                    u.last_updated as acc_lastupdatedtime, u.user_email as acc_useremail
+            from member_userdetail inner join member_user u on member_userdetail.user_id=u.user_id
+            where member_userdetail.user_id=#id#
+    </select>
+    <select id="findByCode" resultMap="result">
+            select  member_userdetail.user_id,  actual_name, user_breifing,
+                    birthday, cert_type, idcard, user_country, user_province, user_city,
+                    user_address, user_tel, user_mobile, user_title,
+                    member_userdetail.last_updated, u.user_id as acc_user_id,
+                    u.full_name as acc_userfullname, u.user_screenname as acc_userscreenname, u.login_id as acc_login_id,
+                    u.user_disabled as acc_disabled, u.user_locked as acc_locked,
+                    u.user_expired as acc_expired, u.create_date as acc_createdate,
+                    u.last_updated as acc_lastupdatedtime, u.user_email as acc_useremail
+            from member_userdetail inner join member_user u on member_userdetail.user_id=u.user_id
+            where idcard=#code#
+    </select>
+    <select id="findUsers" resultMap="result" parameterClass="java.util.Map">
+            select  u.user_id,  actual_name, user_breifing,
+                    birthday, cert_type, idcard, user_country, user_province, user_city,
+                    user_address, user_tel, user_mobile, user_title,
+                    member_userdetail.last_updated, u.user_id as acc_user_id,
+                    u.full_name as acc_userfullname, u.user_screenname as acc_userscreenname, u.login_id as acc_login_id,
+                    u.user_disabled as acc_disabled, u.user_locked as acc_locked,
+                    u.user_expired as acc_expired, u.create_date as acc_createdate,
+                    u.last_updated as acc_lastupdatedtime, u.user_email as acc_useremail
+            from member_userdetail right join member_user u on member_userdetail.user_id=u.user_id
+            where (u.full_name like #keyword#) OR
+                  (u.user_screenname like #keyword#) OR
+                  (u.login_id like #keyword#)
+    </select>
+    <delete id="deleteUserDetail" >
+        delete from member_userdetail
+        where user_id = #id#
+    </delete>
+    <update id="createTable">
+        CREATE TABLE member_userdetail ( user_id bigint, actual_name varchar(20),
+        user_breifing text, birthday timestamp,
+        cert_type varchar(10), idcard varchar(30),
+        user_country varchar(20), user_province varchar(20), user_city varchar(20),
+        user_address varchar(40), user_tel varchar(20), user_mobile varchar(20),
+        user_title varchar(20),last_updated timestamp default now());
+    </update>
+    <insert id="insertUserDetail" >
+        insert into member_userdetail( user_id, actual_name, user_breifing, 
+                    birthday, cert_type, idcard, user_country, user_province, user_city,
+                    user_address, user_tel, user_mobile, user_title,last_updated )
+        values( #id#, #name#, #breifing#, #birthday#, #certType#, #idCard#,#country#,
+                #province#, #city#, #address#, #telephone#, #mobile#, #title#,
+                now())
+    </insert>
+    <update id="updateUserDetail" >
+        update member_userdetail set actual_name=#name#, user_breifing=#breifing#,
+              birthday=#birthday#, cert_type=#certType#, idcard=#idCard#, 
+              user_country=#country#, user_province=#province#, user_city=#city#,
+              user_address=#address#, user_tel=#telephone#, user_mobile=#mobile#, 
+              user_title=#title#, last_updated=now()
+        where user_id=#id#
+    </update>
+    
+</sqlMap>

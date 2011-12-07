@@ -1,0 +1,58 @@
+/* ----------------------------------------------------------------------------------------------------------
+HTML
+---------------------------------------------------------------------------------------------------------- */
+
+body {background:#fff url(../images/summer.gif) no-repeat right top;; color:#000;}
+
+a {border-bottom:1px solid #DFDFDF; color:#000;}
+a:hover {border-bottom:1px solid #DFDFDF; color:#277ca5;}
+
+fieldset {border:1px solid #DFDFDF;}
+legend {background:#FFF; color:#277ca5;}
+
+.low, .low a {color:#7F7F7F;}
+.low a:hover {color:#000;}
+
+/* ----------------------------------------------------------------------------------------------------------
+Layout
+---------------------------------------------------------------------------------------------------------- */
+
+#logo {color:#000;}
+
+#slogan {color:#7F7F7F;}
+
+#mainNav {border-top:1px solid #dce8f4; border-bottom:1px solid #dce8f4;}
+#mainNav ul li.current a {background:#277ca5; color:#FFF;}
+
+#mainNav li.background {background-color: #277ca5;}
+#mainNav .background .left {background-color: #277ca5;}
+
+#footer {border-top:1px solid #dce8f4; color:#5F5F5F;}
+
+/* ----------------------------------------------------------------------------------------------------------
+Page: Home
+---------------------------------------------------------------------------------------------------------- */
+.projectShow {border:1px solid #dce8f4; background:#dce8f4; }
+
+/* ----------------------------------------------------------------------------------------------------------
+Others
+---------------------------------------------------------------------------------------------------------- */
+
+/* cor */
+.lt_cor, .rt_cor, .lb_cor, .rb_cor {
+	background-image: url(../images/cor.gif);
+}
+/* column */
+.column { border:1px solid #dce8f4}
+.column h3 {color:#277ca5;border-bottom: 1px dashed #277ca5;}
+.line {border-bottom:1px solid #277ca5; padding:0 0 15px 0;}
+.column ul li {color:#666;}
+.column ul li img {border:1px solid #dce8f4; background-color:#dce8f4;}
+.column ul li.current { background-color:#277CA5; color:#fff;}
+.column ul li.current a{ color:#fff;}
+
+.detail img { background-color:#dce8f4; border:1px solid #dce8f4;}
+.detail dl dt em, .detail dl dd em { color:#277CA5}
+.detail dl dd.demo_box { background-color:#F9F9F9; border-left:4px solid #dce8f4; color:#000;}
+.detail dl dd.effect_show { background-color:#F9F9F9; border:1px solid #dce8f4; color:#000;}
+.advice_box { background-color:#F9F9F9; border:1px solid #dce8f4;}
